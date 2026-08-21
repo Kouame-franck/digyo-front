@@ -8,7 +8,10 @@ export default defineConfig({
     port: 5174,
     strictPort: true,
     proxy: {
-      "/api": "http://localhost:3001",
+      // Pointe sur le backend de production (donc sur la vraie base de données) : plus besoin
+      // de backend ni de base locale pour développer/tester le front. Remettre en
+      // "http://localhost:3001" ponctuellement si un backend local est explicitement voulu.
+      "/api": { target: "https://api-digyo.scode-ci.pro", changeOrigin: true, secure: true },
     },
   },
 })
