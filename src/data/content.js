@@ -218,6 +218,31 @@ export const pillars = [
   },
 ];
 
+// Une photo par pilier, choisie pour illustrer concrètement chaque service plutôt qu'un
+// pictogramme générique — libres de droits (Pexels), utilisées sur l'accueil et sur /services.
+export const pillarPhotos = {
+  transformation: {
+    src: "/services/transformation.jpg",
+    alt: "Équipe en réunion de travail devant un tableau blanc, discutant d'une stratégie",
+  },
+  creation: {
+    src: "/services/creation.jpg",
+    alt: "Développeur concentré sur plusieurs écrans dans un espace de travail moderne",
+  },
+  saas: {
+    src: "/services/saas.jpg",
+    alt: "Tableau de bord analytique affiché sur un ordinateur portable",
+  },
+  materiel: {
+    src: "/services/materiel.jpg",
+    alt: "Salle équipée de plusieurs ordinateurs de bureau prêts à l'emploi",
+  },
+  formation: {
+    src: "/services/formation.jpg",
+    alt: "Formatrice animant un atelier devant un tableau blanc face à des participants",
+  },
+};
+
 // Repères sur la transformation digitale, affichés sous le titre « Ce que nous faisons ».
 // Trois groupes de trois : ce que les mots veulent dire, sur quoi ça repose, ce que ça rapporte.
 export const reperesTransformation = [
@@ -252,21 +277,25 @@ export const values = [
     title: "Une connaissance fine du terrain",
     description:
       "Contraintes de connectivité, réalités du Mobile Money, spécificités réglementaires locales : notre équipe travaille sur ce terrain au quotidien — pas depuis un cabinet distant qui plaque les mêmes solutions d'un marché à l'autre.",
+    icone: "terrain",
   },
   {
     title: "La securité de Vos données",
     description:
       "La confidentialité dans la gestion et le traitement de vos données represente un parametre assez import dans notre mode d'action. Nous mettons a coeur la protection de vos données dans toute notre demarche collaborative.",
+    icone: "securite",
   },
   {
     title: "Des systèmes construits pour durer",
     description:
       "Sécurité, sauvegardes, code maintenable : chaque outil est pensé pour tourner en production dans cinq ans, pas pour tenir jusqu'à la démonstration.",
+    icone: "durabilite",
   },
   {
     title: "Prix adaptés à votre taille",
     description:
       "Des formules pensées pour l'indépendant qui démarre comme pour l'institution qui structure sa transformation — le même sérieux d'exécution, sans le tarif d'une multinationale.",
+    icone: "prix",
   },
 ];
 

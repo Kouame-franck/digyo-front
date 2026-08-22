@@ -29,7 +29,7 @@ export default function PricingTier({ tier }) {
           <li key={feature} className="flex items-start gap-2 text-sm">
             <svg
               viewBox="0 0 20 20"
-              className={`mt-0.5 h-4 w-4 shrink-0 ${tier.featured ? "text-lagune" : "text-lagune-dark"}`}
+              className={`mt-0.5 h-4 w-4 shrink-0 ${tier.featured ? "text-lagune-panel" : "text-lagune-dark"}`}
               fill="none"
               stroke="currentColor"
               strokeWidth="2"

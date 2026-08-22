@@ -1,7 +1,6 @@
 import Button from "../components/Button";
-import PillarIllustration from "../components/PillarIllustration";
 import Reveal from "../components/Reveal";
-import { pillars } from "../data/content";
+import { pillars, pillarPhotos } from "../data/content";
 import { ACCENTS, ACCENT_DEFAUT } from "../data/pillarAccents";
 
 function Coche({ className }) {
@@ -22,12 +21,16 @@ export default function Services() {
             Nos services
           </span>
           <h1 className="mt-3 font-display text-4xl font-bold text-ink md:text-5xl">
-            Avancer sous plusieurs angles vers votre transformation digitale.
+            Votre transformation digitale, accompagnée sous tous ses angles.
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-ink/70">
-
-            Une gamme variée d'outils et de leviers mis à votre disposition pour repondre le mieux a vos besions .
-            Qu’il s’agisse du déploiement de nouveaux logiciels internes, d’un changement des processus métiers ou encore d’un changement d’organisation, digyo assure  et cadre la mutation de votre structure pour mieux gerer l'adaptation au sain de votre équipe.
+            Nous mettons à votre disposition une gamme complète d'outils et de leviers, choisis et
+            dimensionnés pour répondre précisément à vos besoins. Qu'il s'agisse de diagnostiquer
+            votre existant, de déployer de nouveaux logiciels, de faire évoluer vos processus
+            métiers ou de repenser votre organisation, digyo structure et sécurise chaque étape de
+            la mutation de votre entreprise. Notre rôle ne s'arrête pas au conseil : nous
+            accompagnons concrètement la mise en œuvre et l'adoption par vos équipes, pour que le
+            changement s'installe durablement au sein de votre structure.
           </p>
 
           {/* Navigation rapide vers chaque service : sur une page volontairement longue et
@@ -62,14 +65,14 @@ export default function Services() {
           >
             <div className="container-page">
               <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
-                {/* Illustration : la même identité dessinée à la main que sur l'accueil, reprise
-                    en grand format — un visuel de marque cohérent plutôt qu'une photo de stock
-                    qui ne dirait rien de spécifique à digyo. */}
+                {/* Photo adaptée à chaque service plutôt qu'un pictogramme générique. */}
                 <Reveal className={impair ? "md:order-2" : ""}>
-                  <div className={`flex h-64 items-center justify-center rounded-[2.5rem] md:h-96 ${accent.fond}`}>
-                    <PillarIllustration
-                      slug={pillar.slug}
-                      className={`h-32 w-44 md:h-44 md:w-60 ${accent.trait} ${accent.rotation.replace("group-hover:rotate-0", "")}`}
+                  <div className={`h-64 overflow-hidden rounded-[2.5rem] md:h-96 ${accent.fond}`}>
+                    <img
+                      src={pillarPhotos[pillar.slug]?.src}
+                      alt={pillarPhotos[pillar.slug]?.alt ?? pillar.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
                     />
                   </div>
                 </Reveal>

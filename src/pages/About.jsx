@@ -5,15 +5,25 @@ export default function About() {
   return (
     <>
       {/* Hero */}
-      <section className="border-b border-ink/10 bg-surface py-20">
-        <div className="container-page max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-widest text-lagune-dark">
+      {/* -mt-16 + pt-40/48 (au lieu de py-24/32) : la photo remonte sous le header, transparent
+          tant qu'on n'a pas scrollé sur cette page (voir Header.jsx) -- le padding-top compensé
+          garde le même espacement visuel pour le contenu. */}
+      <section className="relative -mt-16 overflow-hidden border-b border-ink/10 pb-24 pt-40 md:pb-32 md:pt-48">
+        <img
+          src="/about/hero-equipe.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-panel/95 via-panel/80 to-panel/50" />
+        <div className="container-page relative max-w-2xl">
+          <span className="text-xs font-bold uppercase tracking-widest text-lagune-panel">
             Qui sommes-nous?
           </span>
-          <h1 className="mt-3 font-display text-4xl font-bold text-ink md:text-5xl">
+          <h1 className="mt-3 font-display text-4xl font-bold text-on-panel md:text-5xl">
             Une agence de professionels passionés aux services des metiers du numerique.
           </h1>
-          <p className="mt-5 text-lg leading-relaxed text-ink/70">
+          <p className="mt-5 text-lg leading-relaxed text-on-panel/80">
             digyo est née d'un constat simple, observé en Côte d'Ivoire comme ailleurs&nbsp;: la
             transformation digitale ne manque pas d'ambition, elle manque d'accompagnement
             concret, accessible et adapté aux réalités du terrain. Nous existons pour combler

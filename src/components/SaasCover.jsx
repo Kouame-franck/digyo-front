@@ -13,7 +13,7 @@ const accentGradients = {
 };
 
 const accentIconColor = {
-  lagune: "text-lagune-dark",
+  lagune: "text-lagune-panel-dark",
   ambre: "text-ambre-dark",
 };
 

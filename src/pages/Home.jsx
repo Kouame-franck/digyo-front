@@ -2,6 +2,7 @@ import Button from "../components/Button";
 import PillarCard from "../components/PillarCard";
 import Reveal from "../components/Reveal";
 import HeroIllustration from "../components/HeroIllustration";
+import ValeurIcon from "../components/ValeurIcon";
 import { pillars, values, process, partners, reperesTransformation } from "../data/content";
 import ReperesCarousel from "../components/ReperesCarousel";
 
@@ -9,24 +10,34 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-ink/10">
-        <div className="hero-glow pointer-events-none absolute inset-0" />
-        <div className="container-page relative grid gap-12 py-24 md:grid-cols-2 md:items-center md:py-32">
+      {/* -mt-16 + pt-40/48 (au lieu de py-24/32) : la photo remonte sous le header, qui est
+          transparent tant qu'on n'a pas scrollé sur cette page (voir Header.jsx) -- le contenu,
+          lui, garde le même espacement visuel qu'avant grâce au padding-top compensé. */}
+      <section className="relative -mt-16 overflow-hidden border-b border-ink/10 pb-24 pt-40 md:pb-32 md:pt-48">
+        <img
+          src="/home/hero-tech.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-panel/90 via-panel/75 to-panel/45" />
+        <div className="container-page relative grid gap-12 md:grid-cols-2 md:items-center">
           <div>
-            <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[1.05] text-ink md:mt-0 md:text-5xl">
+            <h1 className="mt-6 max-w-3xl font-display text-4xl font-bold leading-[1.05] text-on-panel md:mt-0 md:text-5xl">
               Le monde est passé au digital. Et vous ?
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink/70">
+            <span aria-hidden="true" className="mt-4 block h-1 w-16 rounded-full bg-lagune-panel" />
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-on-panel/80">
               digyo accompagne PME, institutions et indépendants dans leur
               transformation digitale : conseil, création de sites &amp;
               applications, formation des équipes.
             </p>
-            
+
             <div className="mt-9 flex flex-wrap gap-4">
               <Button to="/contact" variant="accent">
                 Démarrer un projet
               </Button>
-              <Button to="/services" variant="ghost">
+              <Button to="/services" variant="ghostLight">
                 Voir nos offres
               </Button>
             </div>
@@ -95,7 +106,7 @@ export default function Home() {
       <section className="bg-panel py-24 text-on-panel">
         <div className="container-page grid gap-12 md:grid-cols-2 md:items-center">
           <Reveal>
-            <span className="text-xs font-bold uppercase tracking-widest text-lagune">
+            <span className="text-xs font-bold uppercase tracking-widest text-lagune-panel">
               Pourquoi digyo
             </span>
             <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">
@@ -119,7 +130,8 @@ export default function Home() {
                 delay={i * 100}
                 className="rounded-2xl border border-on-panel/15 bg-on-panel/5 p-6"
               >
-                <h3 className="font-display text-lg font-bold">{v.title}</h3>
+                <ValeurIcon nom={v.icone} className="h-10 w-10 text-lagune-panel md:h-12 md:w-12" />
+                <h3 className="mt-4 font-display text-lg font-bold">{v.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-on-panel/65">
                   {v.description}
                 </p>

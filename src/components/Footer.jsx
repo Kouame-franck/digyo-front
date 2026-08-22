@@ -20,13 +20,13 @@ export default function Footer() {
             Navigation
           </h5>
           <ul className="mt-4 space-y-2.5 text-sm">
-            <li><Link to="/" className="text-on-panel/80 hover:text-lagune">Accueil</Link></li>
-            <li><Link to="/services" className="text-on-panel/80 hover:text-lagune">Services</Link></li>
-            <li><Link to="/saas" className="text-on-panel/80 hover:text-lagune">SaaS</Link></li>
-            <li><Link to="/blog" className="text-on-panel/80 hover:text-lagune">Blog</Link></li>
-            <li><Link to="/a-propos" className="text-on-panel/80 hover:text-lagune">À propos</Link></li>
-            <li><Link to="/espace-client" className="text-on-panel/80 hover:text-lagune">Espace client</Link></li>
-            <li><Link to="/contact" className="text-on-panel/80 hover:text-lagune">Contact</Link></li>
+            <li><Link to="/" className="text-on-panel/80 hover:text-lagune-panel">Accueil</Link></li>
+            <li><Link to="/services" className="text-on-panel/80 hover:text-lagune-panel">Services</Link></li>
+            <li><Link to="/saas" className="text-on-panel/80 hover:text-lagune-panel">SaaS</Link></li>
+            <li><Link to="/blog" className="text-on-panel/80 hover:text-lagune-panel">Blog</Link></li>
+            <li><Link to="/a-propos" className="text-on-panel/80 hover:text-lagune-panel">À propos</Link></li>
+            <li><Link to="/espace-client" className="text-on-panel/80 hover:text-lagune-panel">Espace client</Link></li>
+            <li><Link to="/contact" className="text-on-panel/80 hover:text-lagune-panel">Contact</Link></li>
           </ul>
         </div>
 
@@ -37,7 +37,7 @@ export default function Footer() {
           <ul className="mt-4 space-y-2.5 text-sm text-on-panel/80">
             <li>{contactInfo.city}</li>
             <li>
-              <a href={`mailto:${contactInfo.email}`} className="hover:text-lagune">
+              <a href={`mailto:${contactInfo.email}`} className="hover:text-lagune-panel">
                 {contactInfo.email}
               </a>
             </li>
@@ -47,7 +47,7 @@ export default function Footer() {
               <a
                 key={s.label}
                 href={s.href}
-                className="text-xs font-semibold text-on-panel/60 hover:text-lagune"
+                className="text-xs font-semibold text-on-panel/60 hover:text-lagune-panel"
               >
                 {s.label}
               </a>
@@ -60,8 +60,8 @@ export default function Footer() {
         <div className="container-page flex flex-col gap-3 text-xs text-on-panel/50 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} digyo. Tous droits réservés.</span>
           <div className="flex gap-5">
-            <Link to="/mentions-legales" className="hover:text-lagune">Mentions légales</Link>
-            <Link to="/politique-de-confidentialite" className="hover:text-lagune">
+            <Link to="/mentions-legales" className="hover:text-lagune-panel">Mentions légales</Link>
+            <Link to="/politique-de-confidentialite" className="hover:text-lagune-panel">
               Politique de confidentialité
             </Link>
           </div>

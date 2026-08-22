@@ -6,6 +6,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SupportWidget from "./components/SupportWidget";
+import SiteNudges from "./components/SiteNudges";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import About from "./pages/About";
@@ -55,6 +56,7 @@ export default function App() {
             </main>
             <Footer />
             <SupportWidget />
+            <SiteNudges />
           </div>
         </AuthModalProvider>
       </SessionProvider>

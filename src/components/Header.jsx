@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import Logo from "./Logo";
 import Button from "./Button";
@@ -8,6 +8,7 @@ import SideDrawer from "./SideDrawer";
 import Avatar from "./Avatar";
 import { useAuthModal } from "../context/AuthModalContext";
 import { useSession } from "../context/SessionContext";
+import { ServicesMegaMenu, SaasMegaMenu, BlogMegaMenu } from "./HeaderMegaMenus";
 
 // Icônes en ligne, même style que les pictos déjà à main levée dans ce fichier (burger,
 // compte) — pas de dépendance d'icônes dans ce projet, inutile d'en ajouter une pour 7 pictos.
@@ -79,9 +80,114 @@ const links = [
   { to: "/contact", label: "Contact", icon: IconContact },
 ];
 
+// Nav desktop volontairement plus courte que la liste complète ci-dessus (utilisée telle
+// quelle dans le menu mobile) : "Espace client" reste joignable via l'icône compte (elle ouvre
+// un menu qui y renvoie, voir UserDrawer), et "Contact" fait déjà le travail du bouton
+// "Démarrer un projet" juste à côté -- pas besoin des deux.
+const navLinks = links.filter((l) => l.to !== "/espace-client" && l.to !== "/contact");
+
+// Pages qui ouvrent sur un hero plein cadre en photo sombre (voir Home.jsx, About.jsx) : sur
+// ces pages seulement, le header démarre transparent par-dessus la photo puis devient une barre
+// pleine au scroll. Ailleurs, le hero est clair -- un header transparent y serait illisible.
+const HERO_ROUTES = ["/", "/a-propos"];
+
+// Les liens qui ouvrent un mega-menu au survol -- panneau toujours en bg-surface (carte
+// opaque), quel que soit l'état transparent/plein du header lui-même.
+const MEGA_MENUS = {
+  "/services": ServicesMegaMenu,
+  "/saas": SaasMegaMenu,
+  "/blog": BlogMegaMenu,
+};
+
+function navLinkClasses({ isActive, transparent }) {
+  if (isActive) {
+    return transparent
+      ? "bg-on-panel/15 font-semibold text-on-panel"
+      : "bg-lagune/10 font-semibold text-lagune-dark";
+  }
+  return transparent
+    ? "text-on-panel/75 hover:bg-on-panel/10 hover:text-on-panel"
+    : "text-ink/60 hover:bg-ink/5 hover:text-ink";
+}
+
+// Enveloppe un lien de nav avec un mega-menu. Ouverture/fermeture pilotées en JS plutôt qu'en
+// pur CSS (`group-hover`) : un enchaînement de survols imbriqués est trop fragile dès que le
+// panneau est positionné en `fixed` loin de son déclencheur dans la mise en page -- la moindre
+// perte de survol d'une fraction de seconde le referme avant qu'on ait pu l'atteindre pour
+// cliquer dedans. Un petit délai à la fermeture (`closeSoon`) laisse le temps à la souris de
+// passer du lien au panneau.
+function NavMenuItem({ to, label, transparent, isActive, Panel }) {
+  const [open, setOpen] = useState(false);
+  const closeTimer = useRef(null);
+  const { pathname } = useLocation();
+
+  // Ferme le panneau après un clic sur un de ses liens, même si la souris n'a pas bougé.
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  function openNow() {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setOpen(true);
+  }
+
+  function closeSoon() {
+    closeTimer.current = setTimeout(() => setOpen(false), 250);
+  }
+
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={openNow}
+      onMouseLeave={closeSoon}
+      onFocus={openNow}
+      onBlur={closeSoon}
+    >
+      <NavLink
+        to={to}
+        aria-expanded={open}
+        className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${navLinkClasses({ isActive, transparent })}`}
+      >
+        {label}
+        <svg
+          viewBox="0 0 20 20"
+          className={`h-3.5 w-3.5 opacity-60 transition-transform duration-150 ${open ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <path d="M5 7.5l5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </NavLink>
+
+      <div
+        className={`fixed inset-x-0 top-16 z-40 flex justify-center transition-opacity duration-150 ${
+          open ? "visible opacity-100" : "invisible opacity-0"
+        }`}
+      >
+        <div className="w-[min(94vw,60rem)] pt-3">
+          <div className="overflow-hidden rounded-xl border border-ink/10 bg-surface shadow-xl shadow-ink/10">
+            <Panel />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
   const { openAuthModal } = useAuthModal();
   const { user } = useSession();
@@ -89,6 +195,15 @@ export default function Header() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 40);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   function handleAccountClick() {
     if (user) {
@@ -98,30 +213,46 @@ export default function Header() {
     }
   }
 
+  const transparent = HERO_ROUTES.includes(pathname) && !scrolled;
+
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/10 bg-canvas/90 backdrop-blur">
+    <header
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
+        transparent
+          ? "border-b border-transparent bg-transparent"
+          : "border-b border-ink/10 bg-canvas/90 shadow-sm shadow-ink/5 backdrop-blur"
+      }`}
+    >
       <div className="container-page flex h-16 items-center justify-between">
         <NavLink to="/" className="shrink-0">
-          <Logo />
+          <Logo variant={transparent ? "light" : "adaptive"} />
         </NavLink>
 
-        <nav className="hidden items-center gap-8 md:flex">
-          {links.map((link) => {
-            const Icon = link.icon;
+        <nav className="hidden items-center gap-1 md:flex">
+          {navLinks.map((link) => {
+            const Panel = MEGA_MENUS[link.to];
+            const isActive = link.to === "/" ? pathname === "/" : pathname.startsWith(link.to);
+
+            if (Panel) {
+              return (
+                <NavMenuItem
+                  key={link.to}
+                  to={link.to}
+                  label={link.label}
+                  transparent={transparent}
+                  isActive={isActive}
+                  Panel={Panel}
+                />
+              );
+            }
+
             return (
               <NavLink
                 key={link.to}
                 to={link.to}
                 end={link.to === "/"}
-                className={({ isActive }) =>
-                  `relative flex items-center gap-1.5 py-1 text-sm font-medium transition-colors after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:rounded-full after:transition-colors ${
-                    isActive
-                      ? "font-semibold text-lagune-dark after:bg-lagune-dark"
-                      : "text-ink/60 after:bg-transparent hover:text-ink"
-                  }`
-                }
+                className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${navLinkClasses({ isActive, transparent })}`}
               >
-                <Icon className="h-4 w-4 shrink-0" />
                 {link.label}
               </NavLink>
             );
@@ -129,12 +260,14 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-1.5">
-          <ThemeToggle />
+          <ThemeToggle className={transparent ? "!text-on-panel hover:!bg-on-panel/10" : ""} />
 
           <button
             type="button"
             onClick={handleAccountClick}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-ink transition-colors hover:bg-ink/5"
+            className={`inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors ${
+              transparent ? "text-on-panel hover:bg-on-panel/10" : "text-ink hover:bg-ink/5"
+            }`}
             aria-label={user ? "Mon compte" : "Se connecter"}
             title={user ? "Mon compte" : "Se connecter"}
           >
@@ -157,7 +290,9 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-ink md:hidden"
+            className={`inline-flex h-10 w-10 items-center justify-center rounded-lg md:hidden ${
+              transparent ? "text-on-panel" : "text-ink"
+            }`}
             aria-label="Ouvrir le menu"
             aria-expanded={open}
           >
