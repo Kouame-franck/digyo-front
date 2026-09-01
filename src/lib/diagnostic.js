@@ -54,13 +54,46 @@ export const pillarOptions = [
   "Autre",
 ];
 
+export const clienteleOptions = [
+  { value: "moins_50", label: "Moins de 50" },
+  { value: "50_200", label: "50 à 200" },
+  { value: "200_1000", label: "200 à 1000" },
+  { value: "plus_1000", label: "Plus de 1000" },
+  { value: "ne_sait_pas", label: "Je ne sais pas" },
+];
+
+export const annualRevenueOptions = [
+  { value: "moins_5m", label: "Moins de 5M FCFA" },
+  { value: "5_20m", label: "5 à 20M FCFA" },
+  { value: "20_50m", label: "20 à 50M FCFA" },
+  { value: "50_100m", label: "50 à 100M FCFA" },
+  { value: "plus_100m", label: "Plus de 100M FCFA" },
+  { value: "non_precise", label: "Je préfère ne pas préciser" },
+];
+
+export const contactMethodOptions = [
+  { value: "ecrit", label: "Formulaire écrit uniquement" },
+  { value: "appel", label: "Appel téléphonique" },
+  { value: "visio", label: "Visioconférence" },
+  { value: "presentiel", label: "Rendez-vous sur place" },
+];
+
+export const availabilityOptions = [
+  "Matin (8h–12h)",
+  "Après-midi (12h–16h)",
+  "Fin de journée (16h–19h)",
+  "Week-end",
+];
+
+// not_requested n'a volontairement pas de badge : rien n'a encore été demandé, un statut ne
+// ferait qu'ajouter du bruit avant le bouton d'action.
 export const deepStatusMeta = {
   not_requested: {
-    label: "Non demandé",
-    badge: "bg-ink/8 text-ink/50",
+    label: null,
+    badge: null,
   },
   requested: {
-    label: "Demande envoyée",
+    label: "En attente du résultat du diagnostic complet",
     badge: "bg-ambre/15 text-ambre-dark",
     description: "Votre demande est bien reçue, notre équipe va l'examiner sous peu.",
   },

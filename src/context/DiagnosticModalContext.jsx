@@ -28,6 +28,7 @@ export function DiagnosticModalProvider({ children }) {
       <DeepDiagnosticModal
         open={deepFormOpen}
         onClose={() => setDeepFormOpen(false)}
+        profile={profile}
         onSubmitted={setProfile}
       />
     </DiagnosticModalContext.Provider>

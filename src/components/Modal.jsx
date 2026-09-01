@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 const sizes = {
   md: "max-w-md",
   lg: "max-w-xl",
+  xl: "max-w-2xl",
 };
 
 export default function Modal({

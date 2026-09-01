@@ -2,43 +2,40 @@ import { deepStatusMeta } from "../lib/diagnostic";
 
 // Statut du diagnostic approfondi (humain) d'une fiche enregistrée -- partagé entre la modale
 // et la carte dépliée d'Espace client. N'a de sens que pour un `profile` réellement persisté,
-// jamais pour un essai libre non connecté. `onOpenForm` ouvre le formulaire de demande
-// (DeepDiagnosticModal) ; ce composant ne soumet jamais rien lui-même.
-export default function DeepDiagnosticStatus({ profile, onOpenForm }) {
+// jamais pour un essai libre non connecté. `onOpen` ouvre DeepDiagnosticModal, qui affiche soit
+// le formulaire (rien encore demandé), soit un résumé en lecture seule de la demande en cours.
+export default function DeepDiagnosticStatus({ profile, onOpen }) {
   const meta = deepStatusMeta[profile.deepStatus];
+  const requested = profile.deepStatus !== "not_requested";
 
   return (
     <div className="mt-6 rounded-2xl border border-ink/10 p-5">
-      <span
-        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide ${meta.badge}`}
-      >
-        {meta.label}
-      </span>
+      {requested && (
+        <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium ${meta.badge}`}>
+          <span className="h-1.5 w-1.5 rounded-full bg-current" />
+          {meta.label}
+        </span>
+      )}
       {meta.description && <p className="mt-2 text-sm text-ink/60">{meta.description}</p>}
       {profile.deepStatus === "completed" && profile.deepResult && (
         <p className="mt-3 whitespace-pre-line rounded-xl bg-ink/5 p-4 text-sm text-ink/80">
           {profile.deepResult}
         </p>
       )}
-      {profile.deepStatus !== "not_requested" && profile.deepChallenge && (
-        <div className="mt-3 rounded-xl bg-ink/5 p-4 text-sm text-ink/70">
-          <p className="text-xs font-semibold uppercase tracking-wide text-ink/40">Votre demande</p>
-          <p className="mt-1.5 whitespace-pre-line">{profile.deepChallenge}</p>
-          {(profile.deepAddress || profile.deepPhone) && (
-            <p className="mt-2 text-xs text-ink/50">
-              {[profile.deepAddress, profile.deepPhone].filter(Boolean).join(" · ")}
-            </p>
-          )}
-          {profile.deepAcceptAudit && (
-            <p className="mt-1 text-xs text-ink/50">Audit physique accepté si nécessaire.</p>
-          )}
-        </div>
-      )}
-      {profile.deepStatus === "not_requested" && (
+
+      {requested ? (
         <button
           type="button"
-          onClick={onOpenForm}
-          className="mt-4 w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+          onClick={onOpen}
+          className="mt-4 text-sm font-semibold text-lagune-dark hover:underline"
+        >
+          Voir le résumé de ma demande →
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={onOpen}
+          className="w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
         >
           Diagnostic approfondi
         </button>

@@ -134,7 +134,7 @@ export default function ClientSpace() {
                       sector: profile.sector,
                     }}
                   />
-                  <DeepDiagnosticStatus profile={profile} onOpenForm={() => setDeepFormOpen(true)} />
+                  <DeepDiagnosticStatus profile={profile} onOpen={() => setDeepFormOpen(true)} />
                 </div>
               )}
             </div>
@@ -255,6 +255,7 @@ export default function ClientSpace() {
       <DeepDiagnosticModal
         open={deepFormOpen}
         onClose={() => setDeepFormOpen(false)}
+        profile={profile}
         onSubmitted={setProfile}
       />
       <ProjectModal

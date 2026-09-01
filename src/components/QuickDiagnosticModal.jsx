@@ -505,7 +505,7 @@ export default function QuickDiagnosticModal({
           </div>
 
           {profile ? (
-            <DeepDiagnosticStatus profile={profile} onOpenForm={handleOpenDeepForm} />
+            <DeepDiagnosticStatus profile={profile} onOpen={handleOpenDeepForm} />
           ) : (
             <div className="mt-6 rounded-2xl border border-dashed border-lagune/40 bg-lagune/5 p-5">
               <p className="text-sm text-ink/70">
