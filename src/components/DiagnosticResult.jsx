@@ -1,7 +1,13 @@
 // Rendu du score/axes/recommandations d'un diagnostic rapide -- partagé entre la modale
 // (essai libre, confirmation après sauvegarde) et la carte dépliée d'Espace client, qui
 // affichent toutes deux la même forme de résultat ({ score, level, axes, recommendations }).
-export default function DiagnosticResult({ result }) {
+// `recommendationsLimit` tronque la liste (ex. aperçu dans la modale, qui renvoie ensuite vers
+// l'espace client pour voir le reste) -- omis, tout s'affiche (usage Espace client).
+export default function DiagnosticResult({ result, recommendationsLimit }) {
+  const recommendations = recommendationsLimit
+    ? result.recommendations.slice(0, recommendationsLimit)
+    : result.recommendations;
+
   return (
     <div>
       {(result.companyName || result.sector) && (
@@ -47,7 +53,7 @@ export default function DiagnosticResult({ result }) {
 
       <h3 className="mt-3 text-sm font-bold text-ink">Nos recommandations prioritaires</h3>
       <ul className="mt-3 space-y-3">
-        {result.recommendations.map((rec) => (
+        {recommendations.map((rec) => (
           <li key={rec.priority} className="flex gap-3 rounded-xl bg-lagune/5 p-3.5 text-sm text-ink/80">
             <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lagune/15 text-xs font-bold text-lagune-dark">
               {rec.priority}

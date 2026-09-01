@@ -1,15 +1,15 @@
 import { createContext, useCallback, useContext, useState } from "react";
 import QuickDiagnosticModal from "../components/QuickDiagnosticModal";
-import DeepDiagnosticModal from "../components/DeepDiagnosticModal";
 
 const DiagnosticModalContext = createContext(null);
 
 // Instance unique, montée à la racine, ouvrable depuis n'importe quel point d'entrée marketing
 // (bouton hero de l'accueil, pop-up nudge...) -- distincte de celle d'Espace client, qui gère
-// elle-même son état car elle affiche aussi un tableau de bord autour de la fiche.
+// elle-même son état car elle affiche aussi un tableau de bord autour de la fiche. Le diagnostic
+// approfondi (DeepDiagnosticModal) n'est plus accessible depuis ce point d'entrée -- l'aperçu ici
+// renvoie vers l'espace client, seul endroit où il reste proposé.
 export function DiagnosticModalProvider({ children }) {
   const [open, setOpen] = useState(false);
-  const [deepFormOpen, setDeepFormOpen] = useState(false);
   const [profile, setProfile] = useState(null);
 
   const openDiagnosticModal = useCallback(() => setOpen(true), []);
@@ -23,13 +23,6 @@ export function DiagnosticModalProvider({ children }) {
         onClose={closeDiagnosticModal}
         profile={profile}
         onProfileChange={setProfile}
-        onOpenDeepForm={() => setDeepFormOpen(true)}
-      />
-      <DeepDiagnosticModal
-        open={deepFormOpen}
-        onClose={() => setDeepFormOpen(false)}
-        profile={profile}
-        onSubmitted={setProfile}
       />
     </DiagnosticModalContext.Provider>
   );

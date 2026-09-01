@@ -113,7 +113,7 @@ export default function ClientSpace() {
                   {deepStatusMeta[profile.deepStatus].label}
                 </span>
               </div>
-              <p className="mt-4 max-w-2xl text-sm text-ink/70">{profile.quickSummary[0]}</p>
+              <p className="mt-4 max-w-2xl text-sm text-ink/70">{profile.quickSummary[0]?.text}</p>
               <button
                 type="button"
                 onClick={() => setDetailOpen((v) => !v)}

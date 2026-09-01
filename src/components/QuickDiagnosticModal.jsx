@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import DiagnosticResult from "./DiagnosticResult";
-import DeepDiagnosticStatus from "./DeepDiagnosticStatus";
 import { apiFetch } from "../lib/api";
 import { useSession } from "../context/SessionContext";
 import { useAuthModal } from "../context/AuthModalContext";
@@ -61,14 +60,7 @@ function formFromProfile(profile) {
   };
 }
 
-export default function QuickDiagnosticModal({
-  open,
-  onClose,
-  profile,
-  onProfileChange,
-  forceForm = false,
-  onOpenDeepForm,
-}) {
+export default function QuickDiagnosticModal({ open, onClose, profile, onProfileChange, forceForm = false }) {
   const { user } = useSession();
   const { openAuthModal } = useAuthModal();
   const navigate = useNavigate();
@@ -167,12 +159,17 @@ export default function QuickDiagnosticModal({
     }
   }
 
-  // Sauvegarde le brouillon d'un invité après connexion -- le formulaire déjà rempli (`form`)
-  // n'est pas reperdu, on le soumet directement dès que la session s'ouvre. On renvoie ensuite
-  // vers l'espace client plutôt que de laisser la modale ouverte sur la même page : le statut
-  // du diagnostic approfondi affiché n'a alors plus rien à voir avec ce que l'invité vient de
-  // faire (ex. une demande déjà en cours sur un compte existant), ce qui semble incohérent.
-  function handleSaveClick() {
+  // Le résultat ici n'est qu'un aperçu (recommandations tronquées, voir DiagnosticResult) --
+  // "Voir toutes les recommandations" renvoie vers l'espace client, seul endroit qui affiche
+  // la liste complète et l'accès au diagnostic approfondi. Un invité doit d'abord se connecter ;
+  // le formulaire déjà rempli (`form`) est alors sauvegardé directement, sans qu'il ait à
+  // ressaisir quoi que ce soit.
+  function handleViewAll() {
+    if (user) {
+      onClose();
+      navigate("/espace-client");
+      return;
+    }
     openAuthModal("login", {
       onSuccess: async () => {
         try {
@@ -182,17 +179,10 @@ export default function QuickDiagnosticModal({
           onClose();
           navigate("/espace-client");
         } catch {
-          // La fiche reste visible localement ; l'utilisateur peut refaire "Sauvegarder" si besoin.
+          // La fiche reste visible localement ; l'utilisateur peut refaire l'action si besoin.
         }
       },
     });
-  }
-
-  // Le diagnostic approfondi a son propre formulaire (DeepDiagnosticModal), ouvert par le
-  // parent -- deux modales ne se superposent pas ici, on ferme donc celle-ci avant.
-  function handleOpenDeepForm() {
-    onClose();
-    onOpenDeepForm();
   }
 
   return (
@@ -503,27 +493,23 @@ export default function QuickDiagnosticModal({
           </h2>
 
           <div className="mt-5">
-            <DiagnosticResult result={result} />
+            <DiagnosticResult result={result} recommendationsLimit={3} />
           </div>
 
-          {profile ? (
-            <DeepDiagnosticStatus profile={profile} onOpen={handleOpenDeepForm} />
-          ) : (
-            <div className="mt-6 rounded-2xl border border-dashed border-lagune/40 bg-lagune/5 p-5">
-              <p className="text-sm text-ink/70">
-                Ceci est un essai libre . Connectez-vous pour
-                accéder à un diagnostic approfondi, réalisé par notre équipe à partir de vos
-                réponses.
-              </p>
-              <button
-                type="button"
-                onClick={handleSaveClick}
-                className="mt-4 w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
-              >
-                Voir le diagnostic approfondi
-              </button>
-            </div>
-          )}
+          <div className="mt-6 rounded-2xl border border-dashed border-lagune/40 bg-lagune/5 p-5">
+            <p className="text-sm text-ink/70">
+              {user
+                ? "Retrouvez le détail complet de votre diagnostic, vos recommandations et le diagnostic approfondi dans votre espace client."
+                : "Ceci n'est qu'un aperçu. Connectez-vous pour l'enregistrer et accéder à l'ensemble de vos recommandations dans votre espace client."}
+            </p>
+            <button
+              type="button"
+              onClick={handleViewAll}
+              className="mt-4 w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+            >
+              Voir toutes les recommandations
+            </button>
+          </div>
 
           <button
             type="button"
