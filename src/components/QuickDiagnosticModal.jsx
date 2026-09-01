@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import { apiFetch } from "../lib/api";
 import { useSession } from "../context/SessionContext";
@@ -62,6 +63,7 @@ function formFromProfile(profile) {
 export default function QuickDiagnosticModal({ open, onClose, profile, onProfileChange }) {
   const { user } = useSession();
   const { openAuthModal } = useAuthModal();
+  const navigate = useNavigate();
   // Résultat d'un essai libre (pas connecté, rien d'enregistré) -- distinct de `profile`, qui
   // lui vient toujours d'une fiche réellement sauvegardée en base.
   const [guestResult, setGuestResult] = useState(null);
@@ -142,7 +144,10 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
   }
 
   // Sauvegarde le brouillon d'un invité après connexion -- le formulaire déjà rempli (`form`)
-  // n'est pas reperdu, on le soumet directement dès que la session s'ouvre.
+  // n'est pas reperdu, on le soumet directement dès que la session s'ouvre. On renvoie ensuite
+  // vers l'espace client plutôt que de laisser la modale ouverte sur la même page : le statut
+  // du diagnostic approfondi affiché n'a alors plus rien à voir avec ce que l'invité vient de
+  // faire (ex. une demande déjà en cours sur un compte existant), ce qui semble incohérent.
   function handleSaveClick() {
     openAuthModal("login", {
       onSuccess: async () => {
@@ -150,6 +155,8 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
           const data = await apiFetch("/api/client-profile", { method: "PUT", body: JSON.stringify(form) });
           onProfileChange(data.profile);
           setGuestResult(null);
+          onClose();
+          navigate("/espace-client");
         } catch {
           // La fiche reste visible localement ; l'utilisateur peut refaire "Sauvegarder" si besoin.
         }
@@ -545,14 +552,15 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
             <div className="mt-6 rounded-2xl border border-dashed border-lagune/40 bg-lagune/5 p-5">
               <p className="text-sm text-ink/70">
                 Ceci est un essai libre : rien n'est encore enregistré. Connectez-vous pour
-                sauvegarder ce diagnostic et accéder au diagnostic approfondi.
+                accéder à un diagnostic approfondi, réalisé par notre équipe à partir de vos
+                réponses.
               </p>
               <button
                 type="button"
                 onClick={handleSaveClick}
                 className="mt-4 w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
               >
-                Sauvegarder mon diagnostic
+                Débloquer le diagnostic approfondi
               </button>
             </div>
           )}
