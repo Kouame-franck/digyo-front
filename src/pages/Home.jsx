@@ -5,8 +5,11 @@ import HeroIllustration from "../components/HeroIllustration";
 import ValeurIcon from "../components/ValeurIcon";
 import { pillars, values, process, partners, reperesTransformation } from "../data/content";
 import ReperesCarousel from "../components/ReperesCarousel";
+import { useDiagnosticModal } from "../context/DiagnosticModalContext";
 
 export default function Home() {
+  const { openDiagnosticModal } = useDiagnosticModal();
+
   return (
     <>
       {/* Hero */}
@@ -34,8 +37,8 @@ export default function Home() {
             </p>
 
             <div className="mt-9 flex flex-wrap gap-4">
-              <Button to="/contact" variant="accent">
-                Démarrer un projet
+              <Button type="button" variant="accent" onClick={openDiagnosticModal}>
+                Diagnostiquer mon activité
               </Button>
               <Button to="/services" variant="ghostLight">
                 Voir nos offres
@@ -58,7 +61,7 @@ export default function Home() {
               </span>
               <h2 className="mt-3 font-display text-3xl font-bold text-ink md:text-4xl">
                 Mettre à votre disposition des outils et méthodes adaptés à
-                votre environnement pour augmanter votre productivité.
+                votre environnement pour augmenter votre productivité.
               </h2>
             </Reveal>
 
@@ -110,14 +113,14 @@ export default function Home() {
               Pourquoi digyo
             </span>
             <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">
-              Au déla de fournir juste un rapport, nous allons jusqu'a la mise en oeuvre.
+              Au-delà de fournir juste un rapport, nous allons jusqu'à la mise en œuvre.
             </h2>
             <p className="mt-5 text-on-panel/70 leading-relaxed">
-              La recommandation n'est juste que le commencement.
+              La recommandation n'est que le commencement.
               Chez digyo, l'équipe pose le diagnostic, construit l'outil,
-              forme vos équipes à s'en servir et. Pour nos propres produits SaaS,
-              une ssistance 7j/7. Une chaîne continue, du premier
-              atelier jusqu'au logiciel qui tourne en production .
+              forme vos équipes à s'en servir et assure, pour nos propres produits SaaS,
+              une assistance 7j/7. Une chaîne continue, du premier
+              atelier jusqu'au logiciel qui tourne en production.
             </p>
             <Button to="/a-propos" variant="ghostLight" className="mt-8">
               Notre histoire

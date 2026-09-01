@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import NudgePopup from "./NudgePopup";
+import { useDiagnosticModal } from "../context/DiagnosticModalContext";
 
 const DELAY_MS = 12000;
 const SESSION_SHOWN_KEY = "digyo_nudge_shown";
@@ -41,8 +42,7 @@ const NUDGES = {
     title: "Un diagnostic clair, sans engagement",
     message:
       "Beaucoup d'organisations avancent à l'instinct. On peut vous aider à voir clair sur ce qui freine vraiment votre croissance.",
-    ctaLabel: "Demander un diagnostic",
-    ctaTo: "/contact",
+    ctaLabel: "Diagnostiquer mon activité",
   },
 };
 
@@ -67,6 +67,7 @@ function getVariant() {
 
 export default function SiteNudges() {
   const { pathname } = useLocation();
+  const { openDiagnosticModal } = useDiagnosticModal();
   const [ready, setReady] = useState(false);
   const [active, setActive] = useState(null);
 
@@ -96,5 +97,11 @@ export default function SiteNudges() {
 
   if (!active) return null;
 
-  return <NudgePopup {...NUDGES[active]} onDismiss={dismiss} />;
+  return (
+    <NudgePopup
+      {...NUDGES[active]}
+      onCtaClick={active === "diagnostic" ? openDiagnosticModal : undefined}
+      onDismiss={dismiss}
+    />
+  );
 }

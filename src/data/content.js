@@ -1,7 +1,7 @@
 export const pillars = [
   {
     slug: "transformation",
-    name: "Transformation et accompagnement digitale",
+    name: "Transformation et accompagnement digital",
     tagline: "Un diagnostic clair, un plan qui se déploie réellement.",
     headline: "Arrêtez de deviner ce qui freine votre croissance.",
     paragraphs: [
@@ -280,9 +280,9 @@ export const values = [
     icone: "terrain",
   },
   {
-    title: "La securité de Vos données",
+    title: "La sécurité de vos données",
     description:
-      "La confidentialité dans la gestion et le traitement de vos données represente un parametre assez import dans notre mode d'action. Nous mettons a coeur la protection de vos données dans toute notre demarche collaborative.",
+      "La confidentialité dans la gestion et le traitement de vos données représente un paramètre assez important dans notre mode d'action. Nous avons à cœur la protection de vos données dans toute notre démarche collaborative.",
     icone: "securite",
   },
   {

@@ -7,7 +7,7 @@ import { apiFetch } from "../lib/api";
 const initialLogin = { email: "", password: "" };
 const initialSignup = { name: "", email: "", password: "" };
 
-export default function AuthModal({ open, initialTab = "login", onClose }) {
+export default function AuthModal({ open, initialTab = "login", onClose, onSuccess }) {
   const { login: startSession } = useSession();
   const [tab, setTab] = useState(initialTab);
   const [login, setLogin] = useState(initialLogin);
@@ -33,6 +33,7 @@ export default function AuthModal({ open, initialTab = "login", onClose }) {
           : await apiFetch("/api/auth/register", { method: "POST", body: JSON.stringify(signup) });
       startSession(data.user);
       handleClose();
+      onSuccess?.();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -49,6 +50,7 @@ export default function AuthModal({ open, initialTab = "login", onClose }) {
       });
       startSession(data.user);
       handleClose();
+      onSuccess?.();
     } catch (err) {
       setError(err.message);
     }

@@ -6,7 +6,14 @@ const sizes = {
   lg: "max-w-xl",
 };
 
-export default function Modal({ open, onClose, labelledBy, size = "md", children }) {
+export default function Modal({
+  open,
+  onClose,
+  labelledBy,
+  size = "md",
+  closeOnBackdropClick = true,
+  children,
+}) {
   const panelRef = useRef(null);
   const onCloseRef = useRef(onClose);
 
@@ -62,7 +69,7 @@ export default function Modal({ open, onClose, labelledBy, size = "md", children
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       <div
         className="absolute inset-0 bg-panel/60 backdrop-blur-sm"
-        onClick={onClose}
+        onClick={closeOnBackdropClick ? onClose : undefined}
         aria-hidden="true"
       />
       <div

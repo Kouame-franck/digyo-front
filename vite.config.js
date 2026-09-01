@@ -11,7 +11,7 @@ export default defineConfig({
       // Pointe sur le backend de production (donc sur la vraie base de données) : plus besoin
       // de backend ni de base locale pour développer/tester le front. Remettre en
       // "http://localhost:3001" ponctuellement si un backend local est explicitement voulu.
-      "/api": { target: "https://api-digyo.scode-ci.pro", changeOrigin: true, secure: true },
+      "/api": { target: "https://api-digyo.digyo.pro", changeOrigin: true, secure: true },
     },
   },
 })

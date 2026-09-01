@@ -11,10 +11,19 @@ export default function NudgePopup({
   message,
   ctaLabel,
   ctaTo,
+  onCtaClick,
   accent = "lagune",
   onDismiss,
 }) {
   const isAmbre = accent === "ambre";
+  const ctaClassName = `mt-4 inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-semibold transition-colors ${
+    isAmbre ? "bg-ambre text-panel hover:bg-ambre-dark" : "bg-lagune text-white hover:bg-lagune-dark"
+  }`;
+  const ctaArrow = (
+    <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M7 4l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
 
   return (
     <div className="animate-nudge-in fixed bottom-6 left-6 z-40 w-[22rem] max-w-[calc(100vw-3rem)]">
@@ -58,20 +67,24 @@ export default function NudgePopup({
           <p className="mt-1.5 font-display text-base font-bold leading-snug text-ink">{title}</p>
           <p className="mt-2 text-sm leading-relaxed text-ink/65">{message}</p>
 
-          <Link
-            to={ctaTo}
-            onClick={onDismiss}
-            className={`mt-4 inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-semibold transition-colors ${
-              isAmbre
-                ? "bg-ambre text-panel hover:bg-ambre-dark"
-                : "bg-lagune text-white hover:bg-lagune-dark"
-            }`}
-          >
-            {ctaLabel}
-            <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M7 4l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
+          {onCtaClick ? (
+            <button
+              type="button"
+              onClick={() => {
+                onCtaClick();
+                onDismiss();
+              }}
+              className={ctaClassName}
+            >
+              {ctaLabel}
+              {ctaArrow}
+            </button>
+          ) : (
+            <Link to={ctaTo} onClick={onDismiss} className={ctaClassName}>
+              {ctaLabel}
+              {ctaArrow}
+            </Link>
+          )}
         </div>
       </div>
     </div>

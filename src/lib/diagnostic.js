@@ -26,6 +26,21 @@ export const yearsActiveOptions = [
 
 export const socialMediaOptions = ["Facebook", "Instagram", "LinkedIn", "TikTok", "YouTube"];
 
+export const toolsOptions = [
+  "Tableur (Excel, Google Sheets)",
+  "Logiciel de gestion / ERP",
+  "CRM",
+  "Comptabilité",
+  "Aucun outil digital",
+];
+
+export const timelineOptions = [
+  { value: "immediat", label: "Immédiatement" },
+  { value: "3_mois", label: "Dans les 3 mois" },
+  { value: "6_mois", label: "Dans les 6 mois" },
+  { value: "pas_defini", label: "Pas encore défini" },
+];
+
 export const digitalComfortOptions = [
   { value: "a_l_aise", label: "À l'aise avec les outils digitaux" },
   { value: "quelques_difficultes", label: "Quelques difficultés" },

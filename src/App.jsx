@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { SessionProvider } from "./context/SessionContext";
 import { AuthModalProvider } from "./context/AuthModalContext";
+import { DiagnosticModalProvider } from "./context/DiagnosticModalContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -34,30 +35,32 @@ export default function App() {
     <ThemeProvider>
       <SessionProvider>
         <AuthModalProvider>
-          <div className="flex min-h-screen flex-col">
-            <ScrollToTop />
-            <Header />
-            <main className="flex-1">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/a-propos" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/espace-client" element={<ClientSpace />} />
-                <Route path="/saas" element={<Saas />} />
-                <Route path="/saas/:slug" element={<SaasDetail />} />
-                <Route path="/saas/:slug/confirmation" element={<SaasSignupConfirmation />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<BlogPost />} />
-                <Route path="/mentions-legales" element={<MentionsLegales />} />
-                <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-            <Footer />
-            <SupportWidget />
-            <SiteNudges />
-          </div>
+          <DiagnosticModalProvider>
+            <div className="flex min-h-screen flex-col">
+              <ScrollToTop />
+              <Header />
+              <main className="flex-1">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/a-propos" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/espace-client" element={<ClientSpace />} />
+                  <Route path="/saas" element={<Saas />} />
+                  <Route path="/saas/:slug" element={<SaasDetail />} />
+                  <Route path="/saas/:slug/confirmation" element={<SaasSignupConfirmation />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/blog/:slug" element={<BlogPost />} />
+                  <Route path="/mentions-legales" element={<MentionsLegales />} />
+                  <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </main>
+              <Footer />
+              <SupportWidget />
+              <SiteNudges />
+            </div>
+          </DiagnosticModalProvider>
         </AuthModalProvider>
       </SessionProvider>
     </ThemeProvider>
