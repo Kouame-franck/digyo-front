@@ -6,15 +6,26 @@ import {
   annualRevenueOptions,
   contactMethodOptions,
   availabilityOptions,
+  businessGoalsOptions,
+  lostProspectsOptions,
+  interestAreasOptions,
+  investmentBudgetOptions,
   deepStatusMeta,
 } from "../lib/diagnostic";
 
 const emptyForm = {
   detailedChallenge: "",
   constraints: "",
+  businessGoals: [],
+  differentiation: "",
   clientele: "",
   annualRevenue: "",
   decisionMaker: "",
+  lostProspects: "",
+  interestAreas: [],
+  investmentBudget: "",
+  digitalImportance: "",
+  expectations: "",
   address: "",
   phone: "",
   contactMethod: "ecrit",
@@ -26,11 +37,38 @@ function labelFor(options, value) {
   return options.find((o) => o.value === value)?.label ?? value;
 }
 
+function toggleIn(list, value) {
+  return list.includes(value) ? list.filter((v) => v !== value) : [...list, value];
+}
+
+function TagToggle({ options, selected, onToggle }) {
+  return (
+    <div className="mt-2 flex flex-wrap gap-2">
+      {options.map((option) => (
+        <button
+          key={option}
+          type="button"
+          onClick={() => onToggle(option)}
+          className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors ${
+            selected.includes(option)
+              ? "border-lagune bg-lagune/10 text-lagune-dark"
+              : "border-ink/15 text-ink/60 hover:border-ink/30"
+          }`}
+        >
+          {option}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 // Formulaire dédié à la demande de diagnostic approfondi (humain) -- distinct du diagnostic
-// rapide, qui ne sert qu'à calculer un score automatique. Ici on récolte de quoi permettre à
-// l'équipe de comprendre l'activité en profondeur et d'organiser un éventuel échange ou une
-// visite. `profile` détermine le point d'entrée : formulaire si rien n'a encore été demandé,
-// résumé en lecture seule sinon -- pour pouvoir revoir sa demande à tout moment sans la refaire.
+// rapide, qui ne sert qu'à calculer un score automatique. Les questions ci-dessous reprennent,
+// en version allégée pour un formulaire en libre-service, celles de la fiche d'audit DIGYO
+// (public/DIGYO_Fiche_Audit_Diagnostic_Digital.pdf) -- pas ses grilles internes (score, SWOT,
+// feuille de route, signature), qui n'ont de sens que remplies par l'auditeur après coup.
+// `profile` détermine le point d'entrée : formulaire si rien n'a encore été demandé, résumé en
+// lecture seule sinon -- pour pouvoir revoir sa demande à tout moment sans la refaire.
 export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitted }) {
   const alreadyRequested = profile && profile.deepStatus !== "not_requested";
   const [step, setStep] = useState(alreadyRequested ? "summary" : "form");
@@ -47,13 +85,8 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  function toggleAvailability(slot) {
-    setForm((f) => ({
-      ...f,
-      availability: f.availability.includes(slot)
-        ? f.availability.filter((s) => s !== slot)
-        : [...f.availability, slot],
-    }));
+  function set(field) {
+    return (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
   }
 
   async function handleSubmit(e) {
@@ -79,7 +112,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
       open={open}
       onClose={onClose}
       labelledBy="deep-diagnostic-title"
-      size="xl"
+      size="2xl"
       closeOnBackdropClick={false}
     >
       <button
@@ -106,10 +139,10 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
             <span className="text-ambre-dark">*</span> Champs obligatoires
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-6 space-y-7">
+          <form onSubmit={handleSubmit} className="mt-6 space-y-8">
             <fieldset className="space-y-4">
               <legend className="text-xs font-bold uppercase tracking-widest text-lagune-dark">
-                Votre défi
+                1. Votre défi et vos objectifs
               </legend>
               <label className="block">
                 <span className="text-sm font-semibold text-ink">
@@ -120,7 +153,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
                   required
                   rows={4}
                   value={form.detailedChallenge}
-                  onChange={(e) => setForm((f) => ({ ...f, detailedChallenge: e.target.value }))}
+                  onChange={set("detailedChallenge")}
                   placeholder="Ex. Nous perdons des clients faute de suivi après la vente, notre équipe jongle entre trois outils différents qui ne communiquent pas entre eux…"
                   className="mt-2 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
                 />
@@ -132,8 +165,29 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
                 <textarea
                   rows={2}
                   value={form.constraints}
-                  onChange={(e) => setForm((f) => ({ ...f, constraints: e.target.value }))}
+                  onChange={set("constraints")}
                   placeholder="Réglementaires, techniques, budgétaires…"
+                  className="mt-2 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
+                />
+              </label>
+              <div>
+                <span className="text-sm font-semibold text-ink">
+                  Vos principaux objectifs pour les 12 prochains mois (optionnel)
+                </span>
+                <TagToggle
+                  options={businessGoalsOptions}
+                  selected={form.businessGoals}
+                  onToggle={(g) => setForm((f) => ({ ...f, businessGoals: toggleIn(f.businessGoals, g) }))}
+                />
+              </div>
+              <label className="block">
+                <span className="text-sm font-semibold text-ink">
+                  Pourquoi un client devrait-il vous choisir plutôt qu'un concurrent ? (optionnel)
+                </span>
+                <textarea
+                  rows={2}
+                  value={form.differentiation}
+                  onChange={set("differentiation")}
                   className="mt-2 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
                 />
               </label>
@@ -141,16 +195,14 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
 
             <fieldset className="space-y-4">
               <legend className="text-xs font-bold uppercase tracking-widest text-lagune-dark">
-                Votre activité en détail
+                2. Votre activité en détail
               </legend>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-3">
                 <label className="block">
-                  <span className="text-sm font-semibold text-ink">
-                    Nombre de clients actuels (optionnel)
-                  </span>
+                  <span className="text-sm font-semibold text-ink">Nombre de clients actuels</span>
                   <select
                     value={form.clientele}
-                    onChange={(e) => setForm((f) => ({ ...f, clientele: e.target.value }))}
+                    onChange={set("clientele")}
                     className="mt-2 w-full rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
                   >
                     <option value="">Sélectionner…</option>
@@ -162,16 +214,31 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
                   </select>
                 </label>
                 <label className="block">
-                  <span className="text-sm font-semibold text-ink">
-                    Chiffre d'affaires annuel (optionnel)
-                  </span>
+                  <span className="text-sm font-semibold text-ink">Chiffre d'affaires annuel</span>
                   <select
                     value={form.annualRevenue}
-                    onChange={(e) => setForm((f) => ({ ...f, annualRevenue: e.target.value }))}
+                    onChange={set("annualRevenue")}
                     className="mt-2 w-full rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
                   >
                     <option value="">Sélectionner…</option>
                     {annualRevenueOptions.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block">
+                  <span className="text-sm font-semibold text-ink">
+                    Prospects perdus faute de suivi / mois
+                  </span>
+                  <select
+                    value={form.lostProspects}
+                    onChange={set("lostProspects")}
+                    className="mt-2 w-full rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
+                  >
+                    <option value="">Sélectionner…</option>
+                    {lostProspectsOptions.map((o) => (
                       <option key={o.value} value={o.value}>
                         {o.label}
                       </option>
@@ -186,8 +253,73 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
                 <input
                   type="text"
                   value={form.decisionMaker}
-                  onChange={(e) => setForm((f) => ({ ...f, decisionMaker: e.target.value }))}
+                  onChange={set("decisionMaker")}
                   placeholder="Nom et fonction"
+                  className="mt-2 w-full max-w-sm rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
+                />
+              </label>
+            </fieldset>
+
+            <fieldset className="space-y-4">
+              <legend className="text-xs font-bold uppercase tracking-widest text-lagune-dark">
+                3. Votre accompagnement
+              </legend>
+              <div>
+                <span className="text-sm font-semibold text-ink">
+                  Domaines qui vous intéressent le plus (optionnel)
+                </span>
+                <TagToggle
+                  options={interestAreasOptions}
+                  selected={form.interestAreas}
+                  onToggle={(a) => setForm((f) => ({ ...f, interestAreas: toggleIn(f.interestAreas, a) }))}
+                />
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <label className="block">
+                  <span className="text-sm font-semibold text-ink">Budget d'investissement envisagé</span>
+                  <select
+                    value={form.investmentBudget}
+                    onChange={set("investmentBudget")}
+                    className="mt-2 w-full rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
+                  >
+                    <option value="">Sélectionner…</option>
+                    {investmentBudgetOptions.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <div>
+                  <span className="text-sm font-semibold text-ink">
+                    Importance du digital pour votre activité
+                  </span>
+                  <div className="mt-2 flex gap-2">
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <button
+                        key={n}
+                        type="button"
+                        onClick={() => setForm((f) => ({ ...f, digitalImportance: String(n) }))}
+                        className={`flex h-10 w-10 items-center justify-center rounded-full border text-sm font-semibold transition-colors ${
+                          Number(form.digitalImportance) === n
+                            ? "border-lagune bg-lagune text-white"
+                            : "border-ink/15 text-ink/60 hover:border-ink/30"
+                        }`}
+                      >
+                        {n}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <label className="block">
+                <span className="text-sm font-semibold text-ink">
+                  Qu'attendez-vous concrètement de cet accompagnement ? (optionnel)
+                </span>
+                <textarea
+                  rows={2}
+                  value={form.expectations}
+                  onChange={set("expectations")}
                   className="mt-2 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
                 />
               </label>
@@ -195,7 +327,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
 
             <fieldset className="space-y-4">
               <legend className="text-xs font-bold uppercase tracking-widest text-lagune-dark">
-                Échange avec notre équipe
+                4. Échange avec notre équipe
               </legend>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="block">
@@ -203,7 +335,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
                   <input
                     type="text"
                     value={form.address}
-                    onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
+                    onChange={set("address")}
                     placeholder="Ex. Cocody, Riviera 3, Abidjan"
                     className="mt-2 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
                   />
@@ -213,7 +345,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
                   <input
                     type="tel"
                     value={form.phone}
-                    onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                    onChange={set("phone")}
                     placeholder="Ex. 07 00 00 00 00"
                     className="mt-2 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
                   />
@@ -225,8 +357,8 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
                 </span>
                 <select
                   value={form.contactMethod}
-                  onChange={(e) => setForm((f) => ({ ...f, contactMethod: e.target.value }))}
-                  className="mt-2 w-full rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
+                  onChange={set("contactMethod")}
+                  className="mt-2 w-full max-w-sm rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
                 >
                   {contactMethodOptions.map((o) => (
                     <option key={o.value} value={o.value}>
@@ -238,22 +370,11 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
               {form.contactMethod !== "ecrit" && (
                 <div>
                   <span className="text-sm font-semibold text-ink">Vos créneaux de disponibilité</span>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {availabilityOptions.map((slot) => (
-                      <button
-                        key={slot}
-                        type="button"
-                        onClick={() => toggleAvailability(slot)}
-                        className={`rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors ${
-                          form.availability.includes(slot)
-                            ? "border-lagune bg-lagune/10 text-lagune-dark"
-                            : "border-ink/15 text-ink/60 hover:border-ink/30"
-                        }`}
-                      >
-                        {slot}
-                      </button>
-                    ))}
-                  </div>
+                  <TagToggle
+                    options={availabilityOptions}
+                    selected={form.availability}
+                    onToggle={(slot) => setForm((f) => ({ ...f, availability: toggleIn(f.availability, slot) }))}
+                  />
                 </div>
               )}
               <label className="flex items-start gap-2.5">
@@ -329,41 +450,63 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
             </div>
           )}
 
-          <dl className="mt-5 space-y-4 text-sm">
-            <div>
+          <dl className="mt-5 grid gap-4 text-sm sm:grid-cols-2">
+            <div className="sm:col-span-2">
               <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
                 Défis décrits
               </dt>
               <dd className="mt-1 whitespace-pre-line text-ink/80">{profile.deepChallenge}</dd>
             </div>
             {profile.deepConstraints && (
-              <div>
+              <div className="sm:col-span-2">
                 <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
                   Contraintes particulières
                 </dt>
                 <dd className="mt-1 whitespace-pre-line text-ink/80">{profile.deepConstraints}</dd>
               </div>
             )}
-            <div className="grid gap-4 sm:grid-cols-2">
-              {profile.deepClientele && (
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
-                    Nombre de clients
-                  </dt>
-                  <dd className="mt-1 text-ink/80">{labelFor(clienteleOptions, profile.deepClientele)}</dd>
-                </div>
-              )}
-              {profile.deepAnnualRevenue && (
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
-                    Chiffre d'affaires
-                  </dt>
-                  <dd className="mt-1 text-ink/80">
-                    {labelFor(annualRevenueOptions, profile.deepAnnualRevenue)}
-                  </dd>
-                </div>
-              )}
-            </div>
+            {profile.deepBusinessGoals?.length > 0 && (
+              <div className="sm:col-span-2">
+                <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
+                  Objectifs pour les 12 prochains mois
+                </dt>
+                <dd className="mt-1 text-ink/80">{profile.deepBusinessGoals.join(", ")}</dd>
+              </div>
+            )}
+            {profile.deepDifferentiation && (
+              <div className="sm:col-span-2">
+                <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
+                  Différenciation
+                </dt>
+                <dd className="mt-1 whitespace-pre-line text-ink/80">{profile.deepDifferentiation}</dd>
+              </div>
+            )}
+            {profile.deepClientele && (
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
+                  Nombre de clients
+                </dt>
+                <dd className="mt-1 text-ink/80">{labelFor(clienteleOptions, profile.deepClientele)}</dd>
+              </div>
+            )}
+            {profile.deepAnnualRevenue && (
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
+                  Chiffre d'affaires
+                </dt>
+                <dd className="mt-1 text-ink/80">
+                  {labelFor(annualRevenueOptions, profile.deepAnnualRevenue)}
+                </dd>
+              </div>
+            )}
+            {profile.deepLostProspects && (
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
+                  Prospects perdus / mois
+                </dt>
+                <dd className="mt-1 text-ink/80">{labelFor(lostProspectsOptions, profile.deepLostProspects)}</dd>
+              </div>
+            )}
             {profile.deepDecisionMaker && (
               <div>
                 <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
@@ -372,20 +515,52 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
                 <dd className="mt-1 text-ink/80">{profile.deepDecisionMaker}</dd>
               </div>
             )}
-            <div className="grid gap-4 sm:grid-cols-2">
-              {profile.deepAddress && (
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">Adresse</dt>
-                  <dd className="mt-1 text-ink/80">{profile.deepAddress}</dd>
-                </div>
-              )}
-              {profile.deepPhone && (
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">Téléphone</dt>
-                  <dd className="mt-1 text-ink/80">{profile.deepPhone}</dd>
-                </div>
-              )}
-            </div>
+            {profile.deepInterestAreas?.length > 0 && (
+              <div className="sm:col-span-2">
+                <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
+                  Domaines d'intérêt
+                </dt>
+                <dd className="mt-1 text-ink/80">{profile.deepInterestAreas.join(", ")}</dd>
+              </div>
+            )}
+            {profile.deepInvestmentBudget && (
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
+                  Budget d'investissement
+                </dt>
+                <dd className="mt-1 text-ink/80">
+                  {labelFor(investmentBudgetOptions, profile.deepInvestmentBudget)}
+                </dd>
+              </div>
+            )}
+            {profile.deepDigitalImportance && (
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
+                  Importance du digital
+                </dt>
+                <dd className="mt-1 text-ink/80">{profile.deepDigitalImportance} / 5</dd>
+              </div>
+            )}
+            {profile.deepExpectations && (
+              <div className="sm:col-span-2">
+                <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
+                  Attentes de l'accompagnement
+                </dt>
+                <dd className="mt-1 whitespace-pre-line text-ink/80">{profile.deepExpectations}</dd>
+              </div>
+            )}
+            {profile.deepAddress && (
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">Adresse</dt>
+                <dd className="mt-1 text-ink/80">{profile.deepAddress}</dd>
+              </div>
+            )}
+            {profile.deepPhone && (
+              <div>
+                <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">Téléphone</dt>
+                <dd className="mt-1 text-ink/80">{profile.deepPhone}</dd>
+              </div>
+            )}
             <div>
               <dt className="text-xs font-semibold uppercase tracking-wide text-ink/40">
                 Mode d'échange préféré

@@ -5,6 +5,7 @@ const sizes = {
   md: "max-w-md",
   lg: "max-w-xl",
   xl: "max-w-2xl",
+  "2xl": "max-w-4xl",
 };
 
 export default function Modal({

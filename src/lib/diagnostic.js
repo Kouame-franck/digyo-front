@@ -85,6 +85,61 @@ export const availabilityOptions = [
   "Week-end",
 ];
 
+// Au-delà de ces options, voir DIGYO_Fiche_Audit_Diagnostic_Digital.pdf (public/) : la grille
+// d'audit complète de l'agence, dont ce formulaire reprend les questions les plus pertinentes
+// pour un client qui se décrit lui-même en ligne -- pas les grilles de notation interne
+// (score, SWOT, feuille de route...), remplies par l'auditeur après coup, pas par le client.
+export const businessGoalsOptions = [
+  "Augmenter le chiffre d'affaires",
+  "Acquérir davantage de clients",
+  "Fidéliser les clients",
+  "Développer une nouvelle activité",
+  "Ouvrir de nouveaux marchés",
+  "Améliorer la notoriété",
+  "Améliorer l'organisation interne",
+  "Réduire les coûts",
+  "Automatiser des tâches",
+  "Digitaliser les opérations",
+  "Développer les ventes en ligne",
+];
+
+export const lostProspectsOptions = [
+  { value: "aucun", label: "Aucun / très peu" },
+  { value: "1_5", label: "1 à 5" },
+  { value: "6_10", label: "6 à 10" },
+  { value: "11_20", label: "11 à 20" },
+  { value: "plus_20", label: "Plus de 20" },
+  { value: "inconnu", label: "Je ne sais pas" },
+];
+
+export const interestAreasOptions = [
+  "Stratégie digitale",
+  "Identité de marque",
+  "Site web / refonte",
+  "E-commerce",
+  "Réseaux sociaux",
+  "Création de contenu",
+  "Publicité digitale",
+  "CRM / gestion commerciale",
+  "Automatisation",
+  "WhatsApp Business / API",
+  "Intelligence artificielle",
+  "Tableaux de bord / data",
+  "SEO / référencement local",
+  "Cybersécurité",
+  "Formation des équipes",
+];
+
+export const investmentBudgetOptions = [
+  { value: "moins_50k", label: "Moins de 50 000 FCFA" },
+  { value: "50_100k", label: "50 000 – 100 000 FCFA" },
+  { value: "100_250k", label: "100 000 – 250 000 FCFA" },
+  { value: "250_500k", label: "250 000 – 500 000 FCFA" },
+  { value: "500k_1m", label: "500 000 – 1 000 000 FCFA" },
+  { value: "plus_1m", label: "Plus de 1 000 000 FCFA" },
+  { value: "a_determiner", label: "À déterminer" },
+];
+
 // not_requested n'a volontairement pas de badge : rien n'a encore été demandé, un statut ne
 // ferait qu'ajouter du bruit avant le bouton d'action.
 export const deepStatusMeta = {
