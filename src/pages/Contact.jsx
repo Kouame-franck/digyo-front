@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { contactInfo, pillars } from "../data/content";
+import { useDiagnosticModal } from "../context/DiagnosticModalContext";
 
 const initialForm = { name: "", email: "", service: "", message: "" };
 
 export default function Contact() {
+  const { openDiagnosticModal } = useDiagnosticModal();
   const [form, setForm] = useState(initialForm);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(null);
@@ -47,6 +49,23 @@ export default function Contact() {
             Décrivez-nous votre besoin — on revient vers vous sous 48h avec
             un premier retour concret.
           </p>
+
+          <div className="mt-6 rounded-2xl border border-dashed border-lagune/40 bg-lagune/5 p-5">
+            <p className="text-sm text-ink/70">
+              Vous ne savez pas encore précisément ce dont vous avez besoin ? Un diagnostic
+              rapide et gratuit vous donne un premier repère avant d'échanger avec nous.
+            </p>
+            <button
+              type="button"
+              onClick={openDiagnosticModal}
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-lagune-dark hover:underline"
+            >
+              Diagnostiquer mon activité
+              <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <path d="M7 4l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
 
           <dl className="mt-10 space-y-6">
             <div>

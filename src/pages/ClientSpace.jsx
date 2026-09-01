@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSession } from "../context/SessionContext";
 import { apiFetch } from "../lib/api";
 import Avatar from "../components/Avatar";
 import QuickDiagnosticModal from "../components/QuickDiagnosticModal";
 import DeepDiagnosticModal from "../components/DeepDiagnosticModal";
-import ProjectModal from "../components/ProjectModal";
 import DiagnosticResult from "../components/DiagnosticResult";
 import DeepDiagnosticStatus from "../components/DeepDiagnosticStatus";
 import { deepStatusMeta } from "../lib/diagnostic";
@@ -46,7 +45,6 @@ export default function ClientSpace() {
   const [profile, setProfile] = useState(undefined);
   const [projects, setProjects] = useState(undefined);
   const [quickOpen, setQuickOpen] = useState(false);
-  const [projectOpen, setProjectOpen] = useState(false);
   const [detailOpen, setDetailOpen] = useState(false);
   const [deepFormOpen, setDeepFormOpen] = useState(false);
 
@@ -203,13 +201,12 @@ export default function ClientSpace() {
             >
               {profile ? "Modifier ma fiche" : "Diagnostic rapide"}
             </button>
-            <button
-              type="button"
-              onClick={() => setProjectOpen(true)}
+            <Link
+              to="/contact"
               className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/30"
             >
               Soumettre un projet
-            </button>
+            </Link>
           </div>
 
           <div className="mt-10">
@@ -258,11 +255,6 @@ export default function ClientSpace() {
         onClose={() => setDeepFormOpen(false)}
         profile={profile}
         onSubmitted={setProfile}
-      />
-      <ProjectModal
-        open={projectOpen}
-        onClose={() => setProjectOpen(false)}
-        onCreated={(project) => setProjects((prev) => [project, ...(prev || [])])}
       />
     </div>
   );
