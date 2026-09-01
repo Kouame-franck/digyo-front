@@ -85,9 +85,9 @@ export default function UserDrawer({ open, onClose }) {
               <IconBuilding className="h-4.5 w-4.5" />
             </span>
             <div className="min-w-0">
-              <div className="text-[11px] font-semibold uppercase tracking-wide text-ink/40">Entreprise</div>
+              <div className="text-[11px] font-semibold uppercase tracking-wide text-ink/55">Entreprise</div>
               <div className="truncate text-sm font-medium text-ink">
-                {user.companyName || <span className="font-normal text-ink/40">Non renseigné</span>}
+                {user.companyName || <span className="font-normal text-ink/45">Non renseigné</span>}
               </div>
             </div>
           </div>
@@ -96,9 +96,9 @@ export default function UserDrawer({ open, onClose }) {
               <IconTag className="h-4.5 w-4.5" />
             </span>
             <div className="min-w-0">
-              <div className="text-[11px] font-semibold uppercase tracking-wide text-ink/40">Secteur d'activité</div>
+              <div className="text-[11px] font-semibold uppercase tracking-wide text-ink/55">Secteur d'activité</div>
               <div className="truncate text-sm font-medium text-ink">
-                {user.sector || <span className="font-normal text-ink/40">Non renseigné</span>}
+                {user.sector || <span className="font-normal text-ink/45">Non renseigné</span>}
               </div>
             </div>
           </div>
