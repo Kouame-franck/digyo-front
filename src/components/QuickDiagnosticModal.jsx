@@ -493,7 +493,7 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
           </h2>
 
           <div className="mt-5">
-            <DiagnosticResult result={result} recommendationsLimit={3} />
+            <DiagnosticResult result={result} recommendationsLimit={2} />
           </div>
 
           <div className="mt-6 rounded-2xl border border-dashed border-lagune/40 bg-lagune/5 p-5">
