@@ -24,13 +24,31 @@ const accentIconColor = {
   ambre: "text-ambre-dark",
 };
 
-export default function BlogCover({ icon = "signal", category, image, className = "" }) {
+// videoMode "preview" (par défaut, listes/vignettes) : lecture muette en boucle façon aperçu
+// animé. "player" (article ouvert) : contrôles natifs, pas d'autoplay -- c'est le contenu
+// principal de la page, pas une simple vignette décorative.
+export default function BlogCover({
+  icon = "signal",
+  category,
+  image,
+  coverType,
+  videoMode = "preview",
+  className = "",
+}) {
   const accent = categoryAccent[category] || "lagune";
 
   if (image) {
     return (
       <div className={`overflow-hidden bg-panel ${className}`}>
-        <img src={image} alt="" className="h-full w-full object-cover" />
+        {coverType === "video" ? (
+          videoMode === "player" ? (
+            <video src={image} className="h-full w-full object-cover" controls playsInline />
+          ) : (
+            <video src={image} className="h-full w-full object-cover" autoPlay muted loop playsInline />
+          )
+        ) : (
+          <img src={image} alt="" className="h-full w-full object-cover" />
+        )}
       </div>
     );
   }

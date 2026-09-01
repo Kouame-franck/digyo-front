@@ -101,6 +101,8 @@ export default function BlogPost() {
         icon={post.icon}
         category={post.category}
         image={post.image}
+        coverType={post.coverType}
+        videoMode="player"
         className="aspect-[2.4/1] w-full md:aspect-[3/1]"
       />
 
@@ -143,7 +145,13 @@ export default function BlogPost() {
                   to={`/blog/${p.slug}`}
                   className="group flex items-center gap-5 overflow-hidden rounded-2xl border border-ink/10 bg-canvas p-5 transition-shadow hover:shadow-lg hover:shadow-ink/10"
                 >
-                  <BlogCover icon={p.icon} category={p.category} image={p.image} className="h-16 w-16 shrink-0 rounded-xl" />
+                  <BlogCover
+                    icon={p.icon}
+                    category={p.category}
+                    image={p.image}
+                    coverType={p.coverType}
+                    className="h-16 w-16 shrink-0 rounded-xl"
+                  />
                   <div>
                     <h4 className="font-display text-base font-bold text-ink">{p.title}</h4>
                     <p className="mt-1 text-sm text-ink/60">{formatPostDate(p.date)}</p>

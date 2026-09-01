@@ -70,6 +70,7 @@ export default function Blog() {
               icon={featured.icon}
               category={featured.category}
               image={featured.image}
+              coverType={featured.coverType}
               className="h-56 w-full md:h-auto md:w-2/5"
             />
             <div className="flex flex-1 flex-col justify-center p-8 md:p-10">
@@ -102,7 +103,13 @@ export default function Blog() {
                 to={`/blog/${post.slug}`}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-surface shadow-sm shadow-ink/5 transition-shadow hover:shadow-lg hover:shadow-ink/10"
               >
-                <BlogCover icon={post.icon} category={post.category} image={post.image} className="h-40 w-full" />
+                <BlogCover
+                  icon={post.icon}
+                  category={post.category}
+                  image={post.image}
+                  coverType={post.coverType}
+                  className="h-40 w-full"
+                />
                 <div className="flex flex-1 flex-col p-6">
                   <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wide text-ink/40">
                     <span className="text-lagune-dark">{post.category}</span>
