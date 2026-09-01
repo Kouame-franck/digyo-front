@@ -4,6 +4,14 @@
 export default function DiagnosticResult({ result }) {
   return (
     <div>
+      {(result.companyName || result.sector) && (
+        <div className="mb-4">
+          {result.companyName && (
+            <div className="font-display text-lg font-bold text-ink">{result.companyName}</div>
+          )}
+          {result.sector && <div className="text-sm text-ink/60">{result.sector}</div>}
+        </div>
+      )}
       <div className="flex items-center gap-5 rounded-2xl border border-ink/10 bg-canvas p-5">
         <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-lagune/10 font-display text-xl font-bold text-lagune-dark">
           {result.score}

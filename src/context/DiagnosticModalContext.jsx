@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useState } from "react";
 import QuickDiagnosticModal from "../components/QuickDiagnosticModal";
+import DeepDiagnosticModal from "../components/DeepDiagnosticModal";
 
 const DiagnosticModalContext = createContext(null);
 
@@ -8,6 +9,7 @@ const DiagnosticModalContext = createContext(null);
 // elle-même son état car elle affiche aussi un tableau de bord autour de la fiche.
 export function DiagnosticModalProvider({ children }) {
   const [open, setOpen] = useState(false);
+  const [deepFormOpen, setDeepFormOpen] = useState(false);
   const [profile, setProfile] = useState(null);
 
   const openDiagnosticModal = useCallback(() => setOpen(true), []);
@@ -21,6 +23,12 @@ export function DiagnosticModalProvider({ children }) {
         onClose={closeDiagnosticModal}
         profile={profile}
         onProfileChange={setProfile}
+        onOpenDeepForm={() => setDeepFormOpen(true)}
+      />
+      <DeepDiagnosticModal
+        open={deepFormOpen}
+        onClose={() => setDeepFormOpen(false)}
+        onSubmitted={setProfile}
       />
     </DiagnosticModalContext.Provider>
   );

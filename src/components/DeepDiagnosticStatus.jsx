@@ -2,8 +2,9 @@ import { deepStatusMeta } from "../lib/diagnostic";
 
 // Statut du diagnostic approfondi (humain) d'une fiche enregistrée -- partagé entre la modale
 // et la carte dépliée d'Espace client. N'a de sens que pour un `profile` réellement persisté,
-// jamais pour un essai libre non connecté.
-export default function DeepDiagnosticStatus({ profile, requesting, onRequest }) {
+// jamais pour un essai libre non connecté. `onOpenForm` ouvre le formulaire de demande
+// (DeepDiagnosticModal) ; ce composant ne soumet jamais rien lui-même.
+export default function DeepDiagnosticStatus({ profile, onOpenForm }) {
   const meta = deepStatusMeta[profile.deepStatus];
 
   return (
@@ -19,14 +20,27 @@ export default function DeepDiagnosticStatus({ profile, requesting, onRequest })
           {profile.deepResult}
         </p>
       )}
+      {profile.deepStatus !== "not_requested" && profile.deepChallenge && (
+        <div className="mt-3 rounded-xl bg-ink/5 p-4 text-sm text-ink/70">
+          <p className="text-xs font-semibold uppercase tracking-wide text-ink/40">Votre demande</p>
+          <p className="mt-1.5 whitespace-pre-line">{profile.deepChallenge}</p>
+          {(profile.deepAddress || profile.deepPhone) && (
+            <p className="mt-2 text-xs text-ink/50">
+              {[profile.deepAddress, profile.deepPhone].filter(Boolean).join(" · ")}
+            </p>
+          )}
+          {profile.deepAcceptAudit && (
+            <p className="mt-1 text-xs text-ink/50">Audit physique accepté si nécessaire.</p>
+          )}
+        </div>
+      )}
       {profile.deepStatus === "not_requested" && (
         <button
           type="button"
-          onClick={onRequest}
-          disabled={requesting}
-          className="mt-4 w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:opacity-60"
+          onClick={onOpenForm}
+          className="mt-4 w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
         >
-          {requesting ? "Envoi…" : "Soumettre à un diagnostic plus approfondi"}
+          Diagnostic approfondi
         </button>
       )}
     </div>

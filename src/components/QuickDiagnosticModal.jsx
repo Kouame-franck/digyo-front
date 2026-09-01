@@ -61,7 +61,14 @@ function formFromProfile(profile) {
   };
 }
 
-export default function QuickDiagnosticModal({ open, onClose, profile, onProfileChange, forceForm = false }) {
+export default function QuickDiagnosticModal({
+  open,
+  onClose,
+  profile,
+  onProfileChange,
+  forceForm = false,
+  onOpenDeepForm,
+}) {
   const { user } = useSession();
   const { openAuthModal } = useAuthModal();
   const navigate = useNavigate();
@@ -72,7 +79,6 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
   const [form, setForm] = useState(formFromProfile(profile));
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [requestingDeep, setRequestingDeep] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -90,8 +96,21 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
   // d'un essai libre non connecté (`guestResult`) -- les deux endpoints (PUT / preview) reposent
   // sur le même moteur de calcul mais n'exposent pas les champs sous les mêmes noms.
   const result = profile
-    ? { score: profile.quickScore, level: profile.quickLevel, axes: profile.quickAxes, recommendations: profile.quickSummary }
-    : guestResult;
+    ? {
+        score: profile.quickScore,
+        level: profile.quickLevel,
+        axes: profile.quickAxes,
+        recommendations: profile.quickSummary,
+        companyName: profile.companyName,
+        sector: profile.sector,
+      }
+    : guestResult
+    ? {
+        ...guestResult,
+        companyName: form.companyName,
+        sector: form.sector === "Autre" ? form.sectorOther : form.sector,
+      }
+    : null;
 
   function set(field) {
     return (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
@@ -167,16 +186,11 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
     });
   }
 
-  async function handleRequestDeep() {
-    setRequestingDeep(true);
-    try {
-      const data = await apiFetch("/api/client-profile/deep-diagnostic", { method: "POST" });
-      onProfileChange(data.profile);
-    } catch {
-      // silencieux : l'utilisateur peut retenter depuis le tableau de bord
-    } finally {
-      setRequestingDeep(false);
-    }
+  // Le diagnostic approfondi a son propre formulaire (DeepDiagnosticModal), ouvert par le
+  // parent -- deux modales ne se superposent pas ici, on ferme donc celle-ci avant.
+  function handleOpenDeepForm() {
+    onClose();
+    onOpenDeepForm();
   }
 
   return (
@@ -491,11 +505,11 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
           </div>
 
           {profile ? (
-            <DeepDiagnosticStatus profile={profile} requesting={requestingDeep} onRequest={handleRequestDeep} />
+            <DeepDiagnosticStatus profile={profile} onOpenForm={handleOpenDeepForm} />
           ) : (
             <div className="mt-6 rounded-2xl border border-dashed border-lagune/40 bg-lagune/5 p-5">
               <p className="text-sm text-ink/70">
-                Ceci est un essai libre : rien n'est encore enregistré. Connectez-vous pour
+                Ceci est un essai libre . Connectez-vous pour
                 accéder à un diagnostic approfondi, réalisé par notre équipe à partir de vos
                 réponses.
               </p>

@@ -4,6 +4,7 @@ import { useSession } from "../context/SessionContext";
 import { apiFetch } from "../lib/api";
 import Avatar from "../components/Avatar";
 import QuickDiagnosticModal from "../components/QuickDiagnosticModal";
+import DeepDiagnosticModal from "../components/DeepDiagnosticModal";
 import ProjectModal from "../components/ProjectModal";
 import DiagnosticResult from "../components/DiagnosticResult";
 import DeepDiagnosticStatus from "../components/DeepDiagnosticStatus";
@@ -47,7 +48,7 @@ export default function ClientSpace() {
   const [quickOpen, setQuickOpen] = useState(false);
   const [projectOpen, setProjectOpen] = useState(false);
   const [detailOpen, setDetailOpen] = useState(false);
-  const [requestingDeep, setRequestingDeep] = useState(false);
+  const [deepFormOpen, setDeepFormOpen] = useState(false);
 
   // Cette page affiche des informations personnelles : dès que la session se ferme (déconnexion
   // depuis cette page ou une autre, expiration...), on quitte immédiatement plutôt que de laisser
@@ -63,17 +64,6 @@ export default function ClientSpace() {
     apiFetch("/api/projects").then((data) => setProjects(data.projects)).catch(() => setProjects([]));
   }, []);
 
-  async function handleRequestDeep() {
-    setRequestingDeep(true);
-    try {
-      const data = await apiFetch("/api/client-profile/deep-diagnostic", { method: "POST" });
-      setProfile(data.profile);
-    } catch {
-      // silencieux : l'utilisateur peut retenter
-    } finally {
-      setRequestingDeep(false);
-    }
-  }
 
   if (loading || !user) return null;
 
@@ -140,9 +130,11 @@ export default function ClientSpace() {
                       level: profile.quickLevel,
                       axes: profile.quickAxes,
                       recommendations: profile.quickSummary,
+                      companyName: profile.companyName,
+                      sector: profile.sector,
                     }}
                   />
-                  <DeepDiagnosticStatus profile={profile} requesting={requestingDeep} onRequest={handleRequestDeep} />
+                  <DeepDiagnosticStatus profile={profile} onOpenForm={() => setDeepFormOpen(true)} />
                 </div>
               )}
             </div>
@@ -259,6 +251,11 @@ export default function ClientSpace() {
         profile={profile}
         onProfileChange={setProfile}
         forceForm
+      />
+      <DeepDiagnosticModal
+        open={deepFormOpen}
+        onClose={() => setDeepFormOpen(false)}
+        onSubmitted={setProfile}
       />
       <ProjectModal
         open={projectOpen}
