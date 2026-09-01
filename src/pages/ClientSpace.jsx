@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSession } from "../context/SessionContext";
 import { apiFetch } from "../lib/api";
 import Avatar from "../components/Avatar";
 import QuickDiagnosticModal from "../components/QuickDiagnosticModal";
 import ProjectModal from "../components/ProjectModal";
+import DiagnosticResult from "../components/DiagnosticResult";
+import DeepDiagnosticStatus from "../components/DeepDiagnosticStatus";
 import { deepStatusMeta } from "../lib/diagnostic";
 
 const projectStatusStyles = {
@@ -37,16 +40,42 @@ function IndicatorCard({ icon, tone, value, label }) {
 }
 
 export default function ClientSpace() {
-  const { user } = useSession();
+  const { user, loading } = useSession();
+  const navigate = useNavigate();
   const [profile, setProfile] = useState(undefined);
   const [projects, setProjects] = useState(undefined);
   const [quickOpen, setQuickOpen] = useState(false);
   const [projectOpen, setProjectOpen] = useState(false);
+  const [detailOpen, setDetailOpen] = useState(false);
+  const [requestingDeep, setRequestingDeep] = useState(false);
+
+  // Cette page affiche des informations personnelles : dès que la session se ferme (déconnexion
+  // depuis cette page ou une autre, expiration...), on quitte immédiatement plutôt que de laisser
+  // le contenu déjà chargé visible derrière un utilisateur qui n'est plus authentifié.
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate("/", { replace: true });
+    }
+  }, [loading, user, navigate]);
 
   useEffect(() => {
     apiFetch("/api/client-profile").then((data) => setProfile(data.profile)).catch(() => setProfile(null));
     apiFetch("/api/projects").then((data) => setProjects(data.projects)).catch(() => setProjects([]));
   }, []);
+
+  async function handleRequestDeep() {
+    setRequestingDeep(true);
+    try {
+      const data = await apiFetch("/api/client-profile/deep-diagnostic", { method: "POST" });
+      setProfile(data.profile);
+    } catch {
+      // silencieux : l'utilisateur peut retenter
+    } finally {
+      setRequestingDeep(false);
+    }
+  }
+
+  if (loading || !user) return null;
 
   const quickValue = profile === undefined ? "…" : profile ? `${profile.quickScore}/100` : "À faire";
   const deepValue =
@@ -97,11 +126,25 @@ export default function ClientSpace() {
               <p className="mt-4 max-w-2xl text-sm text-ink/70">{profile.quickSummary[0]}</p>
               <button
                 type="button"
-                onClick={() => setQuickOpen(true)}
+                onClick={() => setDetailOpen((v) => !v)}
                 className="mt-4 text-sm font-semibold text-lagune-dark hover:underline"
               >
-                Voir le détail complet →
+                {detailOpen ? "Réduire ↑" : "Voir le détail complet →"}
               </button>
+
+              {detailOpen && (
+                <div className="mt-6 border-t border-lagune/20 pt-6">
+                  <DiagnosticResult
+                    result={{
+                      score: profile.quickScore,
+                      level: profile.quickLevel,
+                      axes: profile.quickAxes,
+                      recommendations: profile.quickSummary,
+                    }}
+                  />
+                  <DeepDiagnosticStatus profile={profile} requesting={requestingDeep} onRequest={handleRequestDeep} />
+                </div>
+              )}
             </div>
           ) : profile === null ? (
             <div className="mt-8 overflow-hidden rounded-2xl border border-lagune/30 bg-gradient-to-r from-lagune/10 via-lagune/5 to-transparent p-6 sm:p-7">
@@ -165,7 +208,7 @@ export default function ClientSpace() {
               onClick={() => setQuickOpen(true)}
               className="rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
             >
-              {profile ? "Voir mon diagnostic rapide" : "Diagnostic rapide"}
+              {profile ? "Modifier ma fiche" : "Diagnostic rapide"}
             </button>
             <button
               type="button"
@@ -215,6 +258,7 @@ export default function ClientSpace() {
         onClose={() => setQuickOpen(false)}
         profile={profile}
         onProfileChange={setProfile}
+        forceForm
       />
       <ProjectModal
         open={projectOpen}

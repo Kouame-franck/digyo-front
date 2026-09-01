@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "./Modal";
+import DiagnosticResult from "./DiagnosticResult";
+import DeepDiagnosticStatus from "./DeepDiagnosticStatus";
 import { apiFetch } from "../lib/api";
 import { useSession } from "../context/SessionContext";
 import { useAuthModal } from "../context/AuthModalContext";
@@ -12,7 +14,6 @@ import {
   digitalComfortOptions,
   toolsOptions,
   timelineOptions,
-  deepStatusMeta,
 } from "../lib/diagnostic";
 
 const emptyForm = {
@@ -60,7 +61,7 @@ function formFromProfile(profile) {
   };
 }
 
-export default function QuickDiagnosticModal({ open, onClose, profile, onProfileChange }) {
+export default function QuickDiagnosticModal({ open, onClose, profile, onProfileChange, forceForm = false }) {
   const { user } = useSession();
   const { openAuthModal } = useAuthModal();
   const navigate = useNavigate();
@@ -75,7 +76,9 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
 
   useEffect(() => {
     if (open) {
-      setStep(profile || guestResult ? "result" : "form");
+      // forceForm : utilisé par Espace client, qui affiche déjà le résultat dans sa propre
+      // carte -- ouvrir la modale sert alors uniquement à remplir ou modifier la fiche.
+      setStep(!forceForm && (profile || guestResult) ? "result" : "form");
       setForm(formFromProfile(profile));
       setError("");
     }
@@ -483,71 +486,12 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
             Votre diagnostic rapide
           </h2>
 
-          <div className="mt-5 flex items-center gap-5 rounded-2xl border border-ink/10 bg-canvas p-5">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-lagune/10 font-display text-xl font-bold text-lagune-dark">
-              {result.score}
-              <span className="text-xs font-semibold">/100</span>
-            </div>
-            <div>
-              <div className="font-display text-base font-bold text-ink">
-                Maturité digitale : {result.level}
-              </div>
-              <p className="text-sm text-ink/60">Basé sur vos réponses au questionnaire.</p>
-            </div>
+          <div className="mt-5">
+            <DiagnosticResult result={result} />
           </div>
-
-          <div className="mt-5 space-y-3">
-            {result.axes.map((axis) => (
-              <div key={axis.key}>
-                <div className="flex items-center justify-between text-xs font-semibold text-ink/60">
-                  <span>{axis.label}</span>
-                  <span>{axis.score}/100</span>
-                </div>
-                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-ink/10">
-                  <div className="h-full rounded-full bg-lagune" style={{ width: `${axis.score}%` }} />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <h3 className="mt-6 text-sm font-bold text-ink">Nos recommandations prioritaires</h3>
-          <ul className="mt-3 space-y-3">
-            {result.recommendations.map((rec, i) => (
-              <li key={i} className="flex gap-3 rounded-xl bg-lagune/5 p-3.5 text-sm text-ink/80">
-                <span className="mt-0.5 text-lagune-dark">→</span>
-                <span>{rec}</span>
-              </li>
-            ))}
-          </ul>
 
           {profile ? (
-            <div className="mt-6 rounded-2xl border border-ink/10 p-5">
-              <span
-                className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide ${
-                  deepStatusMeta[profile.deepStatus].badge
-                }`}
-              >
-                {deepStatusMeta[profile.deepStatus].label}
-              </span>
-              {deepStatusMeta[profile.deepStatus].description && (
-                <p className="mt-2 text-sm text-ink/60">{deepStatusMeta[profile.deepStatus].description}</p>
-              )}
-              {profile.deepStatus === "completed" && profile.deepResult && (
-                <p className="mt-3 whitespace-pre-line rounded-xl bg-ink/5 p-4 text-sm text-ink/80">
-                  {profile.deepResult}
-                </p>
-              )}
-              {profile.deepStatus === "not_requested" && (
-                <button
-                  type="button"
-                  onClick={handleRequestDeep}
-                  disabled={requestingDeep}
-                  className="mt-4 w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:opacity-60"
-                >
-                  {requestingDeep ? "Envoi…" : "Soumettre à un diagnostic plus approfondi"}
-                </button>
-              )}
-            </div>
+            <DeepDiagnosticStatus profile={profile} requesting={requestingDeep} onRequest={handleRequestDeep} />
           ) : (
             <div className="mt-6 rounded-2xl border border-dashed border-lagune/40 bg-lagune/5 p-5">
               <p className="text-sm text-ink/70">
@@ -560,7 +504,7 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
                 onClick={handleSaveClick}
                 className="mt-4 w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
               >
-                Débloquer le diagnostic approfondi
+                Voir le diagnostic approfondi
               </button>
             </div>
           )}
