@@ -132,6 +132,7 @@ export default function ClientSpace() {
                       recommendations: profile.quickSummary,
                       companyName: profile.companyName,
                       sector: profile.sector,
+                      mainChallenge: profile.mainChallenge,
                     }}
                   />
                   <DeepDiagnosticStatus profile={profile} onOpen={() => setDeepFormOpen(true)} />

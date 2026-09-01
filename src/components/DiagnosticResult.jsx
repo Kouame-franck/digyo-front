@@ -39,12 +39,25 @@ export default function DiagnosticResult({ result }) {
         ))}
       </div>
 
-      <h3 className="mt-6 text-sm font-bold text-ink">Nos recommandations prioritaires</h3>
+      {result.mainChallenge && (
+        <p className="mt-6 text-sm italic text-ink/60">
+          Défi que vous nous avez indiqué : « {result.mainChallenge} »
+        </p>
+      )}
+
+      <h3 className="mt-3 text-sm font-bold text-ink">Nos recommandations prioritaires</h3>
       <ul className="mt-3 space-y-3">
-        {result.recommendations.map((rec, i) => (
-          <li key={i} className="flex gap-3 rounded-xl bg-lagune/5 p-3.5 text-sm text-ink/80">
-            <span className="mt-0.5 text-lagune-dark">→</span>
-            <span>{rec}</span>
+        {result.recommendations.map((rec) => (
+          <li key={rec.priority} className="flex gap-3 rounded-xl bg-lagune/5 p-3.5 text-sm text-ink/80">
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lagune/15 text-xs font-bold text-lagune-dark">
+              {rec.priority}
+            </span>
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-wide text-lagune-dark">
+                {rec.pillar}
+              </span>
+              <p className="mt-1">{rec.text}</p>
+            </div>
           </li>
         ))}
       </ul>

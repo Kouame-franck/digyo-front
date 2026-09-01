@@ -103,12 +103,14 @@ export default function QuickDiagnosticModal({
         recommendations: profile.quickSummary,
         companyName: profile.companyName,
         sector: profile.sector,
+        mainChallenge: profile.mainChallenge,
       }
     : guestResult
     ? {
         ...guestResult,
         companyName: form.companyName,
         sector: form.sector === "Autre" ? form.sectorOther : form.sector,
+        mainChallenge: form.mainChallenge,
       }
     : null;
 
