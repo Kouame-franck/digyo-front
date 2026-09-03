@@ -3,6 +3,7 @@ import PillarCard from "../components/PillarCard";
 import Reveal from "../components/Reveal";
 import HeroIllustration from "../components/HeroIllustration";
 import ValeurIcon from "../components/ValeurIcon";
+import Seo, { DEFAULT_TITLE, DEFAULT_DESCRIPTION } from "../components/Seo";
 import { pillars, values, process, partners, reperesTransformation } from "../data/content";
 import ReperesCarousel from "../components/ReperesCarousel";
 import { useDiagnosticModal } from "../context/DiagnosticModalContext";
@@ -12,6 +13,8 @@ export default function Home() {
 
   return (
     <>
+      <Seo title={DEFAULT_TITLE} description={DEFAULT_DESCRIPTION} path="/" />
+
       {/* Hero */}
       {/* -mt-16 + pt-40/48 (au lieu de py-24/32) : la photo remonte sous le header, qui est
           transparent tant qu'on n'a pas scrollé sur cette page (voir Header.jsx) -- le contenu,

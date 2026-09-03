@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import Seo from "../components/Seo";
 import { contactInfo, pillars } from "../data/content";
 import { useDiagnosticModal } from "../context/DiagnosticModalContext";
 
@@ -6,7 +8,13 @@ const initialForm = { name: "", email: "", service: "", message: "" };
 
 export default function Contact() {
   const { openDiagnosticModal } = useDiagnosticModal();
-  const [form, setForm] = useState(initialForm);
+  const location = useLocation();
+  // Arrivée depuis SubscribeModal.jsx quand le paiement en ligne est indisponible -- évite au
+  // visiteur de devoir tout réexpliquer, le message arrive déjà avec la formule et l'établissement.
+  const [form, setForm] = useState({
+    ...initialForm,
+    message: location.state?.prefillMessage || "",
+  });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(null);
   const [sending, setSending] = useState(false);
@@ -36,7 +44,13 @@ export default function Contact() {
   }
 
   return (
-    <section className="py-20">
+    <>
+      <Seo
+        title="Contact — digyo, cabinet d'accompagnement digital à Abidjan"
+        description="Un projet de transformation digitale, de site web, d'application ou de solution SaaS ? Parlons-en : contactez digyo, agence basée à Abidjan, Côte d'Ivoire."
+        path="/contact"
+      />
+      <section className="py-20">
       <div className="container-page grid gap-14 md:grid-cols-[1fr_1.2fr]">
         <div>
           <span className="text-xs font-bold uppercase tracking-widest text-lagune-dark">
@@ -199,6 +213,7 @@ export default function Contact() {
           )}
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }

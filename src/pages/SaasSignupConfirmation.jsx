@@ -129,7 +129,7 @@ export default function SaasSignupConfirmation() {
               </p>
 
               <a
-                href="https://scode-ci.pro"
+                href="https://sschool.digyo.pro"
                 className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
               >
                 Me connecter à s-school

@@ -175,7 +175,7 @@ function NavMenuItem({ to, label, transparent, isActive, Panel }) {
         }`}
       >
         <div className="w-[min(94vw,60rem)] pt-3">
-          <div className="overflow-hidden rounded-xl border border-ink/10 bg-surface shadow-xl shadow-ink/10">
+          <div className="overflow-hidden rounded-xl border border-ink/10 bg-surface shadow-xl shadow-black/10">
             <Panel />
           </div>
         </div>

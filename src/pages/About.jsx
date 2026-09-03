@@ -1,9 +1,17 @@
 import Button from "../components/Button";
-import { principes } from "../data/content";
+import ValeurIcon from "../components/ValeurIcon";
+import Seo from "../components/Seo";
+import { principes, process, values } from "../data/content";
 
 export default function About() {
   return (
     <>
+      <Seo
+        title="À propos — digyo, agence de transformation digitale à Abidjan"
+        description="digyo est une agence de transformation digitale basée à Abidjan, en Côte d'Ivoire. Découvrez notre mission, notre méthode en quatre étapes et les principes qui guident chaque projet."
+        path="/a-propos"
+      />
+
       {/* Hero */}
       {/* -mt-16 + pt-40/48 (au lieu de py-24/32) : la photo remonte sous le header, transparent
           tant qu'on n'a pas scrollé sur cette page (voir Header.jsx) -- le padding-top compensé
@@ -21,14 +29,41 @@ export default function About() {
             Qui sommes-nous?
           </span>
           <h1 className="mt-3 font-display text-4xl font-bold text-on-panel md:text-5xl">
-            Une agence de professionels passionés aux services des metiers du numerique.
+            Une agence de professionnels passionnés au service des métiers du numérique.
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-on-panel/80">
-            digyo est née d'un constat simple, observé en Côte d'Ivoire comme ailleurs&nbsp;: la
-            transformation digitale ne manque pas d'ambition, elle manque d'accompagnement
-            concret, accessible et adapté aux réalités du terrain. Nous existons pour combler
-            cet écart — pas avec des présentations, mais avec des outils qui tournent réellement.
+            Chez digyo, une équipe passionnée vous accompagne à chaque étape de votre
+            transformation digitale&nbsp;: stratégie produit, construction et méthodes éprouvées
+            sur le terrain. Ensemble, nous identifions, construisons et faisons évoluer des
+            produits sur mesure, taillés pour vos ambitions.
           </p>
+        </div>
+      </section>
+
+      {/* Contexte */}
+      <section className="border-t border-ink/10 bg-surface py-20">
+        <div className="container-page max-w-3xl">
+          <span className="text-xs font-bold uppercase tracking-widest text-lagune-dark">
+            Contexte
+          </span>
+          <h2 className="mt-3 font-display text-3xl font-bold text-ink md:text-4xl">
+            Le numérique n'est plus une option, c'est un mode de vie.
+          </h2>
+          <div className="mt-6 space-y-4 text-base leading-relaxed text-ink/70">
+            <p>
+              Le numérique a profondément changé la façon dont on vit, dont on achète, dont on
+              décide. Il façonne désormais les habitudes des consommateurs et la relation entre
+              une entreprise et ses clients&nbsp;: être absent en ligne, ou y être mal préparé,
+              revient à se couper d'une part croissante de son marché. En Côte d'Ivoire comme
+              ailleurs, la stratégie digitale n'est plus réservée aux grandes structures — elle
+              est devenue une condition pour se développer et durer.
+            </p>
+            <p>
+              digyo accompagne cette transformation à chaque étape, de la conception à la mise
+              en œuvre, pour que votre présence en ligne ne soit pas une vitrine de plus, mais un
+              véritable levier au service de vos objectifs business.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -39,21 +74,20 @@ export default function About() {
             Notre mission
           </span>
           <h2 className="mt-3 font-display text-3xl font-bold text-ink md:text-4xl">
-            Aligner votre fonctionnement aux changements constant de la société moderne
+            Aligner votre fonctionnement aux changements constants de la société moderne
           </h2>
           <div className="mt-6 space-y-4 text-base leading-relaxed text-ink/70">
             <p>
-              Trop de projets digitaux s'arrêtent à l'apparence&nbsp;: un site qui plaît en
-              démonstration mais que personne ne met à jour, un plan stratégique qui reste dans
-              un tiroir, une formation suivie une fois et jamais réappliquée. Nous ne mesurons
-              pas notre travail à ce qu'il donne en réunion, mais à ce qu'il devient six mois
-              plus tard.
+              Le rythme du changement ne ralentit pas&nbsp;: nouveaux usages, nouveaux outils,
+              nouvelles attentes côté clients. Notre mission n'est pas d'aider les entreprises à
+              courir après ce mouvement, mais à s'y ajuster durablement — comprendre où va votre
+              marché, structurer votre présence numérique en conséquence, et donner à vos équipes
+              les moyens d'avancer seules, sans dépendre de nous indéfiniment.
             </p>
             <p>
-              Concrètement, cela veut dire choisir la solution la plus simple qui résout
-              vraiment le problème, documenter ce que nous construisons pour que vous n'en
-              dépendiez jamais entièrement, et rester joignables après la facture — pas
-              seulement avant.
+              Nous ne vendons pas le digital comme une fin en soi. Une stratégie, un outil, une
+              formation n'ont de valeur que s'ils tiennent dans la durée et continuent de
+              s'adapter à mesure que votre activité et votre marché évoluent.
             </p>
           </div>
         </div>
@@ -61,33 +95,38 @@ export default function About() {
 
       {/* Pourquoi digyo */}
       <section className="border-t border-ink/10 bg-surface py-20">
-        <div className="container-page grid gap-12 md:grid-cols-2 md:items-center">
-          <div>
+        <div className="container-page">
+          <div className="max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-widest text-lagune-dark">
-              Notre nom
+              Pourquoi digyo
             </span>
-            <h2 className="mt-3 font-display text-3xl font-bold text-ink">
-              Pourquoi « digyo » ?
+            <h2 className="mt-3 font-display text-3xl font-bold text-ink md:text-4xl">
+              Trois principes, non négociables.
             </h2>
-            <p className="mt-5 leading-relaxed text-ink/70">
-              Un nom court, construit pour être facile à dire, à écrire et à retenir — en
-              français comme à l'international. Notre cyan signature, lui, n'est pas choisi au
-              hasard&nbsp;: il est ancré dans la lagune Ébrié qui borde Abidjan, où l'agence a vu
-              le jour, associé à un bleu profond qui inspire la confiance et à des touches
-              d'ambre qui rappellent la chaleur de l'accueil local.
-            </p>
           </div>
-          <div className="overflow-hidden rounded-3xl bg-panel p-12">
-            <svg viewBox="0 0 100 100" className="mx-auto h-40 w-40">
-              <path
-                d="M52,14 A36,36 0 1 1 18,58"
-                fill="none"
-                stroke="#F4F9FA"
-                strokeWidth="11"
-                strokeLinecap="round"
-              />
-              <circle cx="52" cy="14" r="10" fill="#0EAFC2" />
-            </svg>
+          <div className="mt-12 grid gap-10 divide-y divide-ink/10 md:grid-cols-3 md:gap-0 md:divide-x md:divide-y-0">
+            {principes.map((p) => (
+              <div key={p.title} className="pt-8 first:pt-0 md:px-8 md:pt-0 md:first:pl-0 md:last:pr-0">
+                <ValeurIcon nom={p.icone} className="h-10 w-10 text-lagune-dark" />
+                <h3 className="mt-4 font-display text-lg font-bold text-ink">{p.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink/65">{p.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 border-t border-ink/10 pt-12">
+            <h3 className="font-display text-lg font-bold text-ink">
+              Ce qui nous distingue sur le terrain.
+            </h3>
+            <div className="mt-8 grid gap-8 sm:grid-cols-2 md:grid-cols-4">
+              {values.map((v) => (
+                <div key={v.title}>
+                  <ValeurIcon nom={v.icone} className="h-9 w-9 text-lagune-dark" />
+                  <h4 className="mt-3 font-display text-base font-bold text-ink">{v.title}</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-ink/65">{v.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -99,49 +138,25 @@ export default function About() {
             Notre façon de faire
           </span>
           <h2 className="mt-3 font-display text-3xl font-bold text-ink md:text-4xl">
-            Construire d'abord, présenter ensuite.
+            Une méthode en quatre étapes, du cadrage au suivi.
           </h2>
-          <div className="mt-6 space-y-5 text-base leading-relaxed text-ink/70">
-            <p>
-              Nous ne vendons pas de jargon. Si un mot compliqué peut se dire simplement, on le
-              dit simplement — à vous comme entre nous. Un projet mal compris par celui qui le
-              finance est un projet qui finit par échouer, quelle que soit la qualité de
-              l'exécution.
-            </p>
-            <p>
-              Nous préférons construire une version qui fonctionne plutôt que présenter une
-              maquette qui impressionne. s-school, notre propre plateforme de gestion scolaire,
-              est née de cette conviction&nbsp;: nous l'utilisons et l'améliorons en continu,
-              pour un établissement réel — pas comme vitrine, comme outil de travail.
-            </p>
-            <p>
-              Et parce qu'un outil livré n'est utile que s'il est repris, nous ne considérons
-              jamais une mission terminée à la remise du livrable. Le vrai test commence après,
-              quand vos équipes s'en servent sans nous.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Ce qui compte pour nous */}
-      <section className="border-t border-ink/10 bg-surface py-20">
-        <div className="container-page">
-          <div className="max-w-2xl">
-            <span className="text-xs font-bold uppercase tracking-widest text-lagune-dark">
-              Ce qui compte pour nous
-            </span>
-            <h2 className="mt-3 font-display text-3xl font-bold text-ink">
-              Trois principes, non négociables.
-            </h2>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {principes.map((p, i) => (
-              <div key={p.title} className="rounded-2xl border border-ink/10 bg-canvas p-7">
-                <span className="font-display text-sm font-bold text-lagune-dark">
-                  0{i + 1}
+          <div className="mt-12">
+            {process.map((p, i) => (
+              <div key={p.step} className="relative flex gap-6 pb-10 last:pb-0">
+                {i < process.length - 1 && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-5 top-10 h-full w-px -translate-x-1/2 bg-ink/15"
+                  />
+                )}
+                <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-lagune-dark/30 bg-canvas font-display text-sm font-bold text-lagune-dark">
+                  {p.step}
                 </span>
-                <h3 className="mt-3 font-display text-lg font-bold text-ink">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink/65">{p.description}</p>
+                <div className="pt-1">
+                  <ValeurIcon nom={p.icone} className="h-8 w-8 text-lagune-dark" />
+                  <h3 className="mt-3 font-display text-lg font-bold text-ink">{p.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-ink/65">{p.description}</p>
+                </div>
               </div>
             ))}
           </div>

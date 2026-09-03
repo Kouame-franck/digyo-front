@@ -7,6 +7,7 @@ import QuickDiagnosticModal from "../components/QuickDiagnosticModal";
 import DeepDiagnosticModal from "../components/DeepDiagnosticModal";
 import DiagnosticResult from "../components/DiagnosticResult";
 import DeepDiagnosticStatus from "../components/DeepDiagnosticStatus";
+import Seo from "../components/Seo";
 import { deepStatusMeta } from "../lib/diagnostic";
 
 const projectStatusStyles = {
@@ -71,7 +72,9 @@ export default function ClientSpace() {
   const projectsValue = projects === undefined ? "…" : projects.length;
 
   return (
-    <div className="bg-canvas">
+    <>
+      <Seo title="Espace client | digyo" path="/espace-client" noindex />
+      <div className="bg-canvas">
       <section className="py-16">
         <div className="container-page">
           <div className="flex flex-wrap items-end justify-between gap-6">
@@ -256,6 +259,7 @@ export default function ClientSpace() {
         profile={profile}
         onSubmitted={setProfile}
       />
-    </div>
+      </div>
+    </>
   );
 }

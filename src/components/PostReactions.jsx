@@ -4,16 +4,19 @@ import { useSession } from "../context/SessionContext";
 import { initialsFrom } from "../lib/initials";
 
 export default function PostReactions({ slug }) {
-  const { liked, comments, toggleLike, addComment } = usePostReactions(slug);
+  const { liked, likes, comments, error, toggleLike, addComment } = usePostReactions(slug);
   const { user } = useSession();
   const [name, setName] = useState(user?.name || "");
   const [text, setText] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (!name.trim() || !text.trim()) return;
-    addComment(name.trim(), text.trim());
-    setText("");
+    if (!name.trim() || !text.trim() || submitting) return;
+    setSubmitting(true);
+    const ok = await addComment(name.trim(), text.trim());
+    setSubmitting(false);
+    if (ok) setText("");
   }
 
   return (
@@ -41,7 +44,7 @@ export default function PostReactions({ slug }) {
               strokeLinejoin="round"
             />
           </svg>
-          J'aime
+          J'aime {likes > 0 && <span>· {likes}</span>}
         </button>
         <span className="text-sm text-ink/50">
           {comments.length} commentaire{comments.length !== 1 ? "s" : ""}
@@ -73,11 +76,13 @@ export default function PostReactions({ slug }) {
               className="rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
             />
           </div>
+          {error && <p className="mt-3 text-sm font-medium text-red-600">{error}</p>}
           <button
             type="submit"
-            className="mt-3 rounded-full bg-lagune px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+            disabled={submitting}
+            className="mt-3 rounded-full bg-lagune px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Publier
+            {submitting ? "Publication..." : "Publier"}
           </button>
         </form>
 

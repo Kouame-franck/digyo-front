@@ -2,8 +2,17 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BlogCover from "../components/BlogCover";
 import LikeIndicator from "../components/LikeIndicator";
+import Seo from "../components/Seo";
 import { apiFetch } from "../lib/api";
 import { formatPostDate } from "../data/blog";
+
+const BLOG_SEO = (
+  <Seo
+    title="Blog — Transformation digitale, conseils & actualités | digyo"
+    description="Des articles courts et concrets sur la transformation digitale, la création d'outils web et l'accompagnement des équipes, écrits par l'équipe digyo."
+    path="/blog"
+  />
+);
 
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState(null);
@@ -17,25 +26,34 @@ export default function Blog() {
 
   if (error) {
     return (
-      <section className="py-20">
-        <div className="container-page max-w-2xl text-center text-ink/60">{error}</div>
-      </section>
+      <>
+        {BLOG_SEO}
+        <section className="py-20">
+          <div className="container-page max-w-2xl text-center text-ink/60">{error}</div>
+        </section>
+      </>
     );
   }
 
   if (!blogPosts) {
     return (
-      <section className="py-20">
-        <div className="container-page max-w-2xl text-center text-ink/50">Chargement…</div>
-      </section>
+      <>
+        {BLOG_SEO}
+        <section className="py-20">
+          <div className="container-page max-w-2xl text-center text-ink/50">Chargement…</div>
+        </section>
+      </>
     );
   }
 
   if (blogPosts.length === 0) {
     return (
-      <section className="py-20">
-        <div className="container-page max-w-2xl text-center text-ink/50">Aucun article pour l'instant.</div>
-      </section>
+      <>
+        {BLOG_SEO}
+        <section className="py-20">
+          <div className="container-page max-w-2xl text-center text-ink/50">Aucun article pour l'instant.</div>
+        </section>
+      </>
     );
   }
 
@@ -43,6 +61,7 @@ export default function Blog() {
 
   return (
     <>
+      {BLOG_SEO}
       <section className="border-b border-ink/10 bg-surface py-20">
         <div className="container-page max-w-2xl">
           <span className="text-xs font-bold uppercase tracking-widest text-lagune-dark">

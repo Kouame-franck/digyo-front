@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from "./Modal";
+import PaymentUnavailableModal from "./PaymentUnavailableModal";
 import { apiFetch } from "../lib/api";
 import { ouvrirWidgetKadevPay } from "../lib/kadevpay";
+
+// CinetPay / Money Fusion sont en attente de validation par le prestataire -- tant que c'est le
+// cas, on n'appelle jamais /initier (qui échouerait ou pire, laisserait croire qu'un paiement est
+// en cours) et on affiche PaymentUnavailableModal à la place. Repasser à true une fois validé.
+const PAYMENT_LIVE = false;
 
 const initialForm = {
   fullName: "",
@@ -18,11 +25,13 @@ function formatFCFA(montant) {
 }
 
 export default function SubscribeModal({ open, onClose, product, plans, initialPlanId }) {
+  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [planId, setPlanId] = useState(initialPlanId || plans?.[0]?.id);
   const [form, setForm] = useState(initialForm);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [showPaymentUnavailable, setShowPaymentUnavailable] = useState(false);
   // La console publie une offre distincte par cycle ("starter" / "starter-annuel") : la carte
   // met en avant l'annuel, c'est ici que le visiteur arbitre réellement mensuel vs annuel.
   const [cycle, setCycle] = useState("annuel");
@@ -41,6 +50,7 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
       setError("");
       setCycle("annuel");
       setQuantite(1);
+      setShowPaymentUnavailable(false);
     }
   }, [open, initialPlanId, plans]);
 
@@ -134,6 +144,18 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
 
   function handleClose() {
     onClose();
+  }
+
+  function handleContactRedirect() {
+    setShowPaymentUnavailable(false);
+    onClose();
+    navigate("/contact", {
+      state: {
+        prefillMessage: `Bonjour, je souhaite finaliser mon abonnement à la formule ${plan?.name}${
+          form.institution ? ` pour ${form.institution}` : ""
+        } (paiement en ligne indisponible pour le moment).`,
+      },
+    });
   }
 
   if (!plan) return null;
@@ -381,7 +403,7 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
             <button
               type="button"
               disabled={submitting}
-              onClick={handlePay}
+              onClick={PAYMENT_LIVE ? handlePay : () => setShowPaymentUnavailable(true)}
               className="flex-1 rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:cursor-not-allowed disabled:opacity-60"
             >
               {submitting ? "Redirection…" : `Payer ${montantAffiche}`}
@@ -389,6 +411,12 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
           </div>
         </div>
       )}
+
+      <PaymentUnavailableModal
+        open={showPaymentUnavailable}
+        onClose={() => setShowPaymentUnavailable(false)}
+        onContact={handleContactRedirect}
+      />
     </Modal>
   );
 }

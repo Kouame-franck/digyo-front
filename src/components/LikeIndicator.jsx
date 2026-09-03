@@ -1,7 +1,7 @@
-import { usePostReactions } from "../hooks/usePostReactions";
+import { useLikeCount } from "../hooks/useLikeCount";
 
 export default function LikeIndicator({ slug, className = "" }) {
-  const { liked } = usePostReactions(slug);
+  const { liked, likes } = useLikeCount(slug);
 
   return (
     <span
@@ -21,7 +21,7 @@ export default function LikeIndicator({ slug, className = "" }) {
           strokeLinejoin="round"
         />
       </svg>
-      {liked ? 1 : 0}
+      {likes}
     </span>
   );
 }

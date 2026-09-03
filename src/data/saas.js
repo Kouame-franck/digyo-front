@@ -3,7 +3,7 @@ export const saasProducts = [
     slug: "s-school",
     name: "s-school",
     tagline:
-      "Vous dirigez un établissement préscolaire, scolaire, un collège, une université ou un centre de formation ? Vivez une expérience inédite de gestion centralisée avec s-school, un logiciel moderne, intuitif et facile à prendre en main. Il automatise vos tâches répétitives, affine la maîtrise de vos chiffres et l'exploitation de vos données, et optimise vos prises de décision ainsi que la gestion de vos apprenants. Entièrement personnalisable pour s'intégrer à votre mode de fonctionnement, il vous accompagne dans la gestion de toutes les tâches principales de l'établissement.",
+      "Vous dirigez un établissement préscolaire, scolaire, un collège ou un centre de formation ? Vivez une expérience inédite de gestion centralisée avec s-school, un logiciel moderne, intuitif et facile à prendre en main. Il automatise vos tâches répétitives, affine la maîtrise de vos chiffres et l'exploitation de vos données, et optimise vos prises de décision ainsi que la gestion de vos apprenants. Entièrement personnalisable pour s'intégrer à votre mode de fonctionnement, il vous accompagne dans la gestion de toutes les tâches principales de l'établissement.",
     // Sélection courte des fonctionnalités les plus différenciantes, affichée dans le hero —
     // la liste complète (`highlights`) est trop longue pour y tenir sans noyer les CTA, elle est
     // reléguée plus bas sur la page, sous "Voir toutes les fonctionnalités" (voir SaasDetail.jsx).
@@ -26,7 +26,7 @@ export const saasProducts = [
       "Importation intelligente des anciens apprenants",
       "Exports PDF & Excel",
       "Photos élèves & enseignants",
-      "Cartes d'accés",
+      "Cartes d'accès",
       "Gestion des matières",
       "Devoirs & coefficients par note, matière, section et niveau",
       "Activités scolaires & extrascolaires",
@@ -45,7 +45,7 @@ export const saasProducts = [
       "Espace enseignants",
       "Espace apprenants",
       "Actualités, avis & communiqués",
-      "système de notation par appréciation",
+      "Système de notation par appréciation",
       "Paiement électronique sécurisé",
       "SMS de rappel",
       "Confidentialité des données",

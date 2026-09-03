@@ -3,6 +3,7 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import Button from "../components/Button";
 import BlogCover from "../components/BlogCover";
 import PostReactions from "../components/PostReactions";
+import Seo from "../components/Seo";
 import { apiFetch } from "../lib/api";
 import { formatPostDate } from "../data/blog";
 
@@ -66,8 +67,27 @@ export default function BlogPost() {
       ? relatedPosts
       : blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: { "@type": "Organization", name: "digyo" },
+    publisher: { "@type": "Organization", name: "digyo" },
+    ...(post.image ? { image: post.image } : {}),
+  };
+
   return (
     <>
+      <Seo
+        title={`${post.title} | Blog digyo`}
+        description={post.excerpt}
+        path={`/blog/${post.slug}`}
+        image={post.image}
+        type="article"
+        jsonLd={articleJsonLd}
+      />
       <section className="border-b border-ink/10 bg-surface">
         <div className="container-page py-8">
           <Link

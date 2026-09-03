@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
+import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok } from "react-icons/fa6";
 import Logo from "./Logo";
 import { contactInfo } from "../data/content";
+
+const SOCIAL_ICONS = {
+  Facebook: FaFacebook,
+  Instagram: FaInstagram,
+  LinkedIn: FaLinkedin,
+  TikTok: FaTiktok,
+};
 
 export default function Footer() {
   return (
@@ -42,16 +50,23 @@ export default function Footer() {
               </a>
             </li>
           </ul>
-          <div className="mt-5 flex gap-4">
-            {contactInfo.socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                className="text-xs font-semibold text-on-panel/60 hover:text-lagune-panel"
-              >
-                {s.label}
-              </a>
-            ))}
+          <div className="mt-5 flex gap-3">
+            {contactInfo.socials.map((s) => {
+              const Icon = SOCIAL_ICONS[s.label];
+              return (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  title={s.label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-on-panel/10 text-on-panel/70 transition-colors hover:bg-lagune-panel hover:text-panel"
+                >
+                  {Icon && <Icon className="h-4 w-4" />}
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>

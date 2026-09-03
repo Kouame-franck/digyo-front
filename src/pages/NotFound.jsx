@@ -1,8 +1,11 @@
 import Button from "../components/Button";
+import Seo from "../components/Seo";
 
 export default function NotFound() {
   return (
-    <section className="flex min-h-[60vh] flex-col items-center justify-center px-6 text-center">
+    <>
+      <Seo title="Page non trouvée | digyo" path="/404" noindex />
+      <section className="flex min-h-[60vh] flex-col items-center justify-center px-6 text-center">
       <span className="font-display text-7xl font-bold text-lagune/20">404</span>
       <h1 className="mt-4 font-display text-2xl font-bold text-ink">
         Cette page n'existe pas (encore).
@@ -13,6 +16,7 @@ export default function NotFound() {
       <Button to="/" variant="accent" className="mt-8">
         Retour à l'accueil
       </Button>
-    </section>
+      </section>
+    </>
   );
 }

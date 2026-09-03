@@ -1,5 +1,6 @@
 import Button from "../components/Button";
 import Reveal from "../components/Reveal";
+import Seo from "../components/Seo";
 import { pillars, pillarPhotos } from "../data/content";
 import { ACCENTS, ACCENT_DEFAUT } from "../data/pillarAccents";
 
@@ -14,6 +15,12 @@ function Coche({ className }) {
 export default function Services() {
   return (
     <>
+      <Seo
+        title="Nos services — Transformation digitale, création web & SaaS | digyo"
+        description="Diagnostic digital, création de sites & applications, solutions SaaS, matériel et formation des équipes : découvrez les services de digyo, cabinet d'accompagnement digital en Côte d'Ivoire."
+        path="/services"
+      />
+
       {/* Hero */}
       <section className="border-b border-ink/10 bg-surface py-20 md:py-28">
         <div className="container-page max-w-2xl">
@@ -21,7 +28,7 @@ export default function Services() {
             Nos services
           </span>
           <h1 className="mt-3 font-display text-4xl font-bold text-ink md:text-5xl">
-            Votre transformation digitale, accompagnée sous tous ses angles.
+            Votre croissance digitale, soutenue sous tous ses angles.
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-ink/70">
             Nous mettons à votre disposition une gamme complète d'outils et de leviers, choisis et

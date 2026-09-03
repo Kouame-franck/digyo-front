@@ -6,6 +6,7 @@ import SaasDeviceShowcase from "../components/SaasDeviceShowcase";
 import IntroCarousel from "../components/IntroCarousel";
 import SubscribeModal from "../components/SubscribeModal";
 import DemoAccessModal from "../components/DemoAccessModal";
+import Seo from "../components/Seo";
 import { getSaasBySlug, saasProducts } from "../data/saas";
 import { ACCENTS } from "../data/pillarAccents";
 import { apiFetch } from "../lib/api";
@@ -250,8 +251,24 @@ export default function SaasDetail() {
     setSubscribeOpen(true);
   }
 
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: product.name,
+    description: product.description,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    url: `https://digyo.pro/saas/${product.slug}`,
+  };
+
   return (
     <>
+      <Seo
+        title={`${product.name} — ${product.category} | digyo`}
+        description={product.description}
+        path={`/saas/${product.slug}`}
+        jsonLd={productJsonLd}
+      />
       <section className="border-b border-ink/10 bg-surface">
         <div className="container-page py-8">
           <Link

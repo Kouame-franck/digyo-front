@@ -2,18 +2,23 @@ import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import SaasCarousel from "../components/SaasCarousel";
 import IntroCarousel from "../components/IntroCarousel";
+import Seo from "../components/Seo";
 import { saasProducts } from "../data/saas";
 
 const INTRO_TEXTE =
-  "Au-delà de l'accompagnement, digyo conçoit et développe ses propres outils numériques. " +
+  "Digyo conçoit et développe ses propres outils numériques. " +
   "Chaque produit part d'un besoin observé sur le terrain, chez des organisations que nous " +
   "accompagnons au quotidien, et se construit pour rester simple à prendre en main, fiable " +
-  "dans la durée et adapté aux réalités de ceux qui l'utilisent. C'est notre manière de " +
-  "démontrer notre expertise technique par des preuves concrètes, plutôt que par des promesses.";
+  "dans la durée et adapté aux réalités de ceux qui l'utilisent.";
 
 export default function Saas() {
   return (
     <>
+      <Seo
+        title="Solutions SaaS — Logiciels métier prêts à l'emploi | digyo"
+        description="s-school et les autres solutions SaaS de digyo : des outils métier déjà construits et éprouvés, facturés à l'usage, que vous mettez en service en quelques minutes."
+        path="/saas"
+      />
       <section className="border-b border-ink/10 bg-surface py-20">
         <div className="container-page max-w-2xl">
           <span className="text-xs font-bold uppercase tracking-widest text-lagune-dark">

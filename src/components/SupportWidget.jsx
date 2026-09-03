@@ -4,7 +4,7 @@ import { useSupportChat } from "../hooks/useSupportChat";
 export default function SupportWidget() {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
-  const { messages, sendMessage } = useSupportChat();
+  const { messages, unread, sending, sendMessage } = useSupportChat(open);
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function SupportWidget() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!text.trim()) return;
+    if (!text.trim() || sending) return;
     sendMessage(text.trim());
     setText("");
   }
@@ -62,7 +62,7 @@ export default function SupportWidget() {
                   }`}
                 >
                   {m.text}
-                  {m.from === "digyo-auto" && (
+                  {m.from === "auto" && (
                     <div className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-ink/35">
                       Réponse automatique
                     </div>
@@ -78,12 +78,14 @@ export default function SupportWidget() {
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Votre message..."
-              className="flex-1 rounded-full border border-ink/15 px-4 py-2 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
+              disabled={sending}
+              className="flex-1 rounded-full border border-ink/15 px-4 py-2 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20 disabled:opacity-60"
             />
             <button
               type="submit"
+              disabled={sending}
               aria-label="Envoyer le message"
-              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lagune text-white transition-colors hover:bg-lagune-dark"
+              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lagune text-white transition-colors hover:bg-lagune-dark disabled:opacity-60"
             >
               <svg viewBox="0 0 20 20" className="h-4 w-4" fill="currentColor">
                 <path d="M2 10l15-7-6 7 6 7-15-7Z" />
@@ -99,6 +101,9 @@ export default function SupportWidget() {
         aria-label={open ? "Fermer l'assistance" : "Ouvrir l'assistance"}
         className="fixed bottom-6 right-6 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full bg-lagune text-white shadow-lg shadow-panel/30 transition-transform hover:scale-105 hover:bg-lagune-dark"
       >
+        {!open && unread && (
+          <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-red-500 ring-2 ring-white" />
+        )}
         {open ? (
           <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8">
             <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />

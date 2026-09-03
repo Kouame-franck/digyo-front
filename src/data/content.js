@@ -8,7 +8,7 @@ export const pillars = [
       "Beaucoup d'organisations avancent à l'instinct : un outil ajouté ici, un tableur bricolé là, sans vision d'ensemble. Résultat, personne ne sait vraiment où se situent les vrais points de friction, ni ce qui mérite d'être digitalisé en priorité.",
       "Nous commençons toujours par un diagnostic factuel de votre existant — outils, process, flux d'information — avant de proposer quoi que ce soit. Le plan d'action qui en ressort est priorisé, chiffré, et pensé pour être exécuté à votre rythme, par vos équipes ou par nous.",
     ],
-    audience: "Busness personnel, PME en croissance, institutions publiques, ONG, associations, organisations qui structurent leur transformation.",
+    audience: "Indépendants, PME en croissance, institutions publiques, ONG, associations, organisations qui structurent leur transformation.",
     highlights: [
       "Audit sans complaisance de l'existant",
       "Plan d'action priorisé et chiffré",
@@ -59,7 +59,7 @@ export const pillars = [
     slug: "creation",
     name: "Création web & app",
     tagline: "Un site ou une application pensés pour votre activité réelle.",
-    headline: "Un outil sorti du moul de votre busness",
+    headline: "Un outil sorti du moule de votre business",
     paragraphs: [
       "Un site vitrine sans stratégie ne convertit personne. Une application développée sans comprendre le métier finit par gêner plus qu'elle n'aide. Nous partons toujours de vos flux réels — comment vos clients vous trouvent, comment votre équipe travaille — avant de dessiner quoi que ce soit.",
       "Du site vitrine à l'application métier sur-mesure, chaque projet est conçu pour être trouvé, utilisé au quotidien, et maintenu dans la durée — pas abandonné après la mise en ligne.",
@@ -117,8 +117,8 @@ export const pillars = [
     tagline: "Des logiciels prêts à l'emploi, facturés à l'usage.",
     headline: "Le logiciel existe déjà. Vous n'avez qu'à prendre votre abonnement.",
     paragraphs: [
-      "Vous voulez un outils prêt à l'emplois, une solution existante ou encor eviter les frais de maintenances ?",
-      "Nos produits SaaS sont des outils métier déjà construits et éprouvés, que vous mettez en service en quelques minutes. nous vous proposons des formules en fonction de votre taille et de votre budjet dans des secteurs varié. s-school, notre plateforme de gestion scolaire, tourne aujourd'hui en production pour la gestion de vos etablisements scolaire, universitaire ou centre de formation. ",
+      "Vous voulez un outil prêt à l'emploi, une solution existante ou encore éviter les frais de maintenance ?",
+      "Nos produits SaaS sont des outils métier déjà construits et éprouvés, que vous mettez en service en quelques minutes. Nous vous proposons des formules en fonction de votre taille et de votre budget, dans des secteurs variés. s-school, notre plateforme de gestion scolaire, tourne aujourd'hui dans de nombreux établissements scolaires, ou centres de formation.",
     ],
     audience: "Établissements et organisations avec des opérations répétitives — inscriptions, présences, facturation, suivi.",
     highlights: [
@@ -140,9 +140,9 @@ export const pillars = [
     slug: "materiel",
     name: "Fourniture de matériel",
     tagline: "Le matériel technologique, informatique, bureautique et divers.",
-    headline: "Du materiel adapté a votre vision et vos besoins quotidiens",
+    headline: "Du matériel adapté à votre vision et vos besoins quotidiens",
     paragraphs: [
-      "Un equipement mal dimensionné pour l'usage réel d'une structure est un veritable frein à une démarche evolutive . L'équipement fait partie du projet, pas une case à cocher après coup.",
+      "Un équipement mal dimensionné pour l'usage réel d'une structure est un véritable frein à une démarche évolutive. L'équipement fait partie du projet, pas une case à cocher après coup.",
       "Nous fournissons le matériel technologique, informatique, bureautique et divers nécessaire à vos projets — ordinateurs, réseau, périphériques, mobilier technique — dimensionné pour l'usage que vous en aurez.",
     ],
     audience: "Établissements qui s'équipent, PME qui renouvellent leur parc, projets qui démarrent de zéro.",
@@ -167,7 +167,7 @@ export const pillars = [
     headline: "Des outils, ça ne sert à rien si personne ne sait s'en servir.",
     paragraphs: [
       "La première cause d'échec d'un projet digital n'est presque jamais l'outil — c'est l'adoption. Une équipe qui n'a pas été formée revient à ses vieilles habitudes en quelques semaines, quel que soit le budget investi.",
-      "Nos formations sont pratiques, construites autour de vos outils réels et de vos cas d'usage — pas des slides génériques. Un indépendant repart avec des réflexes concrets ; une équipe, avec un mode d'emploi qu'elle a elle-même testé pendant l'atelier.",
+      "Nos formations sont pratiques, construites autour de vos outils réels et de vos cas d'usage. Un indépendant repart avec des réflexes concrets ; une équipe, avec un mode d'emploi qu'elle a elle-même testé pendant l'atelier.",
     ],
     audience: "Indépendants qui montent en compétence, équipes PME, grandes structures qui déploient un programme continu.",
     highlights: [
@@ -247,7 +247,7 @@ export const pillarPhotos = {
 // Trois groupes de trois : ce que les mots veulent dire, sur quoi ça repose, ce que ça rapporte.
 export const reperesTransformation = [
   {
-    titre: "Des notions impotates à distinguer",
+    titre: "Des notions importantes à distinguer",
     entrees: [
       { terme: "Numérisation", definition: "Convertir des documents physiques en fichiers exploitables.", icone: "numerisation" },
       { terme: "Digitalisation", definition: "Automatiser une tâche ou un processus à l'aide d'un outil numérique.", icone: "digitalisation" },
@@ -276,7 +276,7 @@ export const values = [
   {
     title: "Une connaissance fine du terrain",
     description:
-      "Contraintes de connectivité, réalités du Mobile Money, spécificités réglementaires locales : notre équipe travaille sur ce terrain au quotidien — pas depuis un cabinet distant qui plaque les mêmes solutions d'un marché à l'autre.",
+      "Contraintes de connectivité, réalités du Mobile Money, spécificités réglementaires locales : notre équipe travaille sur ce terrain au quotidien. ",
     icone: "terrain",
   },
   {
@@ -288,13 +288,13 @@ export const values = [
   {
     title: "Des systèmes construits pour durer",
     description:
-      "Sécurité, sauvegardes, code maintenable : chaque outil est pensé pour tourner en production dans cinq ans, pas pour tenir jusqu'à la démonstration.",
+      "Sécurité, sauvegardes, code maintenable : chaque outil est pensé pour tourner en production dans la durée.",
     icone: "durabilite",
   },
   {
     title: "Prix adaptés à votre taille",
     description:
-      "Des formules pensées pour l'indépendant qui démarre comme pour l'institution qui structure sa transformation — le même sérieux d'exécution, sans le tarif d'une multinationale.",
+      "Des formules pensées pour l'indépendant qui démarre comme pour l'institution qui structure sa transformation — le même sérieux d'exécution.",
     icone: "prix",
   },
 ];
@@ -307,16 +307,19 @@ export const principes = [
     title: "On construit ce qu'on recommande",
     description:
       "Pas de plan qui reste sur papier : la même équipe qui pose le diagnostic met la main à l'exécution, jusqu'à ce que l'outil tourne réellement.",
+    icone: "execution",
   },
   {
     title: "La simplicité avant la sophistication",
     description:
       "Le bon outil est celui que vos équipes utilisent encore dans six mois — pas le plus impressionnant sur le papier. On évite la complexité qui ne sert que la démonstration.",
+    icone: "simplicite",
   },
   {
     title: "Un accompagnement qui ne s'arrête pas à la facture",
     description:
       "Une question après la livraison ne devrait jamais rester sans réponse. Nous restons joignables, et nous le prouvons en continuant d'exploiter nos propres produits.",
+    icone: "accompagnement",
   },
 ];
 
@@ -325,21 +328,25 @@ export const process = [
     step: "01",
     title: "Écoute",
     description: "On cadre vos objectifs réels, vos contraintes et votre budget avant de proposer quoi que ce soit.",
+    icone: "ecoute",
   },
   {
     step: "02",
     title: "Diagnostic",
     description: "Audit de l'existant — outils, process, présence en ligne — pour identifier ce qui compte vraiment.",
+    icone: "diagnostic",
   },
   {
     step: "03",
     title: "Exécution",
     description: "Mise en œuvre concrète : conception, développement, formation — avec des points d'étape réguliers.",
+    icone: "execution",
   },
   {
     step: "04",
     title: "Suivi",
     description: "Un accompagnement qui continue après la livraison, pour que les résultats tiennent dans la durée.",
+    icone: "accompagnement",
   },
 ];
 
@@ -356,8 +363,9 @@ export const contactInfo = {
   email: "contact@digyo.pro",
   city: "Abidjan, Côte d'Ivoire",
   socials: [
-    { label: "LinkedIn", href: "#" },
-    { label: "Facebook", href: "#" },
-    { label: "Instagram", href: "#" },
+    { label: "Facebook", href: "https://www.facebook.com/share/1Hkh662BXN/" },
+    { label: "Instagram", href: "https://www.instagram.com/digyo.ci?igsi=MWM4ODRjczdiNWJ6Zg==" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/digyo-ci/" },
+    { label: "TikTok", href: "https://www.tiktok.com/@digyo.ci?_r=1&_t=ZS-99QKbtGOTGX" },
   ],
 };
