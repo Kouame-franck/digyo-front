@@ -128,6 +128,15 @@ export default function SaasSignupConfirmation() {
                 Pour votre sécurité, changez ce mot de passe dès votre première connexion.
               </p>
 
+              {resultat?.paiement?.recuToken && (
+                <Link
+                  to={`/recu/${resultat.paiement.recuToken}`}
+                  className="mt-4 inline-flex text-sm font-semibold text-lagune-dark hover:underline"
+                >
+                  Voir le reçu de paiement →
+                </Link>
+              )}
+
               <a
                 href="https://sschool.digyo.pro"
                 className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"

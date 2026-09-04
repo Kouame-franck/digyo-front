@@ -16,6 +16,7 @@ import ClientSpace from "./pages/ClientSpace";
 import Saas from "./pages/Saas";
 import SaasDetail from "./pages/SaasDetail";
 import SaasSignupConfirmation from "./pages/SaasSignupConfirmation";
+import Recu from "./pages/Recu";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import MentionsLegales from "./pages/MentionsLegales";
@@ -49,6 +50,7 @@ export default function App() {
                   <Route path="/saas" element={<Saas />} />
                   <Route path="/saas/:slug" element={<SaasDetail />} />
                   <Route path="/saas/:slug/confirmation" element={<SaasSignupConfirmation />} />
+                  <Route path="/recu/:recuToken" element={<Recu />} />
                   <Route path="/blog" element={<Blog />} />
                   <Route path="/blog/:slug" element={<BlogPost />} />
                   <Route path="/mentions-legales" element={<MentionsLegales />} />
