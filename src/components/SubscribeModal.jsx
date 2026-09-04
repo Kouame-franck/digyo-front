@@ -5,10 +5,10 @@ import PaymentUnavailableModal from "./PaymentUnavailableModal";
 import { apiFetch } from "../lib/api";
 import { ouvrirWidgetKadevPay } from "../lib/kadevpay";
 
-// CinetPay / Money Fusion sont en attente de validation par le prestataire -- tant que c'est le
-// cas, on n'appelle jamais /initier (qui échouerait ou pire, laisserait croire qu'un paiement est
-// en cours) et on affiche PaymentUnavailableModal à la place. Repasser à true une fois validé.
-const PAYMENT_LIVE = false;
+// Money Fusion validé le 2026-09-04 (lien https://pay.moneyfusion.net/digyo/... approuvé,
+// premiers tests effectués avec succès depuis la console). Repasser à false si le paiement en
+// ligne redevient indisponible (ex. changement de prestataire en attente de validation).
+const PAYMENT_LIVE = true;
 
 const initialForm = {
   fullName: "",
