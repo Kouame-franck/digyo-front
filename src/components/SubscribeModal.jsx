@@ -188,7 +188,13 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
   if (!plan) return null;
 
   return (
-    <Modal open={open} onClose={handleClose} labelledBy="subscribe-modal-title" size="lg">
+    <Modal
+      open={open}
+      onClose={handleClose}
+      labelledBy="subscribe-modal-title"
+      size="lg"
+      closeOnBackdropClick={false}
+    >
       <button
         type="button"
         onClick={handleClose}
