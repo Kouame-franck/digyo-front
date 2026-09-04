@@ -32,6 +32,8 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [showPaymentUnavailable, setShowPaymentUnavailable] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [checkingEmail, setCheckingEmail] = useState(false);
   // La console publie une offre distincte par cycle ("starter" / "starter-annuel") : la carte
   // met en avant l'annuel, c'est ici que le visiteur arbitre réellement mensuel vs annuel.
   const [cycle, setCycle] = useState("annuel");
@@ -51,6 +53,8 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
       setCycle("annuel");
       setQuantite(1);
       setShowPaymentUnavailable(false);
+      setEmailError("");
+      setCheckingEmail(false);
     }
   }, [open, initialPlanId, plans]);
 
@@ -82,6 +86,29 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
   }
   function goBack() {
     setStep((s) => Math.max(s - 1, 0));
+  }
+
+  // "Initier le paiement doit signifier que le dossier du client est complet et valide" : un
+  // email de responsable déjà utilisé côté Sschool n'était détecté qu'au moment de provisionner
+  // l'établissement, APRÈS paiement confirmé -- le visiteur payait avant de découvrir le
+  // problème. Vérifié ici, à la sortie de l'étape "Vos informations", avant même d'atteindre
+  // l'étape paiement.
+  async function handleInfoSubmit(e) {
+    e.preventDefault();
+    setEmailError("");
+    setCheckingEmail(true);
+    try {
+      const data = await apiFetch(`/api/sschool-signup/email-disponible?email=${encodeURIComponent(form.email)}`);
+      if (!data.available) {
+        setEmailError("Un compte existe déjà avec cet email. Utilisez une autre adresse pour continuer.");
+        return;
+      }
+      goNext();
+    } catch (err) {
+      setEmailError(err.message || "Impossible de vérifier cet email pour le moment. Réessayez.");
+    } finally {
+      setCheckingEmail(false);
+    }
   }
 
   // Une fois le widget terminé côté navigateur, on rejoint la page de confirmation existante en
@@ -274,13 +301,7 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
       )}
 
       {step === 1 && (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            goNext();
-          }}
-          className="mt-6 space-y-4"
-        >
+        <form onSubmit={handleInfoSubmit} className="mt-6 space-y-4">
           <label className="block">
             <span className="text-sm font-semibold text-ink">Nom complet</span>
             <input
@@ -299,10 +320,18 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
                 type="email"
                 required
                 value={form.email}
-                onChange={(e) => updateForm("email", e.target.value)}
-                className="mt-2 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm text-ink outline-none focus:border-lagune focus:ring-2 focus:ring-lagune/20"
+                onChange={(e) => {
+                  updateForm("email", e.target.value);
+                  if (emailError) setEmailError("");
+                }}
+                className={`mt-2 w-full rounded-xl border px-4 py-2.5 text-sm text-ink outline-none focus:ring-2 ${
+                  emailError
+                    ? "border-red-300 focus:border-red-400 focus:ring-red-100"
+                    : "border-ink/15 focus:border-lagune focus:ring-lagune/20"
+                }`}
                 placeholder="vous@etablissement.com"
               />
+              {emailError && <p className="mt-1.5 text-xs text-red-600">{emailError}</p>}
             </label>
             <label className="block">
               <span className="text-sm font-semibold text-ink">Téléphone (Mobile Money)</span>
@@ -351,9 +380,10 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
             </button>
             <button
               type="submit"
-              className="flex-1 rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+              disabled={checkingEmail}
+              className="flex-1 rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Continuer
+              {checkingEmail ? "Vérification..." : "Continuer"}
             </button>
           </div>
         </form>
