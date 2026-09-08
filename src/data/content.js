@@ -352,7 +352,6 @@ export const process = [
 
 export const partners = [
   { name: "Polygone", logo: "/partenaires/logo_polygone_sans_bg.png" },
-  { name: "Homeduc", logo: "/partenaires/logo_homeduc.png" },
   { name: "Aboya", logo: "/partenaires/logo_aboya2.jpg" },
   { name: "AGID", logo: "/partenaires/logo-agid.jpeg" },
   { name: "S-School", logo: "/partenaires/logo2.png" },
