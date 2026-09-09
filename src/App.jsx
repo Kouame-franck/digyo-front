@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { trackPageview } from "./lib/analytics";
 import { SessionProvider } from "./context/SessionContext";
 import { AuthModalProvider } from "./context/AuthModalContext";
 import { DiagnosticModalProvider } from "./context/DiagnosticModalContext";
@@ -28,6 +29,11 @@ function ScrollToTop() {
   useEffect(() => {
     if (!hash) window.scrollTo(0, 0);
   }, [pathname, hash]);
+  // Séparé de l'effet de scroll ci-dessus : un pageview compte par page réellement visitée, pas
+  // par simple changement d'ancre (#section) sur la même page.
+  useEffect(() => {
+    trackPageview(pathname);
+  }, [pathname]);
   return null;
 }
 
