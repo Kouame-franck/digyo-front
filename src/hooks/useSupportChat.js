@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { apiFetch } from "../lib/api";
 import { getVisitorId } from "../lib/visitor";
 import { useSession } from "../context/SessionContext";
+import { useAuthModal } from "../context/AuthModalContext";
 
 const OPEN_POLL_MS = 6000;
 const CLOSED_POLL_MS = 25000;
@@ -12,12 +13,20 @@ const CLOSED_POLL_MS = 25000;
 // (l'utilisateur attend une réponse), léger et rare sinon (juste pour le badge non-lu).
 export function useSupportChat(open) {
   const { user } = useSession();
+  const { openAuthModal } = useAuthModal();
   const [messages, setMessages] = useState([]);
   const [unread, setUnread] = useState(false);
   const [sending, setSending] = useState(false);
   const tokenRef = useRef(null);
   if (!tokenRef.current) tokenRef.current = getVisitorId();
   const token = tokenRef.current;
+  // Lu depuis sendMessage plutôt que `user` directement -- évite de recréer sendMessage (et donc
+  // le onSuccess capturé par AuthModal) à chaque changement de session, ce qui casserait l'auto-
+  // renvoi juste après connexion (closure perimée sur l'ancien `user`, encore `null`).
+  const userRef = useRef(user);
+  useEffect(() => {
+    userRef.current = user;
+  }, [user]);
 
   const fetchThread = useCallback(async () => {
     try {
@@ -50,7 +59,7 @@ export function useSupportChat(open) {
     return () => clearInterval(id);
   }, [open, fetchThread, fetchUnread]);
 
-  const sendMessage = useCallback(
+  const doSend = useCallback(
     async (text) => {
       const optimistic = {
         id: `pending-${Date.now()}`,
@@ -63,7 +72,7 @@ export function useSupportChat(open) {
       try {
         await apiFetch("/api/support", {
           method: "POST",
-          body: JSON.stringify({ token, text, name: user?.name || null, email: user?.email || null }),
+          body: JSON.stringify({ token, text }),
         });
         await fetchThread();
       } catch {
@@ -74,7 +83,22 @@ export function useSupportChat(open) {
         setSending(false);
       }
     },
-    [token, user, fetchThread]
+    [token, fetchThread]
+  );
+
+  // Le back exige désormais une session pour écrire (nom/email viennent du cookie, pas du
+  // visiteur -- voir back/src/routes/support.js). Un visiteur non connecté qui envoie son
+  // premier message se voit proposer AuthModal ; le message part automatiquement une fois
+  // connecté, sans qu'il ait besoin de le retaper.
+  const sendMessage = useCallback(
+    (text) => {
+      if (!userRef.current) {
+        openAuthModal("login", { onSuccess: () => doSend(text) });
+        return;
+      }
+      return doSend(text);
+    },
+    [doSend, openAuthModal]
   );
 
   return { messages, unread, sending, sendMessage };
