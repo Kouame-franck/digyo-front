@@ -81,6 +81,13 @@ function offresToPlans(offres, catalogue) {
 // `ring`/`badge`/`button` habillent la formule mise en avant (`plan.featured`) dans la couleur
 // propre à CETTE formule plutôt qu'un ambre fixe — sinon le bandeau "Recommandé" reste ambre même
 // quand c'est "Pro" (et non "Premium") qui est mis en avant, ce qui jure avec son propre dégradé.
+// `headerText` : `--color-ambre` et `--color-creation` s'inversent en thème sombre (couleur
+// foncée en clair, pastel clair en sombre — voir index.css) car ailleurs sur le site elles servent
+// de COULEUR DE TEXTE sur fond sombre, pas de fond plein. Un texte blanc fixe dessus reste lisible
+// en clair mais devient illisible en sombre (pastel clair + blanc) : ces deux formules gardent donc
+// un texte d'en-tête sombre (`text-panel`) qui reste lisible dans les deux thèmes, comme le fait
+// déjà leur badge/bouton ci-dessous. lagune et panel, elles, restent assez foncées dans les deux
+// thèmes pour supporter du texte blanc fixe — inutile d'y toucher.
 const STYLES_PALIER = {
   Starter: {
     degrade: "from-panel to-panel/80",
@@ -99,13 +106,15 @@ const STYLES_PALIER = {
   Pro: {
     degrade: "from-creation to-creation-dark",
     icone: "diamant",
+    headerText: "text-panel",
     ring: "shadow-xl shadow-creation/20 ring-1 ring-creation",
-    badge: "bg-creation text-white",
-    button: "bg-creation text-white hover:bg-creation-dark",
+    badge: "bg-creation text-panel",
+    button: "bg-creation text-panel hover:bg-creation-dark",
   },
   Premium: {
     degrade: "from-ambre to-ambre-dark",
     icone: "couronne",
+    headerText: "text-panel",
     ring: "shadow-xl shadow-ambre/20 ring-1 ring-ambre",
     badge: "bg-ambre text-panel",
     button: "bg-ambre text-panel hover:bg-ambre-dark",
@@ -577,7 +586,7 @@ export default function SaasDetail() {
                       </div>
                     )}
 
-                    <div className={`bg-gradient-to-br ${palier.degrade} p-5 text-white`}>
+                    <div className={`bg-gradient-to-br ${palier.degrade} p-5 ${palier.headerText ?? "text-white"}`}>
                       <span className="inline-flex rounded-lg bg-white/20 p-2">
                         <IconePalier nom={palier.icone} className="h-5 w-5" />
                       </span>
