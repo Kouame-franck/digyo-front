@@ -251,13 +251,16 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
               <span className="text-xs font-semibold text-ink/70 shrink-0">
                 {cycle === "annuel" ? "Durée (années)" : "Durée (mois)"}
               </span>
+              {/* min-w-0 : un <input type="range"> garde sa largeur intrinsèque (~130px) même en
+                  flex-1, car min-width d'un enfant flex vaut "auto" (pas 0) par défaut -- sur un
+                  mobile étroit la ligne dépassait alors son cadre et poussait "10 ans" hors champ. */}
               <input
                 type="range"
                 min={1}
                 max={cycle === "annuel" ? 10 : 11}
                 value={quantite}
                 onChange={(e) => setQuantite(Number(e.target.value))}
-                className="flex-1 accent-lagune"
+                className="min-w-0 flex-1 accent-lagune"
               />
               <span className="text-sm font-bold text-ink w-14 text-right shrink-0">{dureeLabel}</span>
             </div>
