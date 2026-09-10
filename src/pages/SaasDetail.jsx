@@ -56,7 +56,7 @@ function offresToPlans(offres, catalogue) {
           formule.mensuel && principale.id !== formule.mensuel.id
             ? `ou dès ${formatFCFA(formule.mensuel.price)} / mois`
             : null,
-        featured: formule.name === "Premium",
+        featured: formule.name === "Pro",
         features: principale.features?.length
           ? principale.features
           : ["Toutes les fonctionnalités s-school"],
@@ -78,17 +78,52 @@ function offresToPlans(offres, catalogue) {
 // Hiérarchie visuelle des paliers, calquée sur les cartes de s-school (Configuration > Mon école
 // > Mon abonnement) mais avec la palette digyo : neutre, couleur d'accent, puis or pour le haut
 // de gamme. Le visiteur doit reconnaître la même grille une fois connecté.
+// `ring`/`badge`/`button` habillent la formule mise en avant (`plan.featured`) dans la couleur
+// propre à CETTE formule plutôt qu'un ambre fixe — sinon le bandeau "Recommandé" reste ambre même
+// quand c'est "Pro" (et non "Premium") qui est mis en avant, ce qui jure avec son propre dégradé.
 const STYLES_PALIER = {
-  Starter: { degrade: "from-panel to-panel/80", icone: "eclair" },
-  Standard: { degrade: "from-lagune to-lagune-dark", icone: "etoile" },
-  Premium: { degrade: "from-ambre to-ambre-dark", icone: "couronne" },
+  Starter: {
+    degrade: "from-panel to-panel/80",
+    icone: "eclair",
+    ring: "shadow-xl shadow-ink/10 ring-1 ring-ink/30",
+    badge: "bg-ink text-canvas",
+    button: "bg-ink text-canvas hover:bg-ink/90",
+  },
+  Standard: {
+    degrade: "from-lagune to-lagune-dark",
+    icone: "etoile",
+    ring: "shadow-xl shadow-lagune/20 ring-1 ring-lagune",
+    badge: "bg-lagune text-white",
+    button: "bg-lagune text-white hover:bg-lagune-dark",
+  },
+  Pro: {
+    degrade: "from-creation to-creation-dark",
+    icone: "diamant",
+    ring: "shadow-xl shadow-creation/20 ring-1 ring-creation",
+    badge: "bg-creation text-white",
+    button: "bg-creation text-white hover:bg-creation-dark",
+  },
+  Premium: {
+    degrade: "from-ambre to-ambre-dark",
+    icone: "couronne",
+    ring: "shadow-xl shadow-ambre/20 ring-1 ring-ambre",
+    badge: "bg-ambre text-panel",
+    button: "bg-ambre text-panel hover:bg-ambre-dark",
+  },
 };
-const PALIER_DEFAUT = { degrade: "from-lagune to-lagune-dark", icone: "etoile" };
+const PALIER_DEFAUT = {
+  degrade: "from-lagune to-lagune-dark",
+  icone: "etoile",
+  ring: "shadow-xl shadow-lagune/20 ring-1 ring-lagune",
+  badge: "bg-lagune text-white",
+  button: "bg-lagune text-white hover:bg-lagune-dark",
+};
 
 const TRACES_ICONES = {
   eclair: "M11 2L4 12h5l-1 8 7-10h-5l1-8z",
   etoile: "M10 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L10 14.4 5.2 16.9l.9-5.4L2.2 7.7l5.4-.8L10 2z",
   couronne: "M3 7l3.5 3L10 4l3.5 6L17 7l-1.5 8h-11L3 7z",
+  diamant: "M10 2l4 5-4 11-4-11z M6 7h8",
 };
 
 // Icône par type de limite : une limite se lit alors comme les autres avantages de la formule,
@@ -524,7 +559,7 @@ export default function SaasDetail() {
             )}
 
             {hasPlans && (
-            <div className="mt-10 grid gap-6 md:grid-cols-3">
+            <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {plans.map((plan) => {
                 const palier = STYLES_PALIER[plan.name] ?? PALIER_DEFAUT;
                 return (
@@ -532,12 +567,12 @@ export default function SaasDetail() {
                     key={plan.id}
                     className={`relative flex flex-col overflow-hidden rounded-2xl bg-surface ${
                       plan.featured
-                        ? "shadow-xl shadow-ambre/20 ring-1 ring-ambre md:-translate-y-3"
+                        ? `${palier.ring} lg:-translate-y-3`
                         : "shadow-md ring-1 ring-ink/10"
                     }`}
                   >
                     {plan.featured && (
-                      <div className="bg-ambre py-1.5 text-center text-xs font-bold uppercase tracking-widest text-panel">
+                      <div className={`${palier.badge} py-1.5 text-center text-xs font-bold uppercase tracking-widest`}>
                         Recommandé
                       </div>
                     )}
@@ -621,9 +656,7 @@ export default function SaasDetail() {
                         type="button"
                         onClick={() => openSubscribe(plan.id)}
                         className={`mt-6 w-full rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
-                          plan.featured
-                            ? "bg-ambre text-panel hover:bg-ambre-dark"
-                            : "bg-lagune text-white hover:bg-lagune-dark"
+                          plan.featured ? palier.button : "bg-lagune text-white hover:bg-lagune-dark"
                         }`}
                       >
                         S'abonner
