@@ -50,12 +50,6 @@ function offresToPlans(offres, catalogue) {
         id: formule.name,
         name: formule.name,
         description: principale.description,
-        price: formatFCFA(principale.price),
-        period: principale.cycle === "annuel" ? "par an" : "par mois",
-        priceHint:
-          formule.mensuel && principale.id !== formule.mensuel.id
-            ? `ou dès ${formatFCFA(formule.mensuel.price)} / mois`
-            : null,
         featured: formule.name === "Pro",
         features: principale.features?.length
           ? principale.features
@@ -241,6 +235,10 @@ export default function SaasDetail() {
   const [openFaq, setOpenFaq] = useState(0);
   const [livePlans, setLivePlans] = useState(null);
   const [offresEnErreur, setOffresEnErreur] = useState(false);
+  // Cycle mis en avant sur la grille de tarifs — annuel par défaut (le plus avantageux pour le
+  // visiteur ET celui qu'on préfère commercialement), mais l'autre prix reste toujours visible en
+  // petit sous le prix principal, quel que soit le cycle choisi ici.
+  const [cycleAffiche, setCycleAffiche] = useState("annuel");
 
   useEffect(() => {
     if (!product?.liveOffers) return;
@@ -543,6 +541,35 @@ export default function SaasDetail() {
               </p>
             </div>
 
+            {/* Le cycle choisi ici ne masque pas l'autre prix : il change juste lequel des deux
+                est mis en avant sur chaque carte (voir "ou ..." sous le prix principal), pour
+                rester vendeur sans jamais cacher d'information de prix. */}
+            {hasPlans && (
+              <div className="mt-8 inline-flex items-center gap-1 rounded-full bg-ink/5 p-1">
+                <button
+                  type="button"
+                  onClick={() => setCycleAffiche("mensuel")}
+                  className={`rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
+                    cycleAffiche === "mensuel" ? "bg-surface text-ink shadow-sm" : "text-ink/50 hover:text-ink/80"
+                  }`}
+                >
+                  Mensuel
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCycleAffiche("annuel")}
+                  className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
+                    cycleAffiche === "annuel" ? "bg-surface text-ink shadow-sm" : "text-ink/50 hover:text-ink/80"
+                  }`}
+                >
+                  Annuel
+                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${ACCENTS.saas.puce}`}>
+                    2 mois offerts
+                  </span>
+                </button>
+              </div>
+            )}
+
             {!hasPlans && (
               <div className="mt-10 rounded-2xl bg-surface p-8 text-center ring-1 ring-ink/10">
                 {offresEnErreur ? (
@@ -571,6 +598,13 @@ export default function SaasDetail() {
             <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {plans.map((plan) => {
                 const palier = STYLES_PALIER[plan.name] ?? PALIER_DEFAUT;
+                // Prix mis en avant = le cycle choisi dans le toggle ci-dessus (repli sur l'autre
+                // cycle si cette formule n'existe pas dans celui-ci) ; l'autre reste affiché en
+                // petit juste en dessous, jamais totalement masqué.
+                const autreCycleId = cycleAffiche === "annuel" ? "mensuel" : "annuel";
+                const offreAffichee = plan[cycleAffiche] ?? plan.annuel ?? plan.mensuel;
+                const offreAutre = plan[autreCycleId];
+                if (!offreAffichee) return null;
                 return (
                   <div
                     key={plan.id}
@@ -593,11 +627,15 @@ export default function SaasDetail() {
                       <h3 className="mt-4 font-display text-xl font-bold">{plan.name}</h3>
                       <p className="mt-0.5 text-xs leading-relaxed opacity-75">{plan.description}</p>
                       <div className="mt-4 flex items-baseline gap-1.5">
-                        <span className="font-display text-2xl font-extrabold">{plan.price}</span>
-                        <span className="text-xs font-medium opacity-70">{plan.period}</span>
+                        <span className="font-display text-2xl font-extrabold">{formatFCFA(offreAffichee.price)}</span>
+                        <span className="text-xs font-medium opacity-70">
+                          {offreAffichee.cycle === "annuel" ? "par an" : "par mois"}
+                        </span>
                       </div>
-                      {plan.priceHint && (
-                        <p className="mt-0.5 text-[11px] opacity-70">{plan.priceHint}</p>
+                      {offreAutre && (
+                        <p className="mt-0.5 text-[11px] opacity-70">
+                          ou {formatFCFA(offreAutre.price)} {offreAutre.cycle === "annuel" ? "/ an" : "/ mois"}
+                        </p>
                       )}
                     </div>
 
