@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { trackPageview } from "./lib/analytics";
 import { SessionProvider } from "./context/SessionContext";
@@ -61,6 +61,9 @@ export default function App() {
                   <Route path="/blog/:slug" element={<BlogPost />} />
                   <Route path="/mentions-legales" element={<MentionsLegales />} />
                   <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
+                  {/* Cible du QR code des cartes de visite : adresse fixe imprimée, destination modifiable
+                      ici sans réimprimer. Le pageview /carte (voir ScrollToTop) compte les scans. */}
+                  <Route path="/carte" element={<Navigate to="/" replace />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
