@@ -66,7 +66,8 @@ export const saasProducts = [
     // Un seul compte s-school partagé sert de démo à tous les visiteurs (voir
     // DemoAccessModal.jsx) — le formulaire ne fait que capturer le lead avant de le révéler.
     demoAccess: true,
-    images: ["/sschool1.png", "/sschool2.png", "/school3.png"],
+    // Captures de l'école de démonstration (02/10/2026) : accueil, encaissements, liste des élèves.
+    images: ["/sschool/accueil.jpg", "/sschool/paiements.jpg", "/sschool/secretariat.jpg"],
     audience: "Écoles préscolaires, primaires et secondaires, centres de formation professionnelle, instituts privés, universités.",
     features: [
       {
@@ -152,12 +153,27 @@ export const saasProducts = [
       {
         question: "Y a-t-il un engagement de durée ?",
         answer:
-          "Non, l'abonnement est sans engagement et se règle mensuellement. Vous pouvez y mettre fin à tout moment.",
+          "Non. L'abonnement est sans engagement, au mois ou à l'année (l'annuel offre 2 mois). Vous pouvez y mettre fin à tout moment.",
       },
       {
-        question: "Proposez-vous une période d'essai ?",
+        question: "Peut-on essayer avant de s'abonner ?",
         answer:
-          "Nous organisons une démonstration personnalisée avant souscription, et un accompagnement renforcé durant le premier mois pour valider que l'outil correspond bien à votre fonctionnement.",
+          "Oui. Le bouton « Tester gratuitement » vous donne accès à une école de démonstration complète, à explorer librement. Nous pouvons aussi vous faire une démonstration personnalisée, puis vous accompagner de près durant le premier mois.",
+      },
+      {
+        question: "Puis-je reprendre mes élèves existants ?",
+        answer:
+          "Oui. Vos listes d'élèves s'importent depuis un fichier Excel, et les données suivent ensuite automatiquement d'une année scolaire à l'autre.",
+      },
+      {
+        question: "Les parents peuvent-ils payer en ligne ?",
+        answer:
+          "Oui, avec le module de paiement électronique : depuis leur espace, les familles règlent la scolarité par Mobile Money via Money Fusion. Le paiement est enregistré automatiquement et le reçu disponible tout de suite.",
+      },
+      {
+        question: "Faut-il installer quelque chose ?",
+        answer:
+          "Non. s-school s'utilise dans le navigateur, sur ordinateur, tablette ou téléphone. Il suffit d'une connexion internet.",
       },
     ],
   },
