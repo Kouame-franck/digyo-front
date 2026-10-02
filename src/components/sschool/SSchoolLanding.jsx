@@ -102,10 +102,22 @@ export default function SSchoolLanding({ product, onDemo, tarifs, faq }) {
         />
         <div className="container-page relative pb-16 pt-12 md:pt-20">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full bg-lagune/10 px-3 py-1 text-xs font-semibold text-lagune-dark">
-              <span className="h-1.5 w-1.5 rounded-full bg-lagune-dark" aria-hidden="true" />
+            {/* Accroche manuscrite, un peu de travers et soulignée au feutre, comme notée à la main. */}
+            <p className="relative inline-block -rotate-2 px-2 font-hand text-3xl font-bold leading-tight text-lagune-dark md:text-4xl">
               {hero.badge}
-            </span>
+              <svg
+                viewBox="0 0 300 12"
+                preserveAspectRatio="none"
+                className="absolute -bottom-2 left-0 h-3 w-full text-ambre"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+                strokeLinecap="round"
+                aria-hidden="true"
+              >
+                <path d="M3 8c40-5 85-6 130-3s95 3 164-4" />
+              </svg>
+            </p>
             <h1 className="mt-5 font-display text-4xl font-bold leading-tight text-ink md:text-6xl">
               {hero.titre}
             </h1>

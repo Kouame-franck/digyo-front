@@ -3,6 +3,8 @@
 @import "@fontsource/jost/500.css";
 @import "@fontsource/jost/600.css";
 @import "@fontsource/jost/700.css";
+/* Manuscrite : accroche de la landing s-school (voir SSchoolLanding.jsx). */
+@import "@fontsource/caveat/700.css";
 
 @theme {
   /* Palette "Lagune" -- charte digyo (valeurs claires par defaut) */
@@ -48,6 +50,7 @@
   --color-on-panel: #F4F9FA; /* texte/elements sur ces blocs sombres */
 
   --font-display: 'Jost', 'Century Gothic', 'Futura', ui-sans-serif, sans-serif;
+  --font-hand: 'Caveat', 'Segoe Print', 'Comic Sans MS', cursive;
   --font-logo: 'Bahnschrift', 'Century Gothic', 'Futura', ui-sans-serif, sans-serif;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }

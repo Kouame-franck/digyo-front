@@ -7,7 +7,7 @@
 // Les captures (public/sschool/) ont été faites sur l'école de démonstration.
 
 export const hero = {
-  badge: "Nouveau · Logiciel de gestion scolaire",
+  badge: "Solution de gestion centralisée d'établissement scolaire",
   titre: "Toute la vie de votre école, au même endroit.",
   sousTitre:
     "Inscriptions, notes et bulletins, scolarité et paiements, échanges avec les familles : s‑school remplace les registres et les tableurs par un seul outil, sur ordinateur comme sur téléphone.",
