@@ -105,7 +105,7 @@ export const phares = [
     texte:
       "Les enseignants saisissent leurs notes, s-school calcule moyennes et rangs avec vos coefficients. Notation chiffrée ou par appréciation : c'est vous qui choisissez, et vous décidez quand les familles voient les bulletins.",
     points: ["Coefficients par note, matière et niveau", "Notation chiffrée ou par appréciation", "Bulletins ouverts aux familles par l'administration"],
-    image: "/sschool/bulletins.jpg",
+    image: "/sschool/bulletins.jpg?v=2",
   },
   {
     surtitre: "Suivi des élèves",
