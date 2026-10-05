@@ -28,13 +28,13 @@ export default function CookieBanner() {
     <div
       role="dialog"
       aria-labelledby="cookie-banner-title"
-      className="animate-nudge-in fixed bottom-6 left-6 z-50 w-[24rem] max-w-[calc(100vw-3rem)]"
+      className="animate-nudge-in fixed bottom-6 left-6 z-50 w-[19rem] max-w-[calc(100vw-3rem)]"
     >
-      <div className="rounded-3xl border border-ink/10 bg-surface p-5 shadow-2xl shadow-panel/25">
-        <p id="cookie-banner-title" className="font-display text-base font-bold text-ink">
+      <div className="rounded-xl border border-ink/10 bg-surface p-4 shadow-2xl shadow-panel/25">
+        <p id="cookie-banner-title" className="font-display text-sm font-bold text-ink">
           digyo utilise des cookies
         </p>
-        <p className="mt-2 text-sm leading-relaxed text-ink/70">
+        <p className="mt-1.5 text-xs leading-relaxed text-ink/70">
           Pour améliorer votre expérience, en toute confidentialité.{" "}
           <Link
             to="/politique-de-confidentialite"
@@ -43,18 +43,18 @@ export default function CookieBanner() {
             En savoir plus
           </Link>
         </p>
-        <div className="mt-4 flex gap-2">
+        <div className="mt-3 flex gap-2">
           <button
             type="button"
             onClick={() => choose("denied")}
-            className="flex-1 rounded-full border border-ink/15 px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-ink/5"
+            className="flex-1 rounded-lg border border-ink/15 px-3 py-2 text-xs font-semibold text-ink transition-colors hover:bg-ink/5"
           >
             Non merci
           </button>
           <button
             type="button"
             onClick={() => choose("granted")}
-            className="flex-1 rounded-full bg-lagune px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+            className="flex-1 rounded-lg bg-lagune px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-lagune-dark"
           >
             J'accepte
           </button>
