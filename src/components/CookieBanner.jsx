@@ -40,10 +40,9 @@ export default function CookieBanner() {
       aria-labelledby="cookie-banner-title"
       className="animate-nudge-in fixed bottom-6 left-6 z-50 w-[19rem] max-w-[calc(100vw-3rem)]"
     >
-      {/* Fond opaque, bordure marquée et liseré lagune en tête : la fenêtre se détache nettement
-          de la page, sans recourir à une ombre lourde. */}
+      {/* Fond opaque, bordure marquée et ombre courte : la fenêtre se détache nettement de la
+          page, sans recourir à une ombre lourde. */}
       <div className="overflow-hidden rounded-xl border border-ink/20 bg-surface shadow-[0_10px_30px_-10px_rgb(0_0_0/0.45)]">
-        <div className="h-1 bg-lagune" aria-hidden="true" />
         <div className="p-4">
           <p id="cookie-banner-title" className="font-display text-sm font-bold text-ink">
             digyo utilise des cookies
