@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import DiagnosticResult from "./DiagnosticResult";
 import { apiFetch } from "../lib/api";
+import { trackEvent } from "../lib/analytics";
 import { useSession } from "../context/SessionContext";
 import { useAuthModal } from "../context/AuthModalContext";
 import {
@@ -151,6 +152,7 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
         setGuestResult(data.diagnostic);
       }
       setStep("result");
+      trackEvent("diagnostic_complete", { logged_in: Boolean(user) });
     } catch (err) {
       setError(err.message);
       setStep("form");

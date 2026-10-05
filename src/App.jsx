@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SupportWidget from "./components/SupportWidget";
 import SiteNudges from "./components/SiteNudges";
+import CookieBanner from "./components/CookieBanner";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import About from "./pages/About";
@@ -70,6 +71,7 @@ export default function App() {
               <Footer />
               <SupportWidget />
               <SiteNudges />
+              <CookieBanner />
             </div>
           </DiagnosticModalProvider>
         </AuthModalProvider>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import NudgePopup from "./NudgePopup";
 import { useDiagnosticModal } from "../context/DiagnosticModalContext";
+import useAnalyticsConsent from "../hooks/useAnalyticsConsent";
 
 const DELAY_MS = 12000;
 const SESSION_SHOWN_KEY = "digyo_nudge_shown";
@@ -70,12 +71,15 @@ export default function SiteNudges() {
   const { openDiagnosticModal } = useDiagnosticModal();
   const [ready, setReady] = useState(false);
   const [active, setActive] = useState(null);
+  const consent = useAnalyticsConsent();
 
+  // Le bandeau cookies occupe le même coin (voir CookieBanner.jsx) : le délai ne démarre qu'une
+  // fois que le visiteur y a répondu.
   useEffect(() => {
-    if (sessionStorage.getItem(SESSION_SHOWN_KEY)) return;
+    if (!consent || sessionStorage.getItem(SESSION_SHOWN_KEY)) return;
     const timer = setTimeout(() => setReady(true), DELAY_MS);
     return () => clearTimeout(timer);
-  }, []);
+  }, [consent]);
 
   useEffect(() => {
     if (!ready || active || sessionStorage.getItem(SESSION_SHOWN_KEY)) return;

@@ -4,6 +4,7 @@ import Modal from "./Modal";
 import PaymentUnavailableModal from "./PaymentUnavailableModal";
 import { apiFetch } from "../lib/api";
 import { ouvrirWidgetKadevPay } from "../lib/kadevpay";
+import { trackEvent } from "../lib/analytics";
 
 // Money Fusion validé le 2026-09-04 (lien https://pay.moneyfusion.net/digyo/... approuvé,
 // premiers tests effectués avec succès depuis la console). Repasser à false si le paiement en
@@ -122,6 +123,11 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
   async function handlePay() {
     setSubmitting(true);
     setError("");
+    trackEvent("begin_checkout", {
+      currency: "XOF",
+      value: montantTotal ?? undefined,
+      items: [{ item_id: offre?.id ?? plan?.id, item_name: product.name, quantity: quantite }],
+    });
     try {
       const data = await apiFetch("/api/sschool-signup/initier", {
         method: "POST",

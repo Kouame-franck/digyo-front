@@ -79,10 +79,12 @@ export default function SSchoolLanding({ product, onDemo, tarifs, faq }) {
   const [categorieOuverte, setCategorieOuverte] = useState(null);
   const profil = profils.find((p) => p.id === profilActif) ?? profils[0];
 
-  const boutonDemo = (classe = "") => (
+  // `emplacement` part dans l'événement GA essai_gratuit_clic (voir ouvrirDemo dans SaasDetail.jsx)
+  // pour savoir lequel des boutons « Tester gratuitement » convertit le mieux.
+  const boutonDemo = (classe = "", emplacement) => (
     <button
       type="button"
-      onClick={onDemo}
+      onClick={() => onDemo(emplacement)}
       className={`inline-flex items-center justify-center gap-2 rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-lagune/25 transition-colors hover:bg-lagune-dark ${classe}`}
     >
       Tester gratuitement
@@ -123,7 +125,7 @@ export default function SSchoolLanding({ product, onDemo, tarifs, faq }) {
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-ink/70">{hero.sousTitre}</p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              {boutonDemo("w-full sm:w-auto")}
+              {boutonDemo("w-full sm:w-auto", "landing_haut")}
               <Button href="#tarifs" variant="ghost" className="w-full sm:w-auto">
                 Voir les tarifs
               </Button>
@@ -345,7 +347,7 @@ export default function SSchoolLanding({ product, onDemo, tarifs, faq }) {
             <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <button
                 type="button"
-                onClick={onDemo}
+                onClick={() => onDemo("landing_bas")}
                 className="w-full rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#0C4A6E] transition-colors hover:bg-white/90 sm:w-auto"
               >
                 Tester gratuitement
@@ -361,7 +363,7 @@ export default function SSchoolLanding({ product, onDemo, tarifs, faq }) {
       {/* ── Barre d'action fixe (mobile) ───────────────────────────────── */}
       {/* pr-24 : laisse la place à la bulle d'assistance (SupportWidget, fixée en bas à droite). */}
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-ink/10 bg-surface/95 py-3 pl-3 pr-24 backdrop-blur md:hidden">
-        {boutonDemo("w-full")}
+        {boutonDemo("w-full", "barre_mobile")}
       </div>
     </>
   );

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok } from "react-icons/fa6";
 import Logo from "./Logo";
 import { contactInfo } from "../data/content";
+import { openConsentBanner } from "../lib/analytics";
 
 const SOCIAL_ICONS = {
   Facebook: FaFacebook,
@@ -79,6 +80,9 @@ export default function Footer() {
             <Link to="/politique-de-confidentialite" className="hover:text-lagune-panel">
               Politique de confidentialité
             </Link>
+            <button type="button" onClick={openConsentBanner} className="hover:text-lagune-panel">
+              Gérer les cookies
+            </button>
           </div>
         </div>
       </div>

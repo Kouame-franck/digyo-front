@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { contactInfo } from "../data/content";
 import LegalPlaceholder from "../components/LegalPlaceholder";
 import Seo from "../components/Seo";
+import { openConsentBanner } from "../lib/analytics";
 
 export default function PolitiqueConfidentialite() {
   return (
@@ -69,6 +70,11 @@ export default function PolitiqueConfidentialite() {
                   cookie d'authentification nécessaire au fonctionnement de l'espace client (voir
                   section 5, « Cookies »).
                 </li>
+                <li>
+                  <span className="font-semibold text-ink">Mesure d'audience</span> — uniquement si
+                  vous l'acceptez&nbsp;: pages consultées, provenance de la visite, type d'appareil,
+                  ville ou pays approximatif, via Google Analytics (voir section 5).
+                </li>
               </ul>
             </div>
 
@@ -97,8 +103,12 @@ export default function PolitiqueConfidentialite() {
                     <td className="border-b border-ink/10 px-3 py-2">Exécution du contrat</td>
                   </tr>
                   <tr>
-                    <td className="px-3 py-2">Sécuriser le Site et prévenir la fraude</td>
-                    <td className="px-3 py-2">Intérêt légitime</td>
+                    <td className="border-b border-ink/10 px-3 py-2">Sécuriser le Site et prévenir la fraude</td>
+                    <td className="border-b border-ink/10 px-3 py-2">Intérêt légitime</td>
+                  </tr>
+                  <tr>
+                    <td className="px-3 py-2">Mesurer l'audience du Site pour l'améliorer</td>
+                    <td className="px-3 py-2">Consentement</td>
                   </tr>
                 </tbody>
               </table>
@@ -115,7 +125,10 @@ export default function PolitiqueConfidentialite() {
                   notre hébergeur —{" "}
                   <LegalPlaceholder>Hostinger</LegalPlaceholder> ;
                 </li>
-                <li>Google LLC, pour l'authentification via Google Sign-In ;</li>
+                <li>
+                  Google LLC, pour l'authentification via Google Sign-In et, si vous l'acceptez,
+                  la mesure d'audience (Google Analytics) ;
+                </li>
                 <li>KadevPay, pour le traitement des paiements en ligne.</li>
               </ul>
               <p className="mt-3">
@@ -146,11 +159,25 @@ export default function PolitiqueConfidentialite() {
                 </li>
               </ul>
               <p className="mt-3">
-                Le Site ne dépose aujourd'hui aucun cookie de mesure d'audience publicitaire ni de
-                traçage à des fins de profilage. Si cela venait à changer (par exemple avec l'ajout
-                d'un outil d'analyse d'audience), un bandeau de recueil de votre consentement serait
-                mis en place avant tout dépôt de ces cookies non essentiels, et cette politique
-                serait mise à jour en conséquence.
+                Avec votre consentement uniquement, recueilli par un bandeau lors de votre première
+                visite, le Site utilise aussi Google Analytics pour mesurer son audience&nbsp;:
+                cookies <code className="rounded bg-surface px-1.5 py-0.5 text-xs">_ga</code> et{" "}
+                <code className="rounded bg-surface px-1.5 py-0.5 text-xs">_ga_*</code>, conservés
+                13 mois au maximum. Tant que vous n'avez pas cliqué sur «&nbsp;J'accepte&nbsp;», aucun
+                script Google Analytics n'est chargé. Ces données ne servent ni à la publicité ni au
+                profilage, et ne contiennent ni votre nom, ni votre email, ni votre téléphone.
+              </p>
+              <p className="mt-3">
+                Vous pouvez changer d'avis à tout moment via le lien{" "}
+                <button
+                  type="button"
+                  onClick={openConsentBanner}
+                  className="text-lagune-dark hover:underline"
+                >
+                  «&nbsp;Gérer les cookies&nbsp;»
+                </button>{" "}
+                en bas de chaque page&nbsp;; un refus supprime les cookies Google Analytics déjà
+                déposés.
               </p>
             </div>
 
@@ -234,7 +261,7 @@ export default function PolitiqueConfidentialite() {
             </div>
           </div>
 
-          <p className="mt-12 text-xs text-ink/40">Dernière mise à jour&nbsp;: 21 août 2026</p>
+          <p className="mt-12 text-xs text-ink/40">Dernière mise à jour&nbsp;: 5 octobre 2026</p>
         </div>
       </section>
     </>

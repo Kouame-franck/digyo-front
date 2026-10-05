@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Seo from "../components/Seo";
+import { trackEvent } from "../lib/analytics";
 import { contactInfo, pillars } from "../data/content";
 import { useDiagnosticModal } from "../context/DiagnosticModalContext";
 
@@ -36,6 +37,7 @@ export default function Contact() {
       });
       if (!res.ok) throw new Error();
       setSubmitted(true);
+      trackEvent("generate_lead", { lead_source: "contact", service: form.service || "non précisé" });
     } catch {
       setError("Une erreur est survenue, réessayez dans un instant.");
     } finally {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { apiFetch } from "../lib/api";
 import { getSaasBySlug } from "../data/saas";
+import { trackEvent } from "../lib/analytics";
 
 const MAX_TENTATIVES = 8;
 
@@ -32,6 +33,12 @@ export default function SaasSignupConfirmation() {
           setResultat(data);
           if (data.statut === "paye") {
             setStatut("paye");
+            // Une seule conversion par paiement, même si le client recharge la page.
+            const cle = `digyo_purchase_tracked_${token}`;
+            if (!sessionStorage.getItem(cle)) {
+              sessionStorage.setItem(cle, "1");
+              trackEvent("purchase", { currency: "XOF", product: product?.name ?? slug });
+            }
           } else if (data.statut === "echoue") {
             setStatut("echec");
           } else if (tentatives < MAX_TENTATIVES) {

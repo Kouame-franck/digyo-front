@@ -11,6 +11,7 @@ import SSchoolLanding from "../components/sschool/SSchoolLanding";
 import { getSaasBySlug, saasProducts } from "../data/saas";
 import { ACCENTS } from "../data/pillarAccents";
 import { apiFetch } from "../lib/api";
+import { trackEvent } from "../lib/analytics";
 
 // Rotation des mêmes couleurs de marque que les puces de catégorie de la page Services, pour que
 // les indicateurs de fonctionnalités d'une fiche produit se lisent avec le même langage visuel.
@@ -232,6 +233,13 @@ export default function SaasDetail() {
   const product = getSaasBySlug(slug);
   const [subscribeOpen, setSubscribeOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
+
+  // Clic sur « Tester gratuitement », compté même si le visiteur referme le formulaire sans le
+  // remplir (l'accès obtenu, lui, est compté par generate_lead dans DemoAccessModal.jsx).
+  function ouvrirDemo(emplacement) {
+    trackEvent("essai_gratuit_clic", { product: product.name, location: emplacement });
+    setDemoOpen(true);
+  }
   const [selectedPlanId, setSelectedPlanId] = useState(null);
   const [openFaq, setOpenFaq] = useState(0);
   const [livePlans, setLivePlans] = useState(null);
@@ -535,7 +543,7 @@ export default function SaasDetail() {
       {product.slug === "s-school" ? (
         <SSchoolLanding
           product={product}
-          onDemo={() => setDemoOpen(true)}
+          onDemo={ouvrirDemo}
           tarifs={sectionTarifs}
           faq={sectionFaq}
         />
@@ -630,7 +638,7 @@ export default function SaasDetail() {
                 {product.demoAccess && (
                   <button
                     type="button"
-                    onClick={() => setDemoOpen(true)}
+                    onClick={() => ouvrirDemo("fiche_produit")}
                     className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/30"
                   >
                     Tester gratuitement

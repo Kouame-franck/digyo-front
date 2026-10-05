@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Modal from "./Modal";
 import { apiFetch } from "../lib/api";
+import { trackEvent } from "../lib/analytics";
 
 // Accès au compte test s-school : capture nom/email/téléphone, puis révèle les identifiants
 // partagés remis par la console (voir digyo-site/back/src/routes/demo.js). Pas de paiement, pas
@@ -31,7 +32,10 @@ export default function DemoAccessModal({ open, onClose, productName = "s-school
     setEnvoi(true);
     setErreur("");
     apiFetch("/api/demo/acceder", { method: "POST", body: JSON.stringify(form) })
-      .then((data) => setAcces(data))
+      .then((data) => {
+        setAcces(data);
+        trackEvent("generate_lead", { lead_source: "demo", product: productName });
+      })
       .catch((err) => setErreur(err.message || "Impossible de récupérer l'accès test pour le moment."))
       .finally(() => setEnvoi(false));
   }
