@@ -40,18 +40,19 @@ export default function CookieBanner() {
       aria-labelledby="cookie-banner-title"
       className="animate-nudge-in fixed bottom-6 left-6 z-50 w-[19rem] max-w-[calc(100vw-3rem)]"
     >
-      {/* Fond opaque, bordure marquée et ombre courte : la fenêtre se détache nettement de la
-          page, sans recourir à une ombre lourde. */}
-      <div className="overflow-hidden rounded-xl border border-ink/20 bg-surface shadow-[0_10px_30px_-10px_rgb(0_0_0/0.45)]">
+      {/* Gris anthracite neutre, fixe dans les deux thèmes : tout le site est teinté bleu-lagune,
+          un gris sans teinte s'en détache nettement. Couleurs en dur (pas les tokens ink/surface,
+          qui s'inversent avec le thème) ; lagune-panel reste lisible sur ce fond sombre. */}
+      <div className="overflow-hidden rounded-xl border border-white/10 bg-[#1F2124] shadow-[0_10px_30px_-10px_rgb(0_0_0/0.45)]">
         <div className="p-4">
-          <p id="cookie-banner-title" className="font-display text-sm font-bold text-ink">
+          <p id="cookie-banner-title" className="font-display text-sm font-bold text-white">
             digyo utilise des cookies
           </p>
-          <p className="mt-1.5 text-xs leading-relaxed text-ink/70">
+          <p className="mt-1.5 text-xs leading-relaxed text-white/70">
             Pour améliorer votre expérience, en toute confidentialité.{" "}
             <Link
               to="/politique-de-confidentialite"
-              className="text-lagune-dark underline-offset-2 hover:underline"
+              className="text-lagune-panel-dark underline-offset-2 hover:underline"
             >
               En savoir plus
             </Link>
@@ -60,14 +61,14 @@ export default function CookieBanner() {
             <button
               type="button"
               onClick={() => choose("denied")}
-              className="flex-1 rounded-lg border border-ink/15 px-3 py-2 text-xs font-semibold text-ink transition-colors hover:bg-ink/5"
+              className="flex-1 rounded-lg border border-white/20 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-white/10"
             >
               Non merci
             </button>
             <button
               type="button"
               onClick={() => choose("granted")}
-              className="flex-1 rounded-lg bg-lagune px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-lagune-dark"
+              className="flex-1 rounded-lg bg-lagune-panel px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0973AC]"
             >
               J'accepte
             </button>
