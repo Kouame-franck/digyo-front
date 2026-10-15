@@ -7,6 +7,8 @@ import { useEffect, useRef, useState } from "react";
 // muette dès qu'elle est à moitié visible, un bouton propose d'activer le son. Elle se met
 // en pause quand on la fait défiler hors de l'écran et reprend au retour, sauf si le
 // visiteur l'a lui-même mise en pause.
+// Le bouton « Télécharger » du lecteur natif et le clic droit (« Enregistrer la vidéo sous »)
+// sont désactivés : simple frein, le fichier reste public sur le CDN.
 export default function BlogVideoPlayer({ src }) {
   const videoRef = useRef(null);
   const pausedByScroll = useRef(false);
@@ -58,6 +60,8 @@ export default function BlogVideoPlayer({ src }) {
           muted
           playsInline
           controls
+          controlsList="nodownload"
+          onContextMenu={(e) => e.preventDefault()}
           preload="metadata"
           onLoadedMetadata={(e) => {
             const { videoWidth, videoHeight } = e.currentTarget;

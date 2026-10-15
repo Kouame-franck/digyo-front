@@ -39,7 +39,15 @@ export default function BlogCover({
     return (
       <div className={`overflow-hidden bg-panel ${className}`}>
         {coverType === "video" ? (
-          <video src={image} className="h-full w-full object-cover" autoPlay muted loop playsInline />
+          <video
+            src={image}
+            className="h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            onContextMenu={(e) => e.preventDefault()}
+          />
         ) : (
           <img src={image} alt="" className="h-full w-full object-cover" />
         )}
