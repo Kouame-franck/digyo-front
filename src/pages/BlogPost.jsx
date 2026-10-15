@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import Button from "../components/Button";
 import BlogCover from "../components/BlogCover";
+import BlogVideoPlayer from "../components/BlogVideoPlayer";
 import PostReactions from "../components/PostReactions";
 import Seo from "../components/Seo";
 import { apiFetch } from "../lib/api";
@@ -117,14 +118,17 @@ export default function BlogPost() {
         </div>
       </section>
 
-      <BlogCover
-        icon={post.icon}
-        category={post.category}
-        image={post.image}
-        coverType={post.coverType}
-        videoMode="player"
-        className="aspect-[2.4/1] w-full md:aspect-[3/1]"
-      />
+      {post.image && post.coverType === "video" ? (
+        <BlogVideoPlayer src={post.image} />
+      ) : (
+        <BlogCover
+          icon={post.icon}
+          category={post.category}
+          image={post.image}
+          coverType={post.coverType}
+          className="aspect-[2.4/1] w-full md:aspect-[3/1]"
+        />
+      )}
 
       <section className="py-16">
         <div className="container-page max-w-3xl">

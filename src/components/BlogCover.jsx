@@ -24,15 +24,13 @@ const accentIconColor = {
   ambre: "text-ambre-dark",
 };
 
-// videoMode "preview" (par défaut, listes/vignettes) : lecture muette en boucle façon aperçu
-// animé. "player" (article ouvert) : contrôles natifs, pas d'autoplay -- c'est le contenu
-// principal de la page, pas une simple vignette décorative.
+// Vidéo en couverture (listes/vignettes) : lecture muette en boucle façon aperçu animé.
+// Dans l'article ouvert, la vidéo est servie par BlogVideoPlayer.
 export default function BlogCover({
   icon = "signal",
   category,
   image,
   coverType,
-  videoMode = "preview",
   className = "",
 }) {
   const accent = categoryAccent[category] || "lagune";
@@ -41,11 +39,7 @@ export default function BlogCover({
     return (
       <div className={`overflow-hidden bg-panel ${className}`}>
         {coverType === "video" ? (
-          videoMode === "player" ? (
-            <video src={image} className="h-full w-full object-cover" controls playsInline />
-          ) : (
-            <video src={image} className="h-full w-full object-cover" autoPlay muted loop playsInline />
-          )
+          <video src={image} className="h-full w-full object-cover" autoPlay muted loop playsInline />
         ) : (
           <img src={image} alt="" className="h-full w-full object-cover" />
         )}
