@@ -9,7 +9,7 @@ export default function PillarCard({ pillar, index }) {
   return (
     <div className="group flex flex-col overflow-hidden rounded-3xl bg-surface p-3 shadow-sm shadow-ink/5 ring-1 ring-ink/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-ink/10">
       <div className={`relative h-36 overflow-hidden rounded-2xl ${accent.fond}`}>
-        <span className={`absolute left-4 top-4 z-10 font-display text-xs font-bold ${accent.badge} flex h-7 w-7 items-center justify-center rounded-full`}>
+        <span className={`absolute left-4 top-4 z-10 font-display text-xs font-bold ${accent.badge} flex h-7 w-7 items-center justify-center rounded-md`}>
           {index + 1}
         </span>
         <img
@@ -28,7 +28,7 @@ export default function PillarCard({ pillar, index }) {
         </p>
         <Link
           to={`/services#${pillar.slug}`}
-          className={`mt-6 inline-flex w-fit items-center gap-1.5 rounded-full bg-ink/5 px-4 py-2 text-sm font-semibold text-ink transition-colors ${accent.survol}`}
+          className={`mt-6 inline-flex w-fit items-center gap-1.5 rounded-md bg-ink/5 px-4 py-2 text-sm font-semibold text-ink transition-colors ${accent.survol}`}
         >
           Voir les offres
           <svg viewBox="0 0 20 20" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="1.8">

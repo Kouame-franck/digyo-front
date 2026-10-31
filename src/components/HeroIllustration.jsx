@@ -26,7 +26,7 @@ export default function HeroIllustration() {
 
       {/* Badge croissance */}
       <div className="animate-float-delayed absolute bottom-4 left-0 flex -rotate-3 items-center gap-2 rounded-2xl bg-panel px-4 py-3 text-on-panel shadow-sm shadow-ink/10">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ambre/20 text-sm font-bold text-ambre">
+        <span className="flex h-8 w-8 items-center justify-center rounded-md bg-ambre/20 text-sm font-bold text-ambre">
           ↑
         </span>
         <div>

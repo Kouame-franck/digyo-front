@@ -43,7 +43,7 @@ export default function Recu() {
       <div className="container-page max-w-lg">
         {chargement && (
           <div className="rounded-3xl border border-ink/10 bg-surface p-8 text-center">
-            <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-lagune/30 border-t-lagune" />
+            <div className="mx-auto h-8 w-8 animate-spin rounded-md border-2 border-lagune/30 border-t-lagune" />
           </div>
         )}
 
@@ -61,7 +61,7 @@ export default function Recu() {
                 <div className="text-xs font-bold uppercase tracking-widest text-lagune-dark">digyo</div>
                 <h1 className="mt-1 font-display text-xl font-bold text-ink">Reçu de paiement</h1>
               </div>
-              <span className="shrink-0 rounded-full bg-lagune/10 px-3 py-1 text-xs font-semibold text-lagune-dark">
+              <span className="shrink-0 rounded-md bg-lagune/10 px-3 py-1 text-xs font-semibold text-lagune-dark">
                 Payé
               </span>
             </div>
@@ -106,7 +106,7 @@ export default function Recu() {
             <button
               type="button"
               onClick={() => window.print()}
-              className="mt-6 w-full rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/30 print:hidden"
+              className="mt-6 w-full rounded-md border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/30 print:hidden"
             >
               Imprimer / enregistrer en PDF
             </button>

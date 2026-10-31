@@ -50,7 +50,7 @@ export default function Services() {
                 <a
                   key={pillar.slug}
                   href={`#${pillar.slug}`}
-                  className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${accent.puce}`}
+                  className={`rounded-md px-4 py-2 text-sm font-semibold transition-colors ${accent.puce}`}
                 >
                   {pillar.name}
                 </a>

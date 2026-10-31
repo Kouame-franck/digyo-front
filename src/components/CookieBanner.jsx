@@ -68,7 +68,7 @@ export default function CookieBanner() {
             <button
               type="button"
               onClick={() => choose("granted")}
-              className="flex-1 rounded-lg bg-lagune-panel px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0973AC]"
+              className="flex-1 rounded-lg bg-[#097AB6] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#076495]"
             >
               J'accepte
             </button>

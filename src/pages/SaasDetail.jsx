@@ -97,7 +97,7 @@ const STYLES_PALIER = {
     icone: "etoile",
     ring: "shadow-xl shadow-lagune/20 ring-1 ring-lagune",
     badge: "bg-lagune text-white",
-    button: "bg-lagune text-white hover:bg-lagune-dark",
+    button: "bg-lagune text-white hover:bg-lagune-hover",
   },
   Pro: {
     degrade: "from-creation to-creation-dark",
@@ -105,7 +105,7 @@ const STYLES_PALIER = {
     headerText: "text-panel",
     ring: "shadow-xl shadow-creation/20 ring-1 ring-creation",
     badge: "bg-creation text-panel",
-    button: "bg-creation text-panel hover:bg-creation-dark",
+    button: "bg-creation text-panel hover:opacity-90",
   },
   Premium: {
     degrade: "from-ambre to-ambre-dark",
@@ -113,7 +113,7 @@ const STYLES_PALIER = {
     headerText: "text-panel",
     ring: "shadow-xl shadow-ambre/20 ring-1 ring-ambre",
     badge: "bg-ambre text-panel",
-    button: "bg-ambre text-panel hover:bg-ambre-dark",
+    button: "bg-ambre text-panel hover:opacity-90",
   },
 };
 const PALIER_DEFAUT = {
@@ -121,7 +121,7 @@ const PALIER_DEFAUT = {
   icone: "etoile",
   ring: "shadow-xl shadow-lagune/20 ring-1 ring-lagune",
   badge: "bg-lagune text-white",
-  button: "bg-lagune text-white hover:bg-lagune-dark",
+  button: "bg-lagune text-white hover:bg-lagune-hover",
 };
 
 const TRACES_ICONES = {
@@ -323,7 +323,7 @@ export default function SaasDetail() {
                 est mis en avant sur chaque carte (voir "ou ..." sous le prix principal), pour
                 rester vendeur sans jamais cacher d'information de prix. */}
             {hasPlans && (
-              <div className="mt-8 inline-flex items-center gap-1 rounded-full bg-ink/5 p-1">
+              <div className="mt-8 inline-flex items-center gap-1 rounded-md bg-ink/5 p-1">
                 <button
                   type="button"
                   onClick={() => setCycleAffiche("mensuel")}
@@ -341,7 +341,7 @@ export default function SaasDetail() {
                   }`}
                 >
                   Annuel
-                  <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${ACCENTS.saas.puce}`}>
+                  <span className={`rounded-md px-2 py-0.5 text-[10px] font-bold ${ACCENTS.saas.puce}`}>
                     2 mois offerts
                   </span>
                 </button>
@@ -361,7 +361,7 @@ export default function SaasDetail() {
                     </p>
                     <Link
                       to="/contact"
-                      className="mt-6 inline-flex items-center justify-center rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+                      className="mt-6 inline-flex items-center justify-center rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
                     >
                       Nous contacter
                     </Link>
@@ -421,7 +421,7 @@ export default function SaasDetail() {
                       <ul className={`space-y-3 ${plan.modules?.length ? "" : "flex-1"}`}>
                         {plan.features.map((feature) => (
                           <li key={feature} className="flex items-start gap-3 text-sm">
-                            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lagune/15">
+                            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-lagune/15">
                               <svg viewBox="0 0 20 20" className="h-3 w-3 text-lagune-dark" fill="none" stroke="currentColor" strokeWidth="3">
                                 <path d="M4 10l4 4 8-9" strokeLinecap="round" strokeLinejoin="round" />
                               </svg>
@@ -438,7 +438,7 @@ export default function SaasDetail() {
                           {plan.limits.map((limite) => (
                             <li key={limite.id} className="flex items-center justify-between gap-3 text-xs">
                               <span className="flex items-center gap-2 text-ink/55">
-                                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-ink/5">
+                                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-ink/5">
                                   <IconeLimite id={limite.id} className="h-3 w-3 text-ink/45" />
                                 </span>
                                 {limite.name}
@@ -481,7 +481,7 @@ export default function SaasDetail() {
                         type="button"
                         onClick={() => openSubscribe(plan.id)}
                         className={`mt-6 w-full rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
-                          plan.featured ? palier.button : "bg-lagune text-white hover:bg-lagune-dark"
+                          plan.featured ? palier.button : "bg-lagune text-white hover:bg-lagune-hover"
                         }`}
                       >
                         S'abonner
@@ -586,7 +586,7 @@ export default function SaasDetail() {
                   {heroHighlights.map((item, i) => (
                     <span
                       key={item}
-                      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold transition-colors ${CYCLE_PUCES[i % CYCLE_PUCES.length]}`}
+                      className={`inline-flex items-center rounded-md px-3 py-1 text-xs font-semibold transition-colors ${CYCLE_PUCES[i % CYCLE_PUCES.length]}`}
                     >
                       {item}
                     </span>
@@ -595,7 +595,7 @@ export default function SaasDetail() {
                 {product.highlights?.length > heroHighlights.length && (
                   <a
                     href="#fonctionnalites"
-                    className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-lagune-dark transition-colors hover:text-lagune"
+                    className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-lagune-dark transition-colors hover:text-lagune-dark"
                   >
                     Voir toutes les fonctionnalités
                     <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2">
@@ -611,7 +611,7 @@ export default function SaasDetail() {
                   <button
                     type="button"
                     onClick={() => openSubscribe(null)}
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+                    className="inline-flex items-center justify-center gap-2 rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
                   >
                     S'abonner à {product.name}
                   </button>
@@ -639,7 +639,7 @@ export default function SaasDetail() {
                   <button
                     type="button"
                     onClick={() => ouvrirDemo("fiche_produit")}
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/30"
+                    className="inline-flex items-center justify-center gap-2 rounded-md border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/30"
                   >
                     Tester gratuitement
                   </button>
@@ -725,7 +725,7 @@ export default function SaasDetail() {
                   {product.highlights.map((item, i) => (
                     <span
                       key={item}
-                      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold transition-colors ${CYCLE_PUCES[i % CYCLE_PUCES.length]}`}
+                      className={`inline-flex items-center rounded-md px-3 py-1 text-xs font-semibold transition-colors ${CYCLE_PUCES[i % CYCLE_PUCES.length]}`}
                     >
                       {item}
                     </span>

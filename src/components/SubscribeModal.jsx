@@ -205,7 +205,7 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
         type="button"
         onClick={handleClose}
         aria-label="Fermer"
-        className="absolute right-5 top-5 inline-flex h-8 w-8 items-center justify-center rounded-full text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
+        className="absolute right-5 top-5 inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
       >
         <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
           <path d="M5 5l10 10M15 5L5 15" strokeLinecap="round" />
@@ -233,7 +233,7 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
       {step === 0 && (
         <div className="mt-6 space-y-3">
           {cycleDisponible && (
-            <div className="flex rounded-full bg-ink/5 p-1">
+            <div className="flex rounded-md bg-ink/5 p-1">
               {[
                 { id: "mensuel", label: "Mensuel" },
                 { id: "annuel", label: "Annuel" },
@@ -287,7 +287,7 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
                 <div className="flex items-center gap-2">
                   <span className="font-display text-sm font-bold text-ink">{p.name}</span>
                   {p.featured && (
-                    <span className="inline-flex items-center rounded-full bg-lagune/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-lagune-dark">
+                    <span className="inline-flex items-center rounded-md bg-lagune/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-lagune-dark">
                       Populaire
                     </span>
                   )}
@@ -308,7 +308,7 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
           <button
             type="button"
             onClick={goNext}
-            className="mt-4 w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+            className="mt-4 w-full rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
           >
             Continuer avec {plan.name}
           </button>
@@ -389,14 +389,14 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
             <button
               type="button"
               onClick={goBack}
-              className="rounded-full border border-ink/20 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/50"
+              className="rounded-md border border-ink/20 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/50"
             >
               Retour
             </button>
             <button
               type="submit"
               disabled={checkingEmail}
-              className="flex-1 rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex-1 rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover disabled:cursor-not-allowed disabled:opacity-60"
             >
               {checkingEmail ? "Vérification..." : "Continuer"}
             </button>
@@ -441,7 +441,7 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
             <button
               type="button"
               onClick={goBack}
-              className="rounded-full border border-ink/20 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/50"
+              className="rounded-md border border-ink/20 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/50"
             >
               Retour
             </button>
@@ -449,7 +449,7 @@ export default function SubscribeModal({ open, onClose, product, plans, initialP
               type="button"
               disabled={submitting}
               onClick={PAYMENT_LIVE ? handlePay : () => setShowPaymentUnavailable(true)}
-              className="flex-1 rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex-1 rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover disabled:cursor-not-allowed disabled:opacity-60"
             >
               {submitting ? "Redirection…" : `Payer ${montantAffiche}`}
             </button>

@@ -155,7 +155,7 @@ function NavMenuItem({ to, label, transparent, isActive, Panel }) {
       <NavLink
         to={to}
         aria-expanded={open}
-        className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${navLinkClasses({ isActive, transparent })}`}
+        className={`flex items-center gap-1 rounded-md px-3.5 py-2 text-sm font-medium transition-colors ${navLinkClasses({ isActive, transparent })}`}
       >
         {label}
         <svg
@@ -251,7 +251,7 @@ export default function Header() {
                 key={link.to}
                 to={link.to}
                 end={link.to === "/"}
-                className={`rounded-full px-3.5 py-2 text-sm font-medium transition-colors ${navLinkClasses({ isActive, transparent })}`}
+                className={`rounded-md px-3.5 py-2 text-sm font-medium transition-colors ${navLinkClasses({ isActive, transparent })}`}
               >
                 {link.label}
               </NavLink>
@@ -321,7 +321,7 @@ export default function Header() {
             type="button"
             onClick={() => setOpen(false)}
             aria-label="Fermer"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
           >
             <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M5 5l10 10M15 5L5 15" strokeLinecap="round" />

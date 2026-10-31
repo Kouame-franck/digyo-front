@@ -19,7 +19,7 @@ export default function DiagnosticResult({ result, recommendationsLimit }) {
         </div>
       )}
       <div className="flex items-center gap-5 rounded-2xl border border-ink/10 bg-canvas p-5">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-lagune/10 font-display text-xl font-bold text-lagune-dark">
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-md bg-lagune/10 font-display text-xl font-bold text-lagune-dark">
           {result.score}
           <span className="text-xs font-semibold">/100</span>
         </div>
@@ -39,7 +39,7 @@ export default function DiagnosticResult({ result, recommendationsLimit }) {
               <span>{axis.score}/100</span>
             </div>
             <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-ink/10">
-              <div className="h-full rounded-full bg-lagune" style={{ width: `${axis.score}%` }} />
+              <div className="h-full rounded-md bg-lagune" style={{ width: `${axis.score}%` }} />
             </div>
           </div>
         ))}
@@ -55,7 +55,7 @@ export default function DiagnosticResult({ result, recommendationsLimit }) {
       <ul className="mt-3 space-y-3">
         {recommendations.map((rec) => (
           <li key={rec.priority} className="flex gap-3 rounded-xl bg-lagune/5 p-3.5 text-sm text-ink/80">
-            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lagune/15 text-xs font-bold text-lagune-dark">
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-lagune/15 text-xs font-bold text-lagune-dark">
               {rec.priority}
             </span>
             <div>

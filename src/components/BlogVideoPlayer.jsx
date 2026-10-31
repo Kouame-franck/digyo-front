@@ -73,7 +73,7 @@ export default function BlogVideoPlayer({ src }) {
           <button
             type="button"
             onClick={enableSound}
-            className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-black/60 px-3.5 py-2 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-black/75"
+            className="absolute left-3 top-3 inline-flex items-center gap-2 rounded-md bg-black/60 px-3.5 py-2 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-black/75"
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M11 5L6 9H2v6h4l5 4V5Z M23 9l-6 6 M17 9l6 6" />

@@ -199,7 +199,7 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
         type="button"
         onClick={onClose}
         aria-label="Fermer"
-        className="absolute right-5 top-5 inline-flex h-8 w-8 items-center justify-center rounded-full text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
+        className="absolute right-5 top-5 inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
       >
         <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
           <path d="M5 5l10 10M15 5L5 15" strokeLinecap="round" />
@@ -208,7 +208,7 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
 
       {step === "loading" && (
         <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
-          <span className="h-10 w-10 animate-spin rounded-full border-2 border-lagune/20 border-t-lagune" />
+          <span className="h-10 w-10 animate-spin rounded-md border-2 border-lagune/20 border-t-lagune" />
           <p className="font-display text-lg font-bold text-ink">Analyse de votre activité…</p>
           <p className="max-w-xs text-sm text-ink/60">
             Nous croisons vos réponses avec nos critères d'audit digital.
@@ -341,7 +341,7 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
                   type="checkbox"
                   checked={form.hasWebsite}
                   onChange={(e) => setForm((f) => ({ ...f, hasWebsite: e.target.checked }))}
-                  className="h-4 w-4 rounded border-ink/30 text-lagune focus:ring-lagune/30"
+                  className="h-4 w-4 rounded border-ink/30 text-lagune-dark focus:ring-lagune/30"
                 />
                 <span className="text-sm text-ink">Vous avez un site web</span>
               </label>
@@ -359,7 +359,7 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
                   type="checkbox"
                   checked={form.sellsOnline}
                   onChange={(e) => setForm((f) => ({ ...f, sellsOnline: e.target.checked }))}
-                  className="h-4 w-4 rounded border-ink/30 text-lagune focus:ring-lagune/30"
+                  className="h-4 w-4 rounded border-ink/30 text-lagune-dark focus:ring-lagune/30"
                 />
                 <span className="text-sm text-ink">Vous vendez déjà en ligne</span>
               </label>
@@ -480,7 +480,7 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:opacity-60"
+              className="w-full rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover disabled:opacity-60"
             >
               Lancer mon diagnostic rapide
             </button>
@@ -507,7 +507,7 @@ export default function QuickDiagnosticModal({ open, onClose, profile, onProfile
             <button
               type="button"
               onClick={handleViewAll}
-              className="mt-4 w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+              className="mt-4 w-full rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
             >
               Voir toutes les recommandations
             </button>

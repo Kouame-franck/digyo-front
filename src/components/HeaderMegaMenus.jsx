@@ -52,7 +52,7 @@ export function SaasMegaMenu() {
             <span>
               <span className="flex items-center gap-2">
                 <span className="font-display text-sm font-bold text-ink">{product.name}</span>
-                <span className="rounded-full bg-lagune/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-lagune-dark">
+                <span className="rounded-md bg-lagune/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-lagune-dark">
                   {product.status}
                 </span>
               </span>

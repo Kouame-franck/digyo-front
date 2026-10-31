@@ -69,7 +69,7 @@ export default function AuthModal({ open, initialTab = "login", onClose, onSucce
         type="button"
         onClick={handleClose}
         aria-label="Fermer"
-        className="absolute right-5 top-5 inline-flex h-8 w-8 items-center justify-center rounded-full text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
+        className="absolute right-5 top-5 inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
       >
         <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
           <path d="M5 5l10 10M15 5L5 15" strokeLinecap="round" />
@@ -85,7 +85,7 @@ export default function AuthModal({ open, initialTab = "login", onClose, onSucce
           : "Quelques informations pour créer votre accès."}
       </p>
 
-      <div className="mt-6 inline-flex rounded-full bg-ink/5 p-1">
+      <div className="mt-6 inline-flex rounded-md bg-ink/5 p-1">
         <button
           type="button"
           onClick={() => setTab("login")}
@@ -155,7 +155,7 @@ export default function AuthModal({ open, initialTab = "login", onClose, onSucce
           <button
             type="submit"
             disabled={submitting}
-            className="w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:opacity-60"
+            className="w-full rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover disabled:opacity-60"
           >
             {submitting ? "Connexion…" : "Se connecter"}
           </button>
@@ -199,7 +199,7 @@ export default function AuthModal({ open, initialTab = "login", onClose, onSucce
           <button
             type="submit"
             disabled={submitting}
-            className="w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:opacity-60"
+            className="w-full rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover disabled:opacity-60"
           >
             {submitting ? "Création…" : "Créer mon compte"}
           </button>

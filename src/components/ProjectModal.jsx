@@ -36,7 +36,7 @@ export default function ProjectModal({ open, onClose, onCreated }) {
         type="button"
         onClick={onClose}
         aria-label="Fermer"
-        className="absolute right-5 top-5 inline-flex h-8 w-8 items-center justify-center rounded-full text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
+        className="absolute right-5 top-5 inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
       >
         <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
           <path d="M5 5l10 10M15 5L5 15" strokeLinecap="round" />
@@ -117,7 +117,7 @@ export default function ProjectModal({ open, onClose, onCreated }) {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:opacity-60"
+          className="w-full rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover disabled:opacity-60"
         >
           {submitting ? "Envoi…" : "Soumettre le projet"}
         </button>

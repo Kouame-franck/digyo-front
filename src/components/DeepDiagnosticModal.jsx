@@ -248,7 +248,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
         type="button"
         onClick={onClose}
         aria-label="Fermer"
-        className="absolute right-5 top-5 inline-flex h-8 w-8 items-center justify-center rounded-full text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
+        className="absolute right-5 top-5 inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
       >
         <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
           <path d="M5 5l10 10M15 5L5 15" strokeLinecap="round" />
@@ -459,7 +459,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
                     type="checkbox"
                     checked={form.acceptPhysicalAudit}
                     onChange={(e) => setForm((f) => ({ ...f, acceptPhysicalAudit: e.target.checked }))}
-                    className="mt-0.5 h-4 w-4 rounded border-ink/30 text-lagune focus:ring-lagune/30"
+                    className="mt-0.5 h-4 w-4 rounded border-ink/30 text-lagune-dark focus:ring-lagune/30"
                   />
                   <span className="text-sm text-ink">
                     J'accepte qu'un audit physique soit réalisé sur place si notre équipe le juge
@@ -481,7 +481,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
                 <button
                   type="button"
                   onClick={goBack}
-                  className="rounded-full border border-ink/15 px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-ink/30"
+                  className="rounded-md border border-ink/15 px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-ink/30"
                 >
                   Précédent
                 </button>
@@ -492,7 +492,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
                 <button
                   type="button"
                   onClick={goNext}
-                  className="rounded-full bg-lagune px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+                  className="rounded-md bg-lagune px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
                 >
                   Suivant
                 </button>
@@ -500,7 +500,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:opacity-60"
+                  className="rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover disabled:opacity-60"
                 >
                   {submitting ? "Envoi…" : "Envoyer ma demande"}
                 </button>
@@ -512,7 +512,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
 
       {mode === "sent" && (
         <div className="flex flex-col items-center gap-4 py-10 text-center">
-          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-lagune/10 text-lagune-dark">
+          <span className="flex h-14 w-14 items-center justify-center rounded-md bg-lagune/10 text-lagune-dark">
             <svg viewBox="0 0 20 20" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M4 10.5l4 4 8-9" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -526,7 +526,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
           <button
             type="button"
             onClick={onClose}
-            className="mt-2 rounded-full bg-lagune px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+            className="mt-2 rounded-md bg-lagune px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
           >
             Fermer
           </button>
@@ -577,7 +577,7 @@ export default function DeepDiagnosticModal({ open, onClose, profile, onSubmitte
           <button
             type="button"
             onClick={onClose}
-            className="mt-6 w-full rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/30"
+            className="mt-6 w-full rounded-md border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/30"
           >
             Fermer
           </button>

@@ -149,7 +149,7 @@ export default function About() {
                     className="absolute left-5 top-10 h-full w-px -translate-x-1/2 bg-ink/15"
                   />
                 )}
-                <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-lagune-dark/30 bg-canvas font-display text-sm font-bold text-lagune-dark">
+                <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-lagune-dark/30 bg-canvas font-display text-sm font-bold text-lagune-dark">
                   {p.step}
                 </span>
                 <div className="pt-1">

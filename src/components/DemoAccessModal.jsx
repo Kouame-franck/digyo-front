@@ -53,7 +53,7 @@ export default function DemoAccessModal({ open, onClose, productName = "s-school
         type="button"
         onClick={onClose}
         aria-label="Fermer"
-        className="absolute right-5 top-5 inline-flex h-8 w-8 items-center justify-center rounded-full text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
+        className="absolute right-5 top-5 inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
       >
         <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
           <path d="M5 5l10 10M15 5L5 15" strokeLinecap="round" />
@@ -118,7 +118,7 @@ export default function DemoAccessModal({ open, onClose, productName = "s-school
             <button
               type="submit"
               disabled={envoi}
-              className="w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover disabled:cursor-not-allowed disabled:opacity-60"
             >
               {envoi ? "Un instant…" : "Accéder au compte test"}
             </button>
@@ -147,7 +147,7 @@ export default function DemoAccessModal({ open, onClose, productName = "s-school
               <button
                 type="button"
                 onClick={() => copier(acces.login, "login")}
-                className="shrink-0 rounded-full border border-ink/15 px-3 py-1.5 text-xs font-semibold text-ink/70 hover:border-ink/30"
+                className="shrink-0 rounded-md border border-ink/15 px-3 py-1.5 text-xs font-semibold text-ink/70 hover:border-ink/30"
               >
                 {copie === "login" ? "Copié" : "Copier"}
               </button>
@@ -162,7 +162,7 @@ export default function DemoAccessModal({ open, onClose, productName = "s-school
               <button
                 type="button"
                 onClick={() => copier(acces.password, "password")}
-                className="shrink-0 rounded-full border border-ink/15 px-3 py-1.5 text-xs font-semibold text-ink/70 hover:border-ink/30"
+                className="shrink-0 rounded-md border border-ink/15 px-3 py-1.5 text-xs font-semibold text-ink/70 hover:border-ink/30"
               >
                 {copie === "password" ? "Copié" : "Copier"}
               </button>
@@ -173,7 +173,7 @@ export default function DemoAccessModal({ open, onClose, productName = "s-school
             href={acces.url}
             target="_blank"
             rel="noreferrer"
-            className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+            className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
           >
             Me connecter à {productName}
           </a>

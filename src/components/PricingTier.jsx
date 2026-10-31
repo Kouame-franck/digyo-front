@@ -10,7 +10,7 @@ export default function PricingTier({ tier }) {
       }`}
     >
       {tier.featured && (
-        <span className="mb-3 inline-flex w-fit items-center rounded-full bg-lagune px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+        <span className="mb-3 inline-flex w-fit items-center rounded-md bg-lagune px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
           Le plus choisi
         </span>
       )}
@@ -46,7 +46,7 @@ export default function PricingTier({ tier }) {
         to="/contact"
         className={`mt-7 inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
           tier.featured
-            ? "bg-lagune text-white hover:bg-lagune-dark"
+            ? "bg-lagune text-white hover:bg-lagune-hover"
             : "bg-ink/5 text-ink hover:bg-ink/10"
         }`}
       >

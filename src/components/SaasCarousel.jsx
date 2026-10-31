@@ -72,7 +72,7 @@ export default function SaasCarousel({
             type="button"
             onClick={prev}
             aria-label="Image précédente"
-            className="absolute left-3 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-panel/60 text-on-panel backdrop-blur transition-colors hover:bg-panel/90"
+            className="absolute left-3 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md bg-panel/60 text-on-panel backdrop-blur transition-colors hover:bg-panel/90"
           >
             <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 4l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
@@ -82,7 +82,7 @@ export default function SaasCarousel({
             type="button"
             onClick={next}
             aria-label="Image suivante"
-            className="absolute right-3 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-panel/60 text-on-panel backdrop-blur transition-colors hover:bg-panel/90"
+            className="absolute right-3 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md bg-panel/60 text-on-panel backdrop-blur transition-colors hover:bg-panel/90"
           >
             <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M8 4l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />

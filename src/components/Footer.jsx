@@ -62,7 +62,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={s.label}
                   title={s.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-on-panel/10 text-on-panel/70 transition-colors hover:bg-lagune-panel hover:text-panel"
+                  className="flex h-9 w-9 items-center justify-center rounded-md bg-on-panel/10 text-on-panel/70 transition-colors hover:bg-lagune-panel hover:text-panel"
                 >
                   {Icon && <Icon className="h-4 w-4" />}
                 </a>

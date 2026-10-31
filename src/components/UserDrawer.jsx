@@ -63,7 +63,7 @@ export default function UserDrawer({ open, onClose }) {
             type="button"
             onClick={onClose}
             aria-label="Fermer"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
           >
             <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M5 5l10 10M15 5L5 15" strokeLinecap="round" />
@@ -117,14 +117,14 @@ export default function UserDrawer({ open, onClose }) {
           <Link
             to="/espace-client"
             onClick={onClose}
-            className="w-full rounded-full bg-lagune px-5 py-3 text-center text-sm font-semibold text-white shadow-sm shadow-lagune/30 transition-colors hover:bg-lagune-dark"
+            className="w-full rounded-md bg-lagune px-5 py-3 text-center text-sm font-semibold text-white shadow-sm shadow-lagune/30 transition-colors hover:bg-lagune-hover"
           >
             Espace client
           </Link>
           <button
             type="button"
             onClick={handleLogout}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-red-600 transition-colors hover:bg-red-50"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold text-red-600 transition-colors hover:bg-red-50"
           >
             <IconLogout className="h-4 w-4" />
             Se déconnecter

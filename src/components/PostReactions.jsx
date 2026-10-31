@@ -80,7 +80,7 @@ export default function PostReactions({ slug }) {
           <button
             type="submit"
             disabled={submitting}
-            className="mt-3 rounded-full bg-lagune px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-3 rounded-md bg-lagune px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover disabled:cursor-not-allowed disabled:opacity-60"
           >
             {submitting ? "Publication..." : "Publier"}
           </button>
@@ -92,7 +92,7 @@ export default function PostReactions({ slug }) {
           )}
           {comments.map((c) => (
             <li key={c.id} className="flex gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lagune/15 text-xs font-bold text-lagune-dark">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-lagune/15 text-xs font-bold text-lagune-dark">
                 {initialsFrom(c.name)}
               </span>
               <div>

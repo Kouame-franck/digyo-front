@@ -111,7 +111,7 @@ export default function SaasDeviceShowcase({
 
             {/* Haut-parleur et capteur */}
             <span className="absolute left-1/2 top-[3.3%] h-[0.55%] w-[18%] -translate-x-1/2 rounded-full bg-on-panel/30" />
-            <span className="absolute left-[63%] top-[3%] h-[1.15%] w-[2.5%] rounded-full bg-lagune/50 ring-1 ring-on-panel/20" />
+            <span className="absolute left-[63%] top-[3%] h-[1.15%] w-[2.5%] rounded-md bg-lagune/50 ring-1 ring-on-panel/20" />
 
             {/* Écran */}
             <div className="absolute inset-x-[4%] top-[6.5%] bottom-[8.5%] overflow-hidden rounded-[3%/1.4%] bg-black">
@@ -147,7 +147,7 @@ export default function SaasDeviceShowcase({
             type="button"
             onClick={precedent}
             aria-label="Image précédente"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
           >
             <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 4l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
@@ -172,7 +172,7 @@ export default function SaasDeviceShowcase({
             type="button"
             onClick={suivant}
             aria-label="Image suivante"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-md text-ink/50 transition-colors hover:bg-ink/5 hover:text-ink"
           >
             <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M8 4l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />

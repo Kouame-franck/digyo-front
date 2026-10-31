@@ -11,7 +11,7 @@ export default function DeepDiagnosticStatus({ profile, onOpen }) {
   return (
     <div className="mt-6 rounded-2xl border border-ink/10 p-5">
       {requested && (
-        <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium ${meta.badge}`}>
+        <span className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1 text-sm font-medium ${meta.badge}`}>
           <span className="h-1.5 w-1.5 rounded-full bg-current" />
           {meta.label}
         </span>
@@ -35,7 +35,7 @@ export default function DeepDiagnosticStatus({ profile, onOpen }) {
         <button
           type="button"
           onClick={onOpen}
-          className="w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+          className="w-full rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
         >
           Diagnostic approfondi
         </button>

@@ -127,7 +127,7 @@ export default function Contact() {
         <div className="rounded-3xl border border-ink/10 bg-surface p-8 md:p-10">
           {submitted ? (
             <div className="flex flex-col items-start gap-3 py-8">
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-lagune/10 text-lagune-dark">
+              <span className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-lagune/10 text-lagune-dark">
                 <svg viewBox="0 0 20 20" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M4 10l4 4 8-9" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -207,7 +207,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={sending}
-                className="w-full rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark disabled:cursor-not-allowed disabled:opacity-60"
+                className="w-full rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {sending ? "Envoi…" : "Envoyer le message"}
               </button>

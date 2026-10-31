@@ -54,7 +54,7 @@ export default function Saas() {
                       {p.name}
                     </h3>
                   </div>
-                  <span className="inline-flex shrink-0 items-center rounded-full bg-ambre/15 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide text-ambre-dark">
+                  <span className="inline-flex shrink-0 items-center rounded-md bg-ambre/15 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide text-ambre-dark">
                     {p.status}
                   </span>
                 </div>

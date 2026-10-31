@@ -98,7 +98,7 @@ export default function ReperesCarousel({ groupes }) {
                 <dl className="mt-3 space-y-3 md:mt-4 md:space-y-4">
                   {groupe.entrees.map((entree) => (
                     <div key={entree.terme} className="flex items-start gap-2.5">
-                      <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-lagune/10">
+                      <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-lagune/10">
                         <IconeRepere nom={entree.icone} className="h-3.5 w-3.5 text-lagune-dark" />
                       </span>
                       <div>

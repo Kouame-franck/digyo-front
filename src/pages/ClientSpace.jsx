@@ -96,7 +96,7 @@ export default function ClientSpace() {
             <div className="mt-8 overflow-hidden rounded-2xl border border-lagune/30 bg-gradient-to-r from-lagune/10 via-lagune/5 to-transparent p-6 sm:p-7">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-lagune font-display text-lg font-bold text-white">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-lagune font-display text-lg font-bold text-white">
                     {profile.quickScore}
                   </div>
                   <div>
@@ -109,7 +109,7 @@ export default function ClientSpace() {
                   </div>
                 </div>
                 <span
-                  className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide ${deepStatusMeta[profile.deepStatus].badge}`}
+                  className={`inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide ${deepStatusMeta[profile.deepStatus].badge}`}
                 >
                   {deepStatusMeta[profile.deepStatus].label}
                 </span>
@@ -153,7 +153,7 @@ export default function ClientSpace() {
               <button
                 type="button"
                 onClick={() => setQuickOpen(true)}
-                className="mt-4 rounded-full bg-lagune px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+                className="mt-4 rounded-md bg-lagune px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
               >
                 Lancer mon diagnostic rapide
               </button>
@@ -200,13 +200,13 @@ export default function ClientSpace() {
             <button
               type="button"
               onClick={() => setQuickOpen(true)}
-              className="rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+              className="rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
             >
               {profile ? "Modifier ma fiche" : "Diagnostic rapide"}
             </button>
             <Link
               to="/contact"
-              className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/30"
+              className="rounded-md border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/30"
             >
               Soumettre un projet
             </Link>
@@ -231,7 +231,7 @@ export default function ClientSpace() {
                       <div className="flex flex-wrap items-center gap-3">
                         <h3 className="font-display text-base font-bold text-ink">{p.title}</h3>
                         <span
-                          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide ${projectStatusStyles[p.status]}`}
+                          className={`inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide ${projectStatusStyles[p.status]}`}
                         >
                           {projectStatusLabels[p.status]}
                         </span>

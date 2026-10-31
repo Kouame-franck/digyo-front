@@ -4,7 +4,7 @@ const variants = {
   primary:
     "bg-panel text-on-panel hover:opacity-90 focus-visible:outline-panel",
   accent:
-    "bg-lagune text-white hover:bg-lagune-dark focus-visible:outline-lagune",
+    "bg-lagune text-white hover:bg-lagune-hover focus-visible:outline-lagune",
   ghost:
     "bg-transparent text-ink border border-ink/20 hover:border-ink/50 focus-visible:outline-ink",
   ghostLight:
@@ -20,7 +20,7 @@ export default function Button({
   children,
   ...props
 }) {
-  const classes = `inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${variants[variant]} ${className}`;
+  const classes = `inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${variants[variant]} ${className}`;
 
   if (to) {
     return (

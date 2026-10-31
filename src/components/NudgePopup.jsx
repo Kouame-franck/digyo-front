@@ -17,7 +17,7 @@ export default function NudgePopup({
 }) {
   const isAmbre = accent === "ambre";
   const ctaClassName = `mt-4 inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-semibold transition-colors ${
-    isAmbre ? "bg-ambre text-panel hover:bg-ambre-dark" : "bg-lagune text-white hover:bg-lagune-dark"
+    isAmbre ? "bg-ambre text-panel hover:opacity-90" : "bg-lagune text-white hover:bg-lagune-hover"
   }`;
   const ctaArrow = (
     <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -41,7 +41,7 @@ export default function NudgePopup({
           type="button"
           onClick={onDismiss}
           aria-label="Fermer"
-          className="absolute right-3 top-3 z-10 inline-flex h-7 w-7 items-center justify-center rounded-full text-ink/40 transition-colors hover:bg-ink/10 hover:text-ink"
+          className="absolute right-3 top-3 z-10 inline-flex h-7 w-7 items-center justify-center rounded-md text-ink/40 transition-colors hover:bg-ink/10 hover:text-ink"
         >
           <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M5 5l10 10M15 5L5 15" strokeLinecap="round" />

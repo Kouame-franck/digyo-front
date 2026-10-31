@@ -72,7 +72,7 @@ export default function SaasSignupConfirmation() {
         <div className="rounded-3xl border border-ink/10 bg-surface p-8 text-center">
           {statut === "chargement" && (
             <>
-              <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-lagune/30 border-t-lagune" />
+              <div className="mx-auto h-10 w-10 animate-spin rounded-md border-2 border-lagune/30 border-t-lagune" />
               <h1 className="mt-5 font-display text-xl font-bold text-ink">Vérification du paiement…</h1>
               <p className="mt-2 text-sm text-ink/60">
                 Merci de patienter, nous confirmons votre paiement électronique.
@@ -82,7 +82,7 @@ export default function SaasSignupConfirmation() {
 
           {statut === "paye" && (
             <>
-              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-lagune/10 text-lagune-dark">
+              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-md bg-lagune/10 text-lagune-dark">
                 <svg viewBox="0 0 20 20" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M4 10l4 4 8-9" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -108,7 +108,7 @@ export default function SaasSignupConfirmation() {
                     <button
                       type="button"
                       onClick={() => copier(resultat.admin.login, "login")}
-                      className="shrink-0 rounded-full border border-ink/15 px-3 py-1.5 text-xs font-semibold text-ink/70 hover:border-ink/30"
+                      className="shrink-0 rounded-md border border-ink/15 px-3 py-1.5 text-xs font-semibold text-ink/70 hover:border-ink/30"
                     >
                       {copie === "login" ? "Copié" : "Copier"}
                     </button>
@@ -123,7 +123,7 @@ export default function SaasSignupConfirmation() {
                     <button
                       type="button"
                       onClick={() => copier(resultat.admin.password, "password")}
-                      className="shrink-0 rounded-full border border-ink/15 px-3 py-1.5 text-xs font-semibold text-ink/70 hover:border-ink/30"
+                      className="shrink-0 rounded-md border border-ink/15 px-3 py-1.5 text-xs font-semibold text-ink/70 hover:border-ink/30"
                     >
                       {copie === "password" ? "Copié" : "Copier"}
                     </button>
@@ -146,7 +146,7 @@ export default function SaasSignupConfirmation() {
 
               <a
                 href="https://sschool.digyo.pro"
-                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+                className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
               >
                 Me connecter à s-school
               </a>
@@ -173,7 +173,7 @@ export default function SaasSignupConfirmation() {
               {product && (
                 <Link
                   to={`/saas/${product.slug}#tarifs`}
-                  className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+                  className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
                 >
                   Réessayer
                 </Link>
@@ -190,7 +190,7 @@ export default function SaasSignupConfirmation() {
               </p>
               <Link
                 to="/contact"
-                className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-dark"
+                className="mt-6 inline-flex w-full items-center justify-center rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-lagune-hover"
               >
                 Nous contacter
               </Link>

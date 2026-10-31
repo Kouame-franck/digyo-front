@@ -19,7 +19,7 @@ import {
 
 function Coche({ className = "" }) {
   return (
-    <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lagune/15 ${className}`}>
+    <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-lagune/15 ${className}`}>
       <svg viewBox="0 0 20 20" className="h-3 w-3 text-lagune-dark" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden="true">
         <path d="M4 10l4 4 8-9" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
@@ -85,7 +85,7 @@ export default function SSchoolLanding({ product, onDemo, tarifs, faq }) {
     <button
       type="button"
       onClick={() => onDemo(emplacement)}
-      className={`inline-flex items-center justify-center gap-2 rounded-full bg-lagune px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-lagune/25 transition-colors hover:bg-lagune-dark ${classe}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-md bg-lagune px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-lagune/25 transition-colors hover:bg-lagune-hover ${classe}`}
     >
       Tester gratuitement
       <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -99,7 +99,7 @@ export default function SSchoolLanding({ product, onDemo, tarifs, faq }) {
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-ink/10 bg-surface">
         <div
-          className="pointer-events-none absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-lagune/10 blur-3xl"
+          className="pointer-events-none absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-md bg-lagune/10 blur-3xl"
           aria-hidden="true"
         />
         <div className="container-page relative pb-16 pt-12 md:pt-20">
@@ -297,7 +297,7 @@ export default function SSchoolLanding({ product, onDemo, tarifs, faq }) {
             <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {product.howItWorks.map((step, i) => (
                 <li key={step.title} className="relative rounded-2xl border border-ink/10 bg-surface p-6">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-lagune font-display text-sm font-bold text-white">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-md bg-lagune font-display text-sm font-bold text-white">
                     {i + 1}
                   </span>
                   <h3 className="mt-4 font-display text-base font-bold text-ink">{step.title}</h3>
@@ -341,14 +341,14 @@ export default function SSchoolLanding({ product, onDemo, tarifs, faq }) {
         <div className="container-page">
           {/* Bleus de marque fixes : lagune s'éclaircit en thème sombre et rendrait le texte blanc illisible. */}
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0C4A6E] to-[#093853] px-6 py-14 text-center text-white md:px-16">
-            <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" aria-hidden="true" />
+            <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-md bg-white/10 blur-3xl" aria-hidden="true" />
             <h2 className="relative font-display text-2xl font-bold md:text-4xl">{appelFinal.titre}</h2>
             <p className="relative mx-auto mt-4 max-w-xl text-white/80">{appelFinal.texte}</p>
             <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <button
                 type="button"
                 onClick={() => onDemo("landing_bas")}
-                className="w-full rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#0C4A6E] transition-colors hover:bg-white/90 sm:w-auto"
+                className="w-full rounded-md bg-white px-6 py-3 text-sm font-semibold text-[#0C4A6E] transition-colors hover:bg-white/90 sm:w-auto"
               >
                 Tester gratuitement
               </button>
