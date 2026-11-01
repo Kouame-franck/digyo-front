@@ -22,8 +22,7 @@ const STATIC_ROUTES = [
   { path: "/politique-de-confidentialite", changefreq: "yearly", priority: "0.2" },
 ];
 
-// Synchronisé à la main avec data/saas.js — à compléter le jour
-// où un deuxième SaaS est ajouté au catalogue.
+// Synchronisé à la main avec data/saas.js — à compléter à chaque SaaS ajouté au catalogue.
 const SAAS_SLUGS = ["s-school", "digyo-pos"];
 
 async function fetchBlogSlugs() {
