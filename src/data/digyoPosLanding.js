@@ -3,7 +3,7 @@
 
 export const hero = {
   badge: "Caisse & stock",
-  titre: "La caisse et le stock de vos boutiques, même quand internet coupe",
+  titre: "Encaissez plus vite, gardez la main sur votre stock",
   sousTitre:
     "digyo-pos encaisse vite, suit chaque article de la réception à la vente et vous donne vos chiffres en temps réel, boutique par boutique.",
   rassurance: ["Caisse hors ligne", "Mobile Money intégré", "Plusieurs boutiques", "Installation et formation sur place"],

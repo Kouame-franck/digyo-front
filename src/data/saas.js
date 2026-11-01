@@ -193,7 +193,8 @@ export const saasProducts = [
     url: "https://pos.digyo.pro",
     operatingSystem: "Windows, Web",
     // Captures d'une supérette fictive (base vitrine locale, 01/11/2026).
-    images: ["/digyo-pos/caisse-tactile.webp", "/digyo-pos/tableau-de-bord.webp", "/digyo-pos/ventes.webp"],
+    // Illustration du poste complet (écran, douchette, imprimante, tiroir) puis captures réelles.
+    images: [{ src: "/digyo-pos/poste-caisse.webp", contain: true }, "/digyo-pos/caisse-tactile.webp", "/digyo-pos/tableau-de-bord.webp", "/digyo-pos/ventes.webp"],
     audience: "Supérettes, librairies-papeteries, quincailleries, boutiques de cosmétiques, pharmacies et parapharmacies, magasins multi-sites.",
     features: [
       { title: "Caisse rapide", description: "Lecteur de codes-barres, écran tactile, paiements multiples et ticket imprimé." },

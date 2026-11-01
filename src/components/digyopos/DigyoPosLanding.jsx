@@ -112,7 +112,15 @@ export default function DigyoPosLanding({ faq }) {
               ))}
             </ul>
           </div>
-          <Capture src="/digyo-pos/caisse-tactile.webp" alt="Caisse tactile digyo-pos avec un ticket en cours" legende="digyo-pos Caisse" />
+          {/* Poste complet : écran tactile (vraie capture « Vente enregistrée » avec l'aperçu du ticket),
+              douchette, imprimante thermique en train d'imprimer, tiroir-caisse. Fond transparent. */}
+          <img
+            src="/digyo-pos/poste-caisse.webp"
+            alt="Poste de caisse digyo-pos : écran tactile affichant une vente enregistrée et son ticket, lecteur de codes-barres, imprimante de tickets et tiroir-caisse"
+            width="1560"
+            height="1000"
+            className="block h-auto w-full"
+          />
         </div>
       </section>
 

@@ -55,15 +55,21 @@ export default function SaasCarousel({
         className="flex h-full transition-transform duration-500 ease-out"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
-        {images.map((src, i) => (
-          <img
-            key={src}
-            src={src}
-            alt={`Aperçu ${i + 1}`}
-            className="h-full w-full shrink-0 object-cover"
-            draggable="false"
-          />
-        ))}
+        {/* Une image est une URL (capture, recadrée pour remplir) ou { src, contain } pour une
+            illustration à fond transparent, montrée en entier sur un fond doux. */}
+        {images.map((img, i) => {
+          const src = typeof img === "string" ? img : img.src;
+          const entiere = typeof img === "object" && img.contain;
+          return (
+            <img
+              key={src}
+              src={src}
+              alt={`Aperçu ${i + 1}`}
+              className={`h-full w-full shrink-0 ${entiere ? "bg-[#eef5f7] object-contain p-3" : "object-cover"}`}
+              draggable="false"
+            />
+          );
+        })}
       </div>
 
       {controls && images.length > 1 && (
