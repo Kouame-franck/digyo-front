@@ -177,6 +177,76 @@ export const saasProducts = [
       },
     ],
   },
+  {
+    slug: "digyo-pos",
+    name: "digyo-pos",
+    tagline:
+      "La caisse et le stock de vos boutiques, même quand internet coupe. digyo-pos encaisse vite (lecteur de codes-barres, écran tactile, Mobile Money), suit chaque article de la réception à la vente et vous donne vos chiffres en temps réel, boutique par boutique.",
+    description:
+      "Logiciel de caisse et de gestion de stock pour commerces : vente rapide, caisse hors ligne, inventaires, achats, multi-boutiques et rapports.",
+    longDescription:
+      "digyo-pos réunit la caisse, le stock, les achats et les rapports de vos boutiques dans un seul outil : une appli de caisse Windows qui continue de vendre sans internet, et un espace de gestion en ligne pour piloter votre activité de partout.",
+    category: "Commerce & distribution",
+    status: "Disponible",
+    icon: "caisse",
+    accent: "lagune",
+    url: "https://pos.digyo.pro",
+    operatingSystem: "Windows, Web",
+    // Captures d'une supérette fictive (base vitrine locale, 01/11/2026).
+    images: ["/digyo-pos/caisse-tactile.webp", "/digyo-pos/tableau-de-bord.webp", "/digyo-pos/ventes.webp"],
+    audience: "Supérettes, librairies-papeteries, quincailleries, boutiques de cosmétiques, pharmacies et parapharmacies, magasins multi-sites.",
+    features: [
+      { title: "Caisse rapide", description: "Lecteur de codes-barres, écran tactile, paiements multiples et ticket imprimé." },
+      { title: "Caisse hors ligne", description: "Les ventes continuent sans internet et partent seules au retour du réseau." },
+      { title: "Stock en temps réel", description: "Chaque vente, réception, perte ou inventaire met le stock à jour." },
+      { title: "Achats & fournisseurs", description: "Bons de commande, réceptions et coût moyen d'achat calculé automatiquement." },
+      { title: "Plusieurs boutiques", description: "Stock par boutique, transferts entre boutiques, chiffres par point de vente." },
+      { title: "Rapports & exports", description: "Ventes, marges, stock, caisse : exports Excel et PDF en un clic." },
+    ],
+    howItWorks: [
+      { title: "Démonstration", description: "Nous vous montrons digyo-pos sur un cas proche du vôtre et établissons votre devis." },
+      { title: "Votre catalogue", description: "Import de vos articles depuis Excel, codes-barres et étiquettes, stock de départ." },
+      { title: "Installation des caisses", description: "Appli installée sur vos postes, imprimante et tiroir testés, caisses appairées." },
+      { title: "Formation & suivi", description: "Caissiers et gérants formés sur place, suivi rapproché les premières semaines." },
+    ],
+    faq: [
+      {
+        question: "Que se passe-t-il si internet coupe ?",
+        answer:
+          "La caisse continue de fonctionner : les caissiers se connectent avec leur code PIN, vendent, appliquent les promotions et encaissent normalement. Les ventes sont gardées sur le poste et envoyées automatiquement au retour du réseau, jusqu'à 72 heures sans connexion.",
+      },
+      {
+        question: "Quel matériel faut-il ?",
+        answer:
+          "Un ordinateur sous Windows 10 ou 11 (64 bits) par caisse. Lecteur de codes-barres USB, imprimante de tickets 58 ou 80 mm, tiroir-caisse et écran tactile sont pris en charge, mais aucun n'est obligatoire. La gestion se fait depuis n'importe quel navigateur.",
+      },
+      {
+        question: "Mes articles n'ont pas de code-barres, est-ce un problème ?",
+        answer:
+          "Non. digyo-pos génère des codes internes et imprime les étiquettes (planches A4 ou rouleau). Les articles sans étiquette se vendent aussi en un geste depuis les tuiles de la caisse tactile.",
+      },
+      {
+        question: "Puis-je reprendre mon catalogue existant ?",
+        answer:
+          "Oui. Vos articles s'importent depuis un fichier Excel ou CSV : désignation, prix, codes-barres, catégories et stock de départ.",
+      },
+      {
+        question: "Quels moyens de paiement sont gérés ?",
+        answer:
+          "Espèces avec calcul du rendu, Wave, Orange Money, MTN MoMo, Moov Money et carte bancaire, y compris plusieurs moyens sur un même ticket.",
+      },
+      {
+        question: "Combien coûte digyo-pos ?",
+        answer:
+          "Le prix dépend du nombre de boutiques, de caisses et des modules dont vous avez besoin. Demandez une démonstration : nous établissons un devis adapté à votre commerce.",
+      },
+      {
+        question: "L'appli de caisse est-elle gratuite à télécharger ?",
+        answer:
+          "Oui, le téléchargement est libre. Pour l'utiliser, il faut un compte digyo-pos : chaque poste est relié à votre entreprise par un code d'appairage créé dans votre espace de gestion.",
+      },
+    ],
+  },
   // {
   //   slug: "saas-2",
   //   name: "Nom du SaaS 2",

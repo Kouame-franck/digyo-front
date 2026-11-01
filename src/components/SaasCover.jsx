@@ -2,6 +2,9 @@ const icons = {
   graduation: (
     <path d="M4 10l8-4 8 4-8 4-8-4Z M8 12v4.5c0 1.4 1.8 2.5 4 2.5s4-1.1 4-2.5V12 M20 10v6" />
   ),
+  caisse: (
+    <path d="M5 9h14v10H5z M8 9V5h8v4 M8 13h2 M12 13h4 M8 16h8" />
+  ),
   grid: (
     <path d="M4 4h6v6H4z M14 4h6v6h-6z M4 14h6v6H4z M14 14h6v6h-6z" />
   ),

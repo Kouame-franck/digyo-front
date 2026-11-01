@@ -8,6 +8,7 @@ import SubscribeModal from "../components/SubscribeModal";
 import DemoAccessModal from "../components/DemoAccessModal";
 import Seo from "../components/Seo";
 import SSchoolLanding from "../components/sschool/SSchoolLanding";
+import DigyoPosLanding from "../components/digyopos/DigyoPosLanding";
 import { getSaasBySlug, saasProducts } from "../data/saas";
 import { ACCENTS } from "../data/pillarAccents";
 import { apiFetch } from "../lib/api";
@@ -526,7 +527,7 @@ export default function SaasDetail() {
     name: product.name,
     description: product.description,
     applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
+    operatingSystem: product.operatingSystem || "Web",
     url: `https://digyo.pro/saas/${product.slug}`,
   };
 
@@ -547,6 +548,8 @@ export default function SaasDetail() {
           tarifs={sectionTarifs}
           faq={sectionFaq}
         />
+      ) : product.slug === "digyo-pos" ? (
+        <DigyoPosLanding faq={sectionFaq} />
       ) : (
         <>
         <section className="border-b border-ink/10 bg-surface">

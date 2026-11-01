@@ -26,6 +26,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://digyo.pro/saas/digyo-pos</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://digyo.pro/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
