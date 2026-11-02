@@ -51,6 +51,18 @@ function Capture({ src, alt, legende, className = "" }) {
   );
 }
 
+// Capture d'ordinateur avec un téléphone posé devant, débordant en bas à droite (vraie capture mobile).
+function CaptureEtTelephone({ src, alt, telephone, telephoneAlt, className = "" }) {
+  return (
+    <div className={`relative pb-16 pr-4 sm:pb-20 sm:pr-6 ${className}`}>
+      <Capture src={src} alt={alt} />
+      <div className="absolute bottom-0 right-0 w-[34%] max-w-52 rounded-[1.6rem] bg-gradient-to-br from-[#2a3642] to-[#0d141b] p-1.5 shadow-2xl shadow-ink/40 ring-1 ring-white/15">
+        <img src={telephone} alt={telephoneAlt} loading="lazy" width="780" height="1545" className="block h-auto w-full rounded-[1.25rem]" />
+      </div>
+    </div>
+  );
+}
+
 const ICONES_PROBLEMES = [
   "M4 6h12v10H4z M4 9h12 M8 12h4",
   "M3 8a10 10 0 0114 0 M6 11a6 6 0 018 0 M9 14h2 M3 3l14 14",
@@ -112,11 +124,12 @@ export default function DigyoPosLanding({ faq }) {
               ))}
             </ul>
           </div>
-          {/* Poste complet : écran tactile (vraie capture « Vente enregistrée » avec l'aperçu du ticket),
-              douchette, imprimante thermique en train d'imprimer, tiroir-caisse. Fond transparent. */}
+          {/* Poste complet : terminal POS tactile (vraie capture « Vente enregistrée » avec l'aperçu du ticket),
+              douchette, imprimante thermique en train d'imprimer, tiroir-caisse. Fond transparent.
+              Source : partage/prospection-digyo/plaquette-digyo-pos/source/scene-pos.html. */}
           <img
-            src="/digyo-pos/poste-caisse.webp"
-            alt="Poste de caisse digyo-pos : écran tactile affichant une vente enregistrée et son ticket, lecteur de codes-barres, imprimante de tickets et tiroir-caisse"
+            src="/digyo-pos/poste-caisse-tactile.webp"
+            alt="Poste de caisse digyo-pos : terminal tactile affichant une vente enregistrée et son ticket, lecteur de codes-barres, imprimante de tickets et tiroir-caisse"
             width="1560"
             height="1000"
             className="block h-auto w-full"
@@ -170,7 +183,11 @@ export default function DigyoPosLanding({ faq }) {
                     ))}
                   </ul>
                 </div>
-                <Capture src={f.image} alt={f.alt} className={i % 2 ? "lg:order-1" : ""} />
+                {f.telephone ? (
+                  <CaptureEtTelephone src={f.image} alt={f.alt} telephone={f.telephone} telephoneAlt={f.telephoneAlt} className={i % 2 ? "lg:order-1" : ""} />
+                ) : (
+                  <Capture src={f.image} alt={f.alt} className={i % 2 ? "lg:order-1" : ""} />
+                )}
               </div>
             </Reveal>
           ))}
@@ -210,8 +227,8 @@ export default function DigyoPosLanding({ faq }) {
         <div className="container-page">
           <div className="max-w-2xl">
             <Surtitre>Matériel</Surtitre>
-            <h2 className="mt-3 font-display text-2xl font-bold text-ink md:text-4xl">Avec le matériel du commerce</h2>
-            <p className="mt-3 text-ink/70">Aucun équipement propriétaire : digyo-pos fonctionne avec du matériel courant, et rien n'est obligatoire à part l'ordinateur.</p>
+            <h2 className="mt-3 font-display text-2xl font-bold text-ink md:text-4xl">Avec votre matériel, ou celui que nous vous livrons</h2>
+            <p className="mt-3 text-ink/70">Aucun équipement propriétaire : digyo-pos fonctionne avec du matériel courant, et seul le poste de caisse est indispensable.</p>
           </div>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {materiel.map((m, i) => (
@@ -223,6 +240,15 @@ export default function DigyoPosLanding({ faq }) {
                 <p className="mt-2 text-sm leading-relaxed text-ink/65">{m.texte}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-5 flex flex-col gap-5 rounded-2xl bg-lagune/10 p-6 md:flex-row md:items-center md:justify-between md:p-8">
+            <div className="max-w-2xl">
+              <h3 className="font-display text-lg font-bold text-ink">Pas encore équipé ? Possibilité de livraison avec le matériel</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink/70">
+                Dites-nous combien de caisses vous souhaitez ouvrir : nous intégrons le matériel à votre devis et nous vous le livrons avec le logiciel.
+              </p>
+            </div>
+            {boutonDemo("w-full shrink-0 md:w-auto", "materiel")}
           </div>
         </div>
       </section>
@@ -241,7 +267,7 @@ export default function DigyoPosLanding({ faq }) {
           <div className="rounded-2xl border border-ink/10 bg-canvas p-6 md:p-8">
             <p className="text-sm font-semibold text-ink">Votre devis précise :</p>
             <ul className="mt-4 space-y-3">
-              {["Le nombre de boutiques et de caisses", "Les modules retenus", "L'installation et la formation sur place", "L'abonnement et la maintenance"].map((t) => (
+              {["Le nombre de boutiques et de caisses", "Les modules retenus", "L'installation et la formation sur place", "Le matériel, si vous souhaitez être livré", "L'abonnement et la maintenance"].map((t) => (
                 <li key={t} className="flex items-start gap-3 text-sm text-ink/75">
                   <Coche />
                   {t}

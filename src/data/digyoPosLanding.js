@@ -6,7 +6,7 @@ export const hero = {
   titre: "Encaissez plus vite, gardez la main sur votre stock",
   sousTitre:
     "digyo-pos encaisse vite, suit chaque article de la réception à la vente et vous donne vos chiffres en temps réel, boutique par boutique.",
-  rassurance: ["Caisse hors ligne", "Mobile Money intégré", "Plusieurs boutiques", "Installation et formation sur place"],
+  rassurance: ["Caisse hors ligne", "Vos chiffres sur mobile", "Mobile Money intégré", "Plusieurs boutiques", "Installation et formation sur place", "Livraison du matériel possible"],
 };
 
 export const problemes = {
@@ -62,6 +62,22 @@ export const phares = [
     ],
     image: "/digyo-pos/tableau-de-bord.webp",
     alt: "Tableau de bord de digyo-pos",
+  },
+  {
+    surtitre: "Sur mobile",
+    titre: "Vos chiffres partout, jusque sur votre téléphone",
+    texte:
+      "En déplacement ou à la maison, ouvrez votre espace de gestion sur votre téléphone et voyez où en sont vos boutiques. Il n'y a rien à installer : le navigateur suffit.",
+    points: [
+      "Ventes du jour, tickets et panier moyen",
+      "Valeur du stock et alertes de rupture",
+      "Rapports et ventes, boutique par boutique",
+      "Aussi sur tablette et sur ordinateur",
+    ],
+    image: "/digyo-pos/ventes.webp",
+    alt: "Écran Ventes de digyo-pos sur ordinateur",
+    telephone: "/digyo-pos/mobile-tableau-de-bord.webp",
+    telephoneAlt: "Tableau de bord de digyo-pos affiché sur un téléphone : ventes du jour, tickets, valeur du stock et alertes",
   },
 ];
 
@@ -127,7 +143,7 @@ export const categories = [
 ];
 
 export const materiel = [
-  { titre: "Ordinateur Windows", texte: "Windows 10 ou 11, 64 bits. Un par caisse." },
+  { titre: "Caisse tactile ou ordinateur", texte: "Sous Windows 10 ou 11, 64 bits. Un poste par caisse." },
   { titre: "Lecteur de codes-barres", texte: "Tout lecteur USB ou sans fil qui saisit le code puis « Entrée »." },
   { titre: "Imprimante de tickets", texte: "Thermique 58 ou 80 mm, installée dans Windows." },
   { titre: "Tiroir-caisse", texte: "Relié à l'imprimante de tickets ou au réseau." },

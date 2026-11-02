@@ -194,7 +194,7 @@ export const saasProducts = [
     operatingSystem: "Windows, Web",
     // Captures d'une supérette fictive (base vitrine locale, 01/11/2026).
     // Illustration du poste complet (écran, douchette, imprimante, tiroir) puis captures réelles.
-    images: [{ src: "/digyo-pos/poste-caisse.webp", contain: true }, "/digyo-pos/caisse-tactile.webp", "/digyo-pos/tableau-de-bord.webp", "/digyo-pos/ventes.webp"],
+    images: [{ src: "/digyo-pos/poste-caisse-tactile.webp", contain: true }, "/digyo-pos/caisse-tactile.webp", "/digyo-pos/tableau-de-bord.webp", "/digyo-pos/ventes.webp"],
     audience: "Supérettes, librairies-papeteries, quincailleries, boutiques de cosmétiques, pharmacies et parapharmacies, magasins multi-sites.",
     features: [
       { title: "Caisse rapide", description: "Lecteur de codes-barres, écran tactile, paiements multiples et ticket imprimé." },
@@ -219,7 +219,12 @@ export const saasProducts = [
       {
         question: "Quel matériel faut-il ?",
         answer:
-          "Un ordinateur sous Windows 10 ou 11 (64 bits) par caisse. Lecteur de codes-barres USB, imprimante de tickets 58 ou 80 mm, tiroir-caisse et écran tactile sont pris en charge, mais aucun n'est obligatoire. La gestion se fait depuis n'importe quel navigateur.",
+          "Une caisse tactile ou un ordinateur sous Windows 10 ou 11 (64 bits) par caisse. Lecteur de codes-barres USB, imprimante de tickets 58 ou 80 mm et tiroir-caisse sont pris en charge, mais aucun n'est obligatoire. Vous n'êtes pas encore équipé ? Nous pouvons vous livrer le matériel avec le logiciel.",
+      },
+      {
+        question: "Puis-je consulter mes chiffres depuis mon téléphone ?",
+        answer:
+          "Oui. Votre espace de gestion s'ouvre dans le navigateur de votre téléphone, sans rien installer : ventes du jour, valeur du stock, alertes de rupture et rapports, boutique par boutique.",
       },
       {
         question: "Mes articles n'ont pas de code-barres, est-ce un problème ?",
