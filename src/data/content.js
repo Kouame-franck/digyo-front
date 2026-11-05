@@ -361,6 +361,7 @@ export const partners = [
 export const contactInfo = {
   email: "contact@digyo.pro",
   city: "Abidjan, Côte d'Ivoire",
+  address: "Abidjan, Cocody Angré, à 100 m du nouveau CHU, Côte d'Ivoire",
   socials: [
     { label: "Facebook", href: "https://www.facebook.com/share/1Hkh662BXN/" },
     { label: "Instagram", href: "https://www.instagram.com/digyo.ci?igsi=MWM4ODRjczdiNWJ6Zg==" },

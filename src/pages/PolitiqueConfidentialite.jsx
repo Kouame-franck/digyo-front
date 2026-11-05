@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { contactInfo } from "../data/content";
-import LegalPlaceholder from "../components/LegalPlaceholder";
 import Seo from "../components/Seo";
 import { openConsentBanner } from "../lib/analytics";
 
@@ -34,10 +33,10 @@ export default function PolitiqueConfidentialite() {
               <p className="mt-3">
                 Le responsable du traitement des données collectées sur le Site est&nbsp;:
                 <br />
-                <LegalPlaceholder>DIGYO</LegalPlaceholder>, société de
-                droit ivoirien immatriculée sous le n° RCCM{" "}
-                <LegalPlaceholder>[__]</LegalPlaceholder>, dont le siège social est situé{" "}
-                <LegalPlaceholder>[__]</LegalPlaceholder>, {contactInfo.city}
+                DIGYO, société à responsabilité limitée unipersonnelle (SARLU) au capital de
+                1&nbsp;000&nbsp;000 FCFA, immatriculée au RCCM d'Abidjan sous le n°
+                CI-ABJ-03-2026-B13-14797, NCC 2606628 F, située {contactInfo.address}, représentée par
+                son gérant, M. KOUAME Kouadio Franck Hervé
                 . Voir aussi nos{" "}
                 <Link to="/mentions-legales" className="text-lagune-dark hover:underline">
                   mentions légales
@@ -121,10 +120,7 @@ export default function PolitiqueConfidentialite() {
                 sous-traitants techniques, dans la stricte limite de leurs missions&nbsp;:
               </p>
               <ul className="mt-3 list-disc space-y-1.5 pl-5">
-                <li>
-                  notre hébergeur —{" "}
-                  <LegalPlaceholder>Hostinger</LegalPlaceholder> ;
-                </li>
+                <li>notre hébergeur, Hostinger International Ltd (Chypre) ;</li>
                 <li>
                   Google LLC, pour l'authentification via Google Sign-In et, si vous l'acceptez,
                   la mesure d'audience (Google Analytics) ;
@@ -184,7 +180,7 @@ export default function PolitiqueConfidentialite() {
             <div>
               <h2 className="font-display text-xl font-bold text-ink">6. Transferts hors de Côte d'Ivoire</h2>
               <p className="mt-3">
-                Certains de nos prestataires (Google, KadevPay) peuvent traiter des données en
+                Certains de nos prestataires (Hostinger, Google, KadevPay) peuvent traiter des données en
                 dehors de la Côte d'Ivoire. Dans ce cas, nous nous assurons que ces transferts
                 s'appuient sur des garanties appropriées (clauses contractuelles, certification du
                 prestataire) offrant un niveau de protection adéquat à vos données.
@@ -256,12 +252,13 @@ export default function PolitiqueConfidentialite() {
                 <a href={`mailto:${contactInfo.email}`} className="text-lagune-dark hover:underline">
                   {contactInfo.email}
                 </a>
-                {" "}— <LegalPlaceholder>[__]</LegalPlaceholder>.
+                {" "}— par téléphone au +225 05 46 07 68 59 — ou par courrier à DIGYO,{" "}
+                {contactInfo.address}.
               </p>
             </div>
           </div>
 
-          <p className="mt-12 text-xs text-ink/40">Dernière mise à jour&nbsp;: 5 octobre 2026</p>
+          <p className="mt-12 text-xs text-ink/40">Dernière mise à jour&nbsp;: 5 novembre 2026</p>
         </div>
       </section>
     </>

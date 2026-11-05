@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { contactInfo } from "../data/content";
-import LegalPlaceholder from "../components/LegalPlaceholder";
 import Seo from "../components/Seo";
 
 export default function MentionsLegales() {
@@ -31,34 +30,23 @@ export default function MentionsLegales() {
               <h2 className="font-display text-xl font-bold text-ink">1. Éditeur du site</h2>
               <p className="mt-3">Le Site est édité par&nbsp;:</p>
               <ul className="mt-3 space-y-1.5">
+                <li>Dénomination sociale&nbsp;: DIGYO</li>
+                <li>Forme juridique&nbsp;: Société à responsabilité limitée unipersonnelle (SARLU)</li>
+                <li>Capital social&nbsp;: 1&nbsp;000&nbsp;000 FCFA</li>
+                <li>RCCM&nbsp;: CI-ABJ-03-2026-B13-14797 (Tribunal de commerce d'Abidjan)</li>
+                <li>Numéro de compte contribuable (NCC)&nbsp;: 2606628 F</li>
+                <li>Adresse&nbsp;: {contactInfo.address}</li>
                 <li>
-                  Raison sociale&nbsp;:{" "}
-                  <LegalPlaceholder>DIGYO SARL </LegalPlaceholder>
+                  Activités&nbsp;: accompagnement digital, diagnostic et coaching&nbsp;; création de
+                  logiciels et d'applications web et mobiles&nbsp;; solutions SaaS&nbsp;; fourniture
+                  de matériels et d'équipements informatiques et technologiques
                 </li>
-                <li>Forme juridique&nbsp;: Société à responsabilité limitée (SARL / SUARL)</li>
-                <li>
-                  Capital social&nbsp;:{" "}
-                  <LegalPlaceholder>[5000000 FCFA]</LegalPlaceholder>
-                </li>
-                <li>
-                  Numéro RCCM&nbsp;:{" "}
-                  <LegalPlaceholder>[n° RCCM]</LegalPlaceholder>
-                </li>
-                <li>
-                  Numéro de Compte Contribuable (NCC)&nbsp;:{" "}
-                  <LegalPlaceholder>[ n° NCC]</LegalPlaceholder>
-                </li>
-                <li>
-                  Siège social&nbsp;:{" "}
-                  <LegalPlaceholder>[____]</LegalPlaceholder>, {contactInfo.city}
-                </li>
-                <li>
-                  Gérant / Directeur de la publication&nbsp;:{" "}
-                  <LegalPlaceholder>KOUAME KOUADIO FRANCK HERVE</LegalPlaceholder>
-                </li>
+                <li>Gérant et directeur de la publication&nbsp;: M. KOUAME Kouadio Franck Hervé</li>
                 <li>
                   Téléphone&nbsp;:{" "}
-                  <LegalPlaceholder>+225 05 46 07 68 59</LegalPlaceholder>
+                  <a href="tel:+2250546076859" className="text-lagune-dark hover:underline">
+                    +225 05 46 07 68 59
+                  </a>
                 </li>
                 <li>
                   Email&nbsp;:{" "}
@@ -73,14 +61,9 @@ export default function MentionsLegales() {
               <h2 className="font-display text-xl font-bold text-ink">2. Hébergement</h2>
               <p className="mt-3">Le Site est hébergé par&nbsp;:</p>
               <ul className="mt-3 space-y-1.5">
-                <li>
-                  Raison sociale&nbsp;:{" "}
-                  <LegalPlaceholder>Hostinger</LegalPlaceholder>
-                </li>
-                <li>
-                  Adresse&nbsp;:{" "}
-                  <LegalPlaceholder>[____]</LegalPlaceholder>
-                </li>
+                <li>Raison sociale&nbsp;: Hostinger International Ltd</li>
+                <li>Adresse&nbsp;: 61 Lordou Vironos Street, 6023 Larnaca, Chypre</li>
+                <li>Site&nbsp;: www.hostinger.com</li>
               </ul>
             </div>
 
@@ -89,8 +72,7 @@ export default function MentionsLegales() {
               <p className="mt-3">
                 L'ensemble des éléments constituant le Site — textes, graphismes, logos, icônes,
                 images, mises en page, marques (dont « digyo » et « s-school ») — est la propriété
-                exclusive de {" "}
-                <LegalPlaceholder>DIGYO</LegalPlaceholder>, sauf mention
+                exclusive de DIGYO, sauf mention
                 contraire, et est protégé par les dispositions du droit ivoirien et des conventions
                 internationales relatives à la propriété intellectuelle applicables en Côte
                 d'Ivoire (dont l'Accord de Bangui révisé, instituant l'Organisation Africaine de la
@@ -133,7 +115,7 @@ export default function MentionsLegales() {
             </div>
           </div>
 
-          <p className="mt-12 text-xs text-ink/40">Dernière mise à jour&nbsp;: 21 août 2026</p>
+          <p className="mt-12 text-xs text-ink/40">Dernière mise à jour&nbsp;: 5 novembre 2026</p>
         </div>
       </section>
     </>
