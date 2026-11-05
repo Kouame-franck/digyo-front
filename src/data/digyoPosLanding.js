@@ -46,7 +46,7 @@ export const phares = [
       "Envoi automatique au retour du réseau, jusqu'à 72 h de coupure",
       "Chaque poste numérote ses tickets : aucun doublon, aucun trou",
     ],
-    image: "/digyo-pos/connexion-pin.webp",
+    image: "/digyo-pos/connexion-pin-v2.webp",
     alt: "Connexion du caissier par code PIN dans l'appli digyo-pos",
   },
   {
